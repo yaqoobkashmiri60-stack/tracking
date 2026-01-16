@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Membership</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .payment-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .payment-section.active {
+            display: block;
+        }
+        
+        .user-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .amount-box {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 25px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff5f5, #ffeaea);
+            border-radius: 10px;
+            border: 2px solid #ffcccc;
+        }
+        
+        .qr-box {
+            text-align: center;
+            padding: 25px;
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            margin: 30px 0;
+            background: white;
+        }
+        
+        .qr-code {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .instructions {
+            background: #e8f4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            color: #2c3e50;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .qr-code {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .amount-box {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Section -->
+        <div id="formSection">
+            <h1>Premium Membership</h1>
+            <p class="subtitle">Enter your details to proceed with payment</p>
+            
+            <form id="membershipForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit mobile number">
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    Proceed to Payment - ₹1999
+                </button>
+            </form>
+        </div>
+        
+        <!-- Payment Section -->
+        <div id="paymentSection" class="payment-section">
+            <button class="back-btn" id="backBtn">
+                ← Back
+            </button>
+            
+            <h1>Complete Payment</h1>
+            <p class="subtitle">Scan QR code to pay ₹1999</p>
+            
+            <div class="user-info">
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" id="displayName">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value" id="displayPhone">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Amount:</span>
+                    <span class="info-value">₹1999</span>
+                </div>
+            </div>
+            
+            <div class="amount-box">
+                ₹1999
+            </div>
+            
+            <div class="qr-box">
+                <h3 style="color: #333; margin-bottom: 20px;">Scan QR Code to Pay</h3>
+                
+                <!-- Your QR Code -->
+                <img src="https://github.com/user-attachments/assets/39b5e873-49ba-46b9-a8ae-e9e813251223" 
+                     alt="Payment QR Code" 
+                     class="qr-code" 
+                     id="qrCode">
+                
+                <div style="margin-top: 15px;">
+                    <p style="color: #e74c3c; font-weight: bold; font-size: 16px; margin-bottom: 5px;">
+                        Amount: ₹1999
+                    </p>
+                    <p style="color: #666; font-size: 14px;">
+                        Scan with any UPI app
+                    </p>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>How to Pay</h3>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <span class="step-text">Open any UPI app (Google Pay, PhonePe, Paytm, etc.)</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <span class="step-text">Tap on "Scan QR Code"</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span class="step-text">Scan the QR code above</span>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <span class="step-text">Enter ₹1999 and complete payment</span>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <p>After payment, contact us for verification:</p>
+                <p><strong>WhatsApp:</strong> +91 89713951380</p>
+                <p>Share payment screenshot with your name and phone number</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const membershipForm = document.getElementById('membershipForm');
+            const formSection = document.getElementById('formSection');
+            const paymentSection = document.getElementById('paymentSection');
+            const backBtn = document.getElementById('backBtn');
+            const displayName = document.getElementById('displayName');
+            const displayPhone = document.getElementById('displayPhone');
+            const qrCodeImg = document.getElementById('qrCode');
+            
+            // Form submit handler
+            membershipForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nameInput = document.getElementById('name');
+                const phoneInput = document.getElementById('phone');
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                
+                // Basic validation
+                if (!name) {
+                    alert('Please enter your name');
+                    nameInput.focus();
+                    return;
+                }
+                
+                if (!phone) {
+                    alert('Please enter your phone number');
+                    phoneInput.focus();
+                    return;
+                }
+                
+                // Phone validation
+                const phoneRegex = /^[6-9]\d{9}$/;
+                if (!phoneRegex.test(phone)) {
+                    alert('Please enter a valid 10-digit Indian mobile number');
+                    phoneInput.focus();
+                    return;
+                }
+                
+                // Display user info
+                displayName.textContent = name;
+                displayPhone.textContent = phone;
+                
+                // Show payment section
+                formSection.style.display = 'none';
+                paymentSection.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+            
+            // Back button handler
+            backBtn.addEventListener('click', function() {
+                paymentSection.classList.remove('active');
+                formSection.style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+            
+            // QR code error handling
+            qrCodeImg.onerror = function() {
+                console.log('QR code failed to load');
+                // Optional: You can set a fallback image here
+                // this.src = 'fallback-qr.jpg';
+            };
+            
+            // Enter key support
+            document.getElementById('phone').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    membershipForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
