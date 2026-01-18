@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .title h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .title p {
+            font-size: 18px;
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .ranks-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .rank-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rank-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .rank-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            font-weight: 800;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-bottom-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+        
+        .rank-price {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 20px 0;
+            color: #FFD700;
+        }
+        
+        .rank-price span {
+            font-size: 16px;
+            color: #aaa;
+            font-weight: 500;
+        }
+        
+        .rank-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .rank-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rank-features li i {
+            color: #00c6ff;
+        }
+        
+        .book-btn {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .book-btn:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            transform: scale(1.03);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #fff;
+        }
+        
+        .modal h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #00c6ff;
+        }
+        
+        .modal p {
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .qr-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        
+        .qr-container img {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .upi-id {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #FFD700;
+            padding: 15px;
+            margin-top: 25px;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .instructions h4 {
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .title h1 {
+                font-size: 32px;
+            }
+            
+            .rank-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://github.com/user-attachments/assets/ff2ac056-b9f7-4e44-ae77-f3f62ff387c3" alt="Dream11 Logo" class="logo-img">
+            <div class="logo-text">Dream11 Rank Booking</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="title">
+            <h1>Rank Booking</h1>
+            <p>Secure your Dream11 rank now! Each rank comes with exclusive benefits and higher winning probabilities. Book your preferred rank before someone else does!</p>
+        </div>
+        
+        <div class="ranks-container">
+            <!-- Rank 1 -->
+            <div class="rank-card">
+                <div class="rank-badge">Rank 1</div>
+                <h3>Gold Rank</h3>
+                <div class="rank-price">₹5999 <span>+ GST</span></div>
+                <ul class="rank-features">
+                    <li><i class="fas fa-check-circle"></i> 100% Winning Probability</li>
+                    <li><i class="fas fa-check-circle"></i> Priority Support</li>
+                    <li><i class="fas fa-check-circle"></i> Exclusive Tips & Strategies</li>
+                    <li><i class="fas fa-check-circle"></i>1 rank Team Building</li>
+                </ul>
+                <button class="book-btn" data-rank="1" data-price="5999">
+                    <i class="fas fa-lock"></i> Book Rank 1
+                </button>
+            </div>
+            
+            <!-- Rank 2 -->
+            <div class="rank-card">
+                <div class="rank-badge">Rank 2</div>
+                <h3>Silver Rank</h3>
+                <div class="rank-price">₹4999 <span>+ GST</span></div>
+                <ul class="rank-features">
+                    <li><i class="fas fa-check-circle"></i>100% Winning Probability</li>
+                    <li><i class="fas fa-check-circle"></i> Dedicated Support</li>
+                    <li><i class="fas fa-check-circle"></i> Premium Tips & Strategies</li>
+                    <li><i class="fas fa-check-circle"></i> Advanced Team</li>
+                </ul>
+                <button class="book-btn" data-rank="2" data-price="4999">
+                    <i class="fas fa-lock"></i> Book Rank 2
+                </button>
+            </div>
+            
+            <!-- Rank 3 -->
+            <div class="rank-card">
+                <div class="rank-badge">Rank 3</div>
+                <h3>Bronze Rank</h3>
+                <div class="rank-price">₹3999 <span>+ GST</span></div>
+                <ul class="rank-features">
+                    <li><i class="fas fa-check-circle"></i> 100%Winning Probability</li>
+                    <li><i class="fas fa-check-circle"></i> Priority Support</li>
+                    <li><i class="fas fa-check-circle"></i> Expert Tips & Strategies</li>
+                    <li><i class="fas fa-check-circle"></i> Team Building Assistance</li>
+                </ul>
+                <button class="book-btn" data-rank="3" data-price="3999">
+                    <i class="fas fa-lock"></i> Book Rank 3
+                </button>
+            </div>
+            
+            <!-- Rank 4 -->
+            <div class="rank-card">
+                <div class="rank-badge">Rank 4</div>
+                <h3>Pro Rank</h3>
+                <div class="rank-price">₹2999 <span>+ GST</span></div>
+                <ul class="rank-features">
+                    <li><i class="fas fa-check-circle"></i> 100% Winning Probability</li>
+                    <li><i class="fas fa-check-circle"></i> Email Support</li>
+                    <li><i class="fas fa-check-circle"></i> Daily Tips & Strategies</li>
+                    <li><i class="fas fa-check-circle"></i> Basic Team Building</li>
+                </ul>
+                <button class="book-btn" data-rank="4" data-price="2999">
+                    <i class="fas fa-lock"></i> Book Rank 4
+                </button>
+            </div>
+            
+            <!-- Rank 5 -->
+            <div class="rank-card">
+                <div class="rank-badge">Rank 5</div>
+                <h3>Basic Rank</h3>
+                <div class="rank-price">₹1999 <span>+ GST</span></div>
+                <ul class="rank-features">
+                    <li><i class="fas fa-check-circle"></i> 100% Winning Probability</li>
+                    <li><i class="fas fa-check-circle"></i> FAQ Support</li>
+                    <li><i class="fas fa-check-circle"></i> Weekly Tips & Strategies</li>
+                    <li><i class="fas fa-check-circle"></i> Team Suggestions</li>
+                </ul>
+                <button class="book-btn" data-rank="5" data-price="1999">
+                    <i class="fas fa-lock"></i> Book Rank 5
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Complete Your Payment</h2>
+            <p>Scan the QR code below or use the UPI ID to complete your Rank <span id="selectedRank">1</span> booking</p>
+            
+            <div class="qr-container">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=dream11rankbooking@upi&pn=Dream11%20Rank%20Booking&am=5999&tn=Rank%201%20Booking" alt="UPI QR Code" id="qrCode">
+            </div>
+            
+            <div class="upi-id" id="upiId">dream11rankbooking@upi</div>
+            
+            <p>Amount to pay: <strong>₹<span id="paymentAmount">5999</span></strong> (Including GST)</p>
+            
+            <div class="instructions">
+                <h4>Payment Instructions:</h4>
+                <ol>
+                    <li>Scan the QR code with any UPI app</li>
+                    <li>Or send money to the UPI ID shown above</li>
+                    <li>After payment, share screenshot on Telegram</li>
+                    <li>Your rank will be confirmed within 15 minutes</li>
+                </ol>
+            </div>
+            
+            <button id="confirmPayment" class="book-btn" style="margin-top: 20px;">
+                <i class="fas fa-check-circle"></i> I've Completed the Payment
+            </button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Dream11 Rank Booking. All rights reserved.</p>
+        <p>This is a demonstration page for educational purposes only.</p>
+    </footer>
+
+    <script>
+        // Get modal and buttons
+        const modal = document.getElementById('paymentModal');
+        const closeModal = document.querySelector('.close-modal');
+        const bookButtons = document.querySelectorAll('.book-btn');
+        const selectedRank = document.getElementById('selectedRank');
+        const paymentAmount = document.getElementById('paymentAmount');
+        const qrCode = document.getElementById('qrCode');
+        const upiId = document.getElementById('upiId');
+        const confirmPaymentBtn = document.getElementById('confirmPayment');
+        
+        // Price for each rank (subtracting 1000 for each subsequent rank)
+        const rankPrices = {
+            1: 5999,
+            2: 4999,
+            3: 3999,
+            4: 2999,
+            5: 1999
+        };
+        
+        // Open modal when any book button is clicked
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const rank = this.getAttribute('data-rank');
+                const price = this.getAttribute('data-price');
+                
+                selectedRank.textContent = rank;
+                paymentAmount.textContent = price;
+                
+                // Update QR code with the correct amount
+                const qrData = `upi://pay?pa=dream11rankbooking@upi&pn=Dream11%20Rank%20Booking&am=${price}&tn=Rank%20${rank}%20Booking`;
+                qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
+                
+                // Update UPI ID display
+                upiId.textContent = `dream11rankbooking@upi (Amount: ₹${price})`;
+                
+                // Show modal
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // Close modal when X is clicked
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Handle payment confirmation
+        confirmPaymentBtn.addEventListener('click', function() {
+            const rank = selectedRank.textContent;
+            const amount = paymentAmount.textContent;
+            
+            // Show confirmation message
+            alert(`Thank you! Your payment for Rank ${rank} (₹${amount}) has been recorded. Please share the payment screenshot on our Telegram channel for confirmation.`);
+            
+            // Close modal
+            modal.style.display = 'none';
+            
+            // In a real implementation, you would send this data to a server
+            console.log(`Payment confirmed for Rank ${rank}, Amount: ₹${amount}`);
+        });
+        
+        // Add some interactivity to the cards
+        document.querySelectorAll('.rank-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'rgba(0, 198, 255, 0.5)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>
