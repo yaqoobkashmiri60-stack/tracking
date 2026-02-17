@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Fantasy withdrawal · Dream11 style</title>
+  <style>
+    /* ----- CSS reset & modern font ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f4f7fc 0%, #e9eef4 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      margin: 0;
+    }
+
+    /* main card – mobile friendly container */
+    .withdrawal-container {
+      max-width: 440px;
+      width: 100%;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 0 25px 50px -12px rgba(0,20,40,0.35), 0 4px 18px 0 rgba(0,0,0,0.06);
+      padding: 28px 22px 38px 22px;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    /* logo area with actual image from github */
+    .logo-area {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .logo-img {
+      max-width: 180px;
+      height: auto;
+      background: white;
+      border-radius: 60px;
+      padding: 10px 24px;
+      box-shadow: 0 12px 22px -10px rgba(0,40,80,0.25);
+      border: 1px solid rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-img img {
+      width: 100%;
+      height: auto;
+      max-height: 60px;
+      object-fit: contain;
+    }
+
+    /* winning headline */
+    .winning-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .congrats {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1f384f;
+      background: rgba(255,255,255,0.7);
+      padding: 8px 16px;
+      border-radius: 60px;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .winning-amount-large {
+      font-size: 2.7rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+      text-shadow: 0 6px 14px rgba(0,60,130,0.2);
+    }
+    .winning-amount-large span {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #496f92;
+    }
+
+    /* prize card */
+    .prize-card {
+      background: white;
+      border-radius: 34px;
+      padding: 24px 22px;
+      margin: 22px 0 26px 0;
+      box-shadow: 0 22px 38px -16px rgba(20, 40, 70, 0.3), inset 0 1px 4px white;
+      border: 1px solid rgba(255,255,255,0.9);
+      transition: transform 0.2s;
+    }
+    .prize-card:hover {
+      transform: scale(1.01);
+    }
+
+    /* user greeting green */
+    .user-greeting {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      background: #e2f0e8;
+      padding: 10px 20px;
+      border-radius: 50px;
+      display: inline-block;
+      color: #0b5730;
+      border-left: 6px solid #2b8c5e;
+      box-shadow: 0 6px 12px rgba(0,80,50,0.1);
+    }
+    .user-greeting i {
+      font-style: normal;
+      background: #178f4f;
+      color: white;
+      padding: 3px 12px;
+      border-radius: 40px;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    /* card rows */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 4px;
+      border-bottom: 1px solid #ecf1f6;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      color: #43586e;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .info-value {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .highlight-green {
+      color: #1c8b4c;
+      background: #dcfce7;
+      padding: 5px 16px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .rank-badge {
+      background: #232f49;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+      box-shadow: 0 5px 12px rgba(0,30,60,0.3);
+    }
+    .contest-name {
+      font-weight: 700;
+      color: #17222e;
+      background: #f2f6fd;
+      padding: 6px 18px;
+      border-radius: 40px;
+    }
+    .winning-amount-card {
+      color: #b45f2b;
+      background: #fff1e0;
+      padding: 5px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* gradient withdraw button */
+    .withdraw-btn {
+      width: 100%;
+      background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
+      border: none;
+      padding: 22px 22px;
+      border-radius: 90px;
+      color: white;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 24px 34px -14px #0b3050, 0 4px 12px rgba(0,20,10,0.3);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .withdraw-btn:hover {
+      background: linear-gradient(105deg, #253a5a, #2f608b, #148573);
+      box-shadow: 0 30px 40px -12px #063048;
+      transform: scale(1.02) translateY(-3px);
+    }
+    .withdraw-btn:active {
+      transform: scale(0.99) translateY(2px);
+      box-shadow: 0 12px 24px -8px #021d30;
+    }
+
+    /* ----- modal overlay ----- */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 20, 30, 0.6);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-content {
+      background: white;
+      max-width: 380px;
+      width: 100%;
+      border-radius: 50px;
+      padding: 32px 26px 36px 26px;
+      box-shadow: 0 40px 70px -10px #031120;
+      text-align: center;
+      border: 2px solid rgba(255,255,255,0.8);
+      transform: scale(1);
+      animation: slideUp 0.25s ease;
+    }
+    .modal-content p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1b2f44;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    .gst-amount {
+      background: #ecf7ff;
+      padding: 22px 12px;
+      border-radius: 48px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #17487a;
+      margin: 20px 0 26px;
+      border: 1px dashed #3e7eb3;
+    }
+    .gst-amount small {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #38658f;
+    }
+    .pay-now-btn {
+      background: linear-gradient(145deg, #1c3d5e, #0f614e);
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 20px 24px;
+      border-radius: 120px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 26px 30px -16px #09432b;
+      transition: 0.2s;
+      border: 1px solid #93d4bc;
+    }
+    .pay-now-btn:hover {
+      background: linear-gradient(145deg, #25527a, #128065);
+      transform: scale(1.02);
+      box-shadow: 0 32px 34px -16px #063a27;
+    }
+    .pay-now-btn:active {
+      transform: scale(0.98);
+    }
+    .close-modal {
+      margin-top: 22px;
+      background: transparent;
+      border: none;
+      color: #728ea7;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 18px;
+      border-radius: 40px;
+    }
+    .close-modal:hover {
+      background: #f0f4fc;
+    }
+
+    /* animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; } 100% { opacity: 1; }
+    }
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* small adjustments */
+    .editable-hint {
+      font-size: 0.9rem;
+      color: #617e9c;
+      margin-top: 6px;
+      letter-spacing: 0.2px;
+    }
+    .footer-note {
+      text-align: center;
+      color: #637e9b;
+      margin-top: 22px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="withdrawal-container">
+  <!-- 1. LOGO top – with your github image link -->
+  <div class="logo-area">
+    <div class="logo-img">
+      <img src="https://github.com/user-attachments/assets/9d722eec-f5d9-4f49-8053-833bbcb93a00" 
+           alt="Fantasy Sports Logo"
+           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%3Crect%20width%3D%22160%22%20height%3D%2260%22%20fill%3D%22%231d267d%22%20rx%3D%2230%22%2F%3E%3Ctext%20x%3D%2230%22%20y%3D%2240%22%20font-family%3D%22Arial%22%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%3EFANTASY%3C%2Ftext%3E%3C%2Fsvg%3E';">
+    </div>
+  </div>
+
+  <!-- winning message & dynamic amount -->
+  <div class="winning-header">
+    <div class="congrats">🏆 Congratulations! You secured Rank #1</div>
+    <!-- editable winning amount: change text inside span -->
+    <div class="winning-amount-large" id="dynamicWinningAmount">₹87,42,000 <span>prize</span></div>
+    <div class="editable-hint">(you can edit this amount in code: id "dynamicWinningAmount")</div>
+  </div>
+
+  <!-- WINNING CARD (green user line, rank, status etc) -->
+  <div class="prize-card">
+    <!-- Dear user [user591700] in green -->
+    <div class="user-greeting">
+      Dear user; <i>user591700</i>
+    </div>
+
+    <!-- card details rows -->
+    <div class="info-row">
+      <span class="info-label">Rank</span>
+      <span class="info-value rank-badge">#1</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Status</span>
+      <span class="info-value highlight-green">Winning Confirmed ✅</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Winning Amount</span>
+      <span class="info-value winning-amount-card" id="cardWinningAmount">₹87,42,000</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Contest</span>
+      <span class="info-value contest-name">Mega Grand League</span>
+    </div>
+
+    <!-- prominent withdraw button -->
+    <button class="withdraw-btn" id="withdrawNowBtn">💸 Withdraw Now</button>
+  </div>
+
+  <div class="footer-note">✨ secure & instant withdrawal</div>
+</div>
+
+<!-- MODAL POPUP (hidden by default) -->
+<div class="modal" id="gstModal">
+  <div class="modal-content">
+    <p>To withdraw your winning amount,<br>you must pay 10% GST processing fee.</p>
+    <!-- GST amount fixed as ₹15,000 (editable here) -->
+    <div class="gst-amount">
+      ₹15,000 <small>GST</small>
+    </div>
+    <!-- Pay Now button inside modal -->
+    <button class="pay-now-btn" id="payNowBtn">Pay Now</button>
+    <button class="close-modal" id="closeModalBtn">✕ cancel</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ===== DYNAMIC / EDITABLE PLACEHOLDER AMOUNTS =====
+    // You can change these two values manually to reflect updated winning amount
+    // They sync the top large amount and the card amount.
+    const winningAmountEditable = "₹87,42,000";  // <-- CHANGE THIS (e.g. "₹12,500")
+    
+    // Apply to both places (top & card)
+    const topAmountSpan = document.getElementById('dynamicWinningAmount');
+    const cardAmountSpan = document.getElementById('cardWinningAmount');
+    if (topAmountSpan) {
+      // keep the 'prize' suffix intact (optional)
+      topAmountSpan.innerHTML = `${winningAmountEditable} <span>prize</span>`;
+    }
+    if (cardAmountSpan) {
+      cardAmountSpan.innerText = winningAmountEditable;
+    }
+
+    // ===== MODAL LOGIC =====
+    const withdrawBtn = document.getElementById('withdrawNowBtn');
+    const modal = document.getElementById('gstModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const payNowBtn = document.getElementById('payNowBtn');
+
+    // Open modal when "Withdraw Now" clicked
+    withdrawBtn.addEventListener('click', function() {
+      modal.style.display = 'flex';  // show modal (flex centers it)
+    });
+
+    // Close modal function
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Close on 'cancel' button
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    // Click outside modal content -> close? (optional, but friendly)
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Pay Now button action: show alert and close modal
+    payNowBtn.addEventListener('click', function() {
+      alert('Redirecting to secure payment gateway...');
+      closeModal();           // optionally close after alert
+    });
+
+    // Also close with ESC key (nice to have)
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    // GST amount is fixed as ₹15,000 (already in modal html). 
+    // If you want to make it dynamic based on winning amount (optional but spec says fixed 15,000), it's already static.
+    // You can edit the GST figure directly inside .gst-amount if needed.
+  })();
+</script>
+
+<!-- small note for easy editing: GST amount is inside modal .gst-amount amount ₹15,000 (change there) 
+     top winning amount at variable winningAmountEditable in script -->
+</body>
+</html>
