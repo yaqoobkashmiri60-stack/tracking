@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>KYC Verification · Fantasy Sports</title>
+  <title>Document Submitted · KYC Processing · Fantasy Sports</title>
   <style>
     /* ----- CSS reset & modern font ----- */
     * {
@@ -24,7 +24,7 @@
     }
 
     /* main card – mobile friendly container */
-    .kyc-container {
+    .document-container {
       max-width: 440px;
       width: 100%;
       background: rgba(255,255,255,0.75);
@@ -37,7 +37,7 @@
       border: 1px solid rgba(255,255,255,0.6);
     }
 
-    /* logo area with actual image from github */
+    /* logo area */
     .logo-area {
       display: flex;
       justify-content: center;
@@ -63,11 +63,11 @@
     }
 
     /* Header */
-    .kyc-header {
+    .doc-header {
       text-align: center;
       margin-bottom: 24px;
     }
-    .kyc-title {
+    .doc-title {
       font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
@@ -76,7 +76,7 @@
       color: transparent;
       margin-bottom: 8px;
     }
-    .kyc-subtitle {
+    .doc-subtitle {
       font-size: 1rem;
       color: #617e9c;
       background: rgba(255,255,255,0.7);
@@ -85,8 +85,8 @@
       display: inline-block;
     }
 
-    /* KYC Card */
-    .kyc-card {
+    /* Main Card */
+    .doc-card {
       background: white;
       border-radius: 34px;
       padding: 24px 22px;
@@ -118,159 +118,164 @@
       font-weight: 500;
     }
 
-    /* Upload Sections */
-    .upload-section {
+    /* Success Icon */
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(145deg, #0f614e, #1c8b4c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 3.5rem;
+      color: white;
+      box-shadow: 0 20px 30px -10px #09432b;
+    }
+
+    /* Status Message */
+    .status-message {
+      text-align: center;
       margin-bottom: 28px;
     }
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .status-title {
+      font-size: 1.8rem;
+      font-weight: 700;
       color: #1f384f;
-      margin-bottom: 12px;
-    }
-    .section-label span {
-      background: #e9eff7;
-      padding: 8px 12px;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      color: #2e4a6b;
-    }
-    .upload-box {
-      border: 2px dashed #b9c8da;
-      border-radius: 30px;
-      padding: 16px;
-      text-align: center;
-      background: #f8fafd;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    .upload-box:hover {
-      border-color: #2b8c5e;
-      background: #f0f9f0;
-    }
-    .upload-icon {
-      font-size: 2.2rem;
       margin-bottom: 8px;
     }
-    .upload-text {
+    .status-text {
+      font-size: 1.1rem;
+      color: #617e9c;
+      line-height: 1.5;
+    }
+
+    /* Timer Box */
+    .timer-box {
+      background: #ecf7ff;
+      border-radius: 40px;
+      padding: 24px 20px;
+      margin: 20px 0 25px;
+      border: 2px dashed #3e7eb3;
+      text-align: center;
+    }
+    .timer-label {
+      font-size: 1.1rem;
+      color: #1f384f;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .timer-display {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #17487a;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .timer-subtext {
+      font-size: 1rem;
+      color: #38658f;
+      font-weight: 500;
+    }
+    .timer-note {
+      font-size: 0.9rem;
+      color: #617e9c;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.7);
+      padding: 8px 15px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+
+    /* Documents Info */
+    .docs-info {
+      background: #f8fafd;
+      border-radius: 30px;
+      padding: 18px;
+      margin: 20px 0;
+    }
+    .doc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e8f0;
+    }
+    .doc-item:last-child {
+      border-bottom: none;
+    }
+    .doc-icon {
+      font-size: 1.8rem;
+    }
+    .doc-details {
+      flex: 1;
+    }
+    .doc-name {
       font-weight: 600;
-      color: #2e4a6b;
-      margin-bottom: 4px;
+      color: #1f384f;
+      margin-bottom: 2px;
     }
-    .upload-hint {
-      font-size: 0.85rem;
-      color: #7f95b0;
-    }
-    .file-name {
-      margin-top: 10px;
+    .doc-status {
       font-size: 0.9rem;
       color: #1c8b4c;
       font-weight: 500;
-      display: none;
     }
-    .file-name.show {
-      display: block;
-    }
-    input[type="file"] {
-      display: none;
+    .doc-status i {
+      color: #178f4f;
+      margin-right: 4px;
     }
 
-    /* Aadhar and PAN specific */
-    .aadhar-preview, .pan-preview {
-      margin-top: 12px;
-    }
-
-    /* Fee Section */
-    .fee-section {
-      background: #ecf7ff;
-      border-radius: 30px;
-      padding: 20px;
-      margin: 28px 0 22px;
-      border: 1px solid #b9d6f0;
-    }
-    .fee-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .fee-label {
-      font-size: 1.1rem;
-      color: #1f384f;
-      font-weight: 500;
-    }
-    .fee-amount {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #b45f2b;
-    }
-    .total-row {
-      border-top: 2px dashed #9bb7d4;
-      padding-top: 15px;
-      margin-top: 8px;
-      font-weight: 700;
-    }
-    .total-row .fee-label {
-      font-size: 1.3rem;
-    }
-    .total-row .fee-amount {
-      font-size: 1.8rem;
-      color: #1c8b4c;
-    }
-    .gst-note {
-      font-size: 0.85rem;
-      color: #617e9c;
-      text-align: right;
-      margin-top: 8px;
-    }
-
-    /* Pay Button - Non Functional */
-    .pay-btn {
+    /* Withdrawal Button (will be enabled after 24h) */
+    .withdraw-btn {
       width: 100%;
       background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
       border: none;
-      padding: 22px 22px;
+      padding: 18px 22px;
       border-radius: 90px;
       color: white;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 24px 34px -14px #0b3050, 0 4px 12px rgba(0,20,10,0.3);
+      cursor: not-allowed;
+      opacity: 0.6;
       transition: all 0.25s ease;
       border: 1px solid rgba(255,255,255,0.3);
-      margin: 10px 0 20px;
+      margin: 15px 0 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      opacity: 0.9;
     }
-    .pay-btn:hover {
-      background: linear-gradient(105deg, #253a5a, #2f608b, #148573);
-      box-shadow: 0 30px 40px -12px #063048;
+    .withdraw-btn.enabled {
+      opacity: 1;
+      cursor: pointer;
+      background: linear-gradient(105deg, #1e2b4a, #2f608b, #148573);
+      box-shadow: 0 24px 34px -14px #0b3050;
+    }
+    .withdraw-btn.enabled:hover {
       transform: scale(1.02) translateY(-3px);
+      box-shadow: 0 30px 40px -12px #063048;
     }
-    .pay-btn:active {
+    .withdraw-btn.enabled:active {
       transform: scale(0.99) translateY(2px);
     }
-    /* Non-functional - no alert, just visual feedback */
-    .pay-btn:focus {
-      outline: 2px solid #ffffff;
-    }
 
-    /* Note about non-functional button */
-    .demo-note {
+    /* Alert Message */
+    .alert-message {
+      display: none;
+      background: #dcfce7;
+      color: #0b5730;
+      padding: 15px;
+      border-radius: 40px;
       text-align: center;
-      color: #a0b8d0;
-      font-size: 0.9rem;
-      font-style: italic;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-weight: 500;
+      border-left: 6px solid #2b8c5e;
+    }
+    .alert-message.show {
+      display: block;
     }
 
+    /* Footer */
     .footer-note {
       text-align: center;
       color: #637e9b;
@@ -281,7 +286,7 @@
 </head>
 <body>
 
-<div class="kyc-container">
+<div class="document-container">
   <!-- Logo -->
   <div class="logo-area">
     <div class="logo-img">
@@ -292,142 +297,182 @@
   </div>
 
   <!-- Header -->
-  <div class="kyc-header">
-    <div class="kyc-title">KYC Verification</div>
-    <div class="kyc-subtitle">Complete your verification to withdraw</div>
+  <div class="doc-header">
+    <div class="doc-title">Document Submitted</div>
+    <div class="doc-subtitle">KYC under verification</div>
   </div>
 
-  <!-- KYC Card -->
-  <div class="kyc-card">
+  <!-- Main Card -->
+  <div class="doc-card">
     <!-- User greeting -->
     <div class="user-greeting">
       Dear user; <i>user591700</i>
     </div>
 
-    <!-- Aadhar Card Upload -->
-    <div class="upload-section">
-      <div class="section-label">
-        📇 Aadhar Card
-        <span>Required</span>
-      </div>
-      <div class="upload-box" id="aadharBox">
-        <div class="upload-icon">📄</div>
-        <div class="upload-text">Click to upload Aadhar</div>
-        <div class="upload-hint">PDF or Image (max 5MB)</div>
-        <div class="file-name" id="aadharFileName"></div>
-        <input type="file" id="aadharUpload" accept=".jpg,.jpeg,.png,.pdf">
+    <!-- Success Icon -->
+    <div class="success-icon">📄✅</div>
+
+    <!-- Status Message -->
+    <div class="status-message">
+      <div class="status-title">Documents Received!</div>
+      <div class="status-text">
+        Your documents have been submitted successfully.<br>
+        Verification will be completed within 24 hours.
       </div>
     </div>
 
-    <!-- PAN Card Upload -->
-    <div class="upload-section">
-      <div class="section-label">
-        🪪 PAN Card
-        <span>Required</span>
+    <!-- Timer Box - 24 Hours Countdown -->
+    <div class="timer-box" id="timerBox">
+      <div class="timer-label">⏳ Time remaining for verification</div>
+      <div class="timer-display" id="timer">24:00:00</div>
+      <div class="timer-subtext">hours : minutes : seconds</div>
+      <div class="timer-note">Withdrawal will be available after timer ends</div>
+    </div>
+
+    <!-- Submitted Documents Info -->
+    <div class="docs-info">
+      <div class="doc-item">
+        <div class="doc-icon">📇</div>
+        <div class="doc-details">
+          <div class="doc-name">Aadhar Card</div>
+          <div class="doc-status"><i>✓</i> Uploaded & Submitted</div>
+        </div>
       </div>
-      <div class="upload-box" id="panBox">
-        <div class="upload-icon">📋</div>
-        <div class="upload-text">Click to upload PAN</div>
-        <div class="upload-hint">PDF or Image (max 5MB)</div>
-        <div class="file-name" id="panFileName"></div>
-        <input type="file" id="panUpload" accept=".jpg,.jpeg,.png,.pdf">
+      <div class="doc-item">
+        <div class="doc-icon">🪪</div>
+        <div class="doc-details">
+          <div class="doc-name">PAN Card</div>
+          <div class="doc-status"><i>✓</i> Uploaded & Submitted</div>
+        </div>
       </div>
     </div>
 
-    <!-- KYC Verification Fee: ₹1899 -->
-    <div class="fee-section">
-      <div class="fee-row">
-        <span class="fee-label">KYC Verification Fee</span>
-        <span class="fee-amount">₹1,899</span>
-      </div>
-      <div class="fee-row">
-        <span class="fee-label">GST (18%)</span>
-        <span class="fee-amount">₹342</span>
-      </div>
-      <div class="fee-row total-row">
-        <span class="fee-label">Total Amount</span>
-        <span class="fee-amount">₹2,241</span>
-      </div>
-      <div class="gst-note">* Inclusive of all taxes</div>
-    </div>
-
-    <!-- Pay Button - Non Functional (No alert, no action) -->
-    <button class="pay-btn" id="payNowBtn">
-      💰 Pay Now ₹2,241
+    <!-- Withdrawal Button (initially disabled) -->
+    <button class="withdraw-btn" id="withdrawBtn" disabled>
+      🔒 Withdrawal (24h pending)
     </button>
-    <div class="demo-note">🔒 This is a demo button - no payment will be processed</div>
+
+    <!-- Alert Message (shown when withdrawal is clicked after enabled) -->
+    <div class="alert-message" id="alertMessage">
+      ✅ Redirecting to withdrawal page...
+    </div>
   </div>
 
-  <div class="footer-note">✨ Secure KYC verification</div>
+  <div class="footer-note">✨ Verification in progress</div>
 </div>
 
 <script>
   (function() {
-    // Aadhar Upload
-    const aadharInput = document.getElementById('aadharUpload');
-    const aadharBox = document.getElementById('aadharBox');
-    const aadharFileName = document.getElementById('aadharFileName');
-
-    // PAN Upload
-    const panInput = document.getElementById('panUpload');
-    const panBox = document.getElementById('panBox');
-    const panFileName = document.getElementById('panFileName');
-
-    // Trigger file input on box click
-    aadharBox.addEventListener('click', function() {
-      aadharInput.click();
-    });
-
-    panBox.addEventListener('click', function() {
-      panInput.click();
-    });
-
-    // Show file name after selection for Aadhar
-    aadharInput.addEventListener('change', function(e) {
-      if (aadharInput.files.length > 0) {
-        const fileName = aadharInput.files[0].name;
-        aadharFileName.textContent = '✓ ' + fileName;
-        aadharFileName.classList.add('show');
-        aadharBox.style.borderColor = '#2b8c5e';
-        aadharBox.style.background = '#f0f9f0';
-      } else {
-        aadharFileName.classList.remove('show');
-        aadharBox.style.borderColor = '#b9c8da';
-        aadharBox.style.background = '#f8fafd';
+    // ===== TIMER WITH LOCAL STORAGE =====
+    const timerDisplay = document.getElementById('timer');
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    const alertMessage = document.getElementById('alertMessage');
+    
+    // Storage keys
+    const STORAGE_KEY = 'kyc_submission_time';
+    const VERIFICATION_HOURS = 24; // 24 hours
+    
+    // Get or set submission time
+    let submissionTime = localStorage.getItem(STORAGE_KEY);
+    const now = new Date().getTime();
+    
+    if (!submissionTime) {
+      // First time - set submission time to now
+      submissionTime = now;
+      localStorage.setItem(STORAGE_KEY, submissionTime);
+    } else {
+      submissionTime = parseInt(submissionTime);
+    }
+    
+    // Calculate end time (submission time + 24 hours)
+    const endTime = submissionTime + (VERIFICATION_HOURS * 60 * 60 * 1000);
+    
+    // Update timer every second
+    function updateTimer() {
+      const currentTime = new Date().getTime();
+      const timeLeft = endTime - currentTime;
+      
+      if (timeLeft <= 0) {
+        // Timer completed
+        timerDisplay.textContent = '00:00:00';
+        
+        // Enable withdrawal button
+        withdrawBtn.disabled = false;
+        withdrawBtn.classList.add('enabled');
+        withdrawBtn.innerHTML = '💰 Withdraw Now';
+        
+        // Clear localStorage if you want to reset after completion? 
+        // We keep it so timer stays at 00:00 even after refresh
+        return;
+      }
+      
+      // Calculate hours, minutes, seconds
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      
+      // Format with leading zeros
+      const formattedHours = hours.toString().padStart(2, '0');
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      const formattedSeconds = seconds.toString().padStart(2, '0');
+      
+      timerDisplay.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+      
+      // Keep button disabled
+      withdrawBtn.disabled = true;
+      withdrawBtn.classList.remove('enabled');
+      withdrawBtn.innerHTML = '🔒 Withdrawal (24h pending)';
+    }
+    
+    // Initial update
+    updateTimer();
+    
+    // Update every second
+    const timerInterval = setInterval(updateTimer, 1000);
+    
+    // Check if already completed on load
+    if (endTime <= new Date().getTime()) {
+      withdrawBtn.disabled = false;
+      withdrawBtn.classList.add('enabled');
+      withdrawBtn.innerHTML = '💰 Withdraw Now';
+    }
+    
+    // Withdrawal button click handler (only works when enabled)
+    withdrawBtn.addEventListener('click', function(e) {
+      if (!withdrawBtn.disabled) {
+        // Show alert message
+        alertMessage.classList.add('show');
+        
+        // Redirect to withdrawal page after 2 seconds
+        setTimeout(function() {
+          window.location.href = 'withdrawal-successful.html'; // Change to your actual withdrawal page
+          // For demo, just hide alert after 3 seconds if no redirect
+          setTimeout(function() {
+            alertMessage.classList.remove('show');
+          }, 3000);
+        }, 2000);
       }
     });
-
-    // Show file name after selection for PAN
-    panInput.addEventListener('change', function(e) {
-      if (panInput.files.length > 0) {
-        const fileName = panInput.files[0].name;
-        panFileName.textContent = '✓ ' + fileName;
-        panFileName.classList.add('show');
-        panBox.style.borderColor = '#2b8c5e';
-        panBox.style.background = '#f0f9f0';
-      } else {
-        panFileName.classList.remove('show');
-        panBox.style.borderColor = '#b9c8da';
-        panBox.style.background = '#f8fafd';
+    
+    // If user wants to reset timer manually (for testing) - can be removed in production
+    // Uncomment below lines to add reset functionality (press 'r' to reset)
+    /*
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
       }
     });
-
-    // Pay button - Non Functional (no alert, absolutely no action)
-    const payBtn = document.getElementById('payNowBtn');
-    payBtn.addEventListener('click', function(e) {
-      e.preventDefault();  // Prevent any default action
-      e.stopPropagation(); // Stop event bubbling
-      // Absolutely nothing happens - no alert, no console, no action
-      // Just visual feedback from CSS :active and :hover
+    */
+    
+    // Cleanup interval on page unload (optional)
+    window.addEventListener('beforeunload', function() {
+      clearInterval(timerInterval);
     });
-
-    // Also prevent any accidental form submissions (if any)
-    document.addEventListener('submit', function(e) {
-      e.preventDefault();
-    });
-
+    
   })();
 </script>
 
+<!-- Note: Timer saves in localStorage, so page refresh se timer reset nahi hoga -->
 </body>
 </html>
