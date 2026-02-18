@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdrawal Successful · Fantasy Sports</title>
+  <title>KYC Verification · Fantasy Sports</title>
   <style>
     /* ----- CSS reset & modern font ----- */
     * {
@@ -24,7 +24,7 @@
     }
 
     /* main card – mobile friendly container */
-    .withdrawal-container {
+    .kyc-container {
       max-width: 440px;
       width: 100%;
       background: rgba(255,255,255,0.75);
@@ -62,100 +62,213 @@
       object-fit: contain;
     }
 
-    /* Success Screen Styles */
-    .success-screen {
-      display: block;
+    /* Header */
+    .kyc-header {
       text-align: center;
-      padding: 20px 10px;
+      margin-bottom: 24px;
     }
-    .success-icon {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(145deg, #0f614e, #1c8b4c);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 4rem;
-      color: white;
-      box-shadow: 0 20px 30px -10px #09432b;
-      animation: popIn 0.5s ease;
-    }
-    .success-title {
-      font-size: 2.2rem;
-      font-weight: 800;
+    .kyc-title {
+      font-size: 1.8rem;
+      font-weight: 700;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
-    .success-message {
-      font-size: 1.4rem;
-      color: #1f384f;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    .time-badge {
-      background: #e2f0e8;
-      padding: 18px 22px;
-      border-radius: 60px;
-      display: inline-block;
-      margin: 16px 0 30px;
-      border-left: 6px solid #2b8c5e;
-    }
-    .time-badge span {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #0b5730;
-      display: block;
-      margin-bottom: 6px;
-    }
-    .time-badge small {
-      font-size: 1.1rem;
-      color: #3a7853;
-    }
-    .amount-info {
-      font-size: 1.5rem;
-      color: #1f384f;
-      margin: 20px 0;
-      font-weight: 600;
-    }
-    .amount-info span {
-      color: #b45f2b;
-      background: #fff1e0;
-      padding: 8px 22px;
+    .kyc-subtitle {
+      font-size: 1rem;
+      color: #617e9c;
+      background: rgba(255,255,255,0.7);
+      padding: 6px 16px;
       border-radius: 40px;
       display: inline-block;
-      margin-top: 10px;
-      font-size: 2rem;
-    }
-    .home-btn {
-      background: linear-gradient(105deg, #1e2b4a, #294d73);
-      border: none;
-      padding: 18px 32px;
-      border-radius: 60px;
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 20px 30px -12px #0b3050;
-      transition: 0.2s;
-      border: 1px solid rgba(255,255,255,0.3);
-      width: 100%;
-      max-width: 280px;
-      margin: 20px auto 0;
-    }
-    .home-btn:hover {
-      transform: scale(1.02);
-      background: linear-gradient(105deg, #253a5a, #2f608b);
     }
 
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      80% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
+    /* KYC Card */
+    .kyc-card {
+      background: white;
+      border-radius: 34px;
+      padding: 24px 22px;
+      margin: 22px 0 26px 0;
+      box-shadow: 0 22px 38px -16px rgba(20, 40, 70, 0.3), inset 0 1px 4px white;
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    /* User greeting */
+    .user-greeting {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      background: #e2f0e8;
+      padding: 12px 20px;
+      border-radius: 50px;
+      color: #0b5730;
+      border-left: 6px solid #2b8c5e;
+      box-shadow: 0 6px 12px rgba(0,80,50,0.1);
+      text-align: center;
+    }
+    .user-greeting i {
+      font-style: normal;
+      background: #178f4f;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 40px;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    /* Upload Sections */
+    .upload-section {
+      margin-bottom: 28px;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1f384f;
+      margin-bottom: 12px;
+    }
+    .section-label span {
+      background: #e9eff7;
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #2e4a6b;
+    }
+    .upload-box {
+      border: 2px dashed #b9c8da;
+      border-radius: 30px;
+      padding: 16px;
+      text-align: center;
+      background: #f8fafd;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .upload-box:hover {
+      border-color: #2b8c5e;
+      background: #f0f9f0;
+    }
+    .upload-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .upload-text {
+      font-weight: 600;
+      color: #2e4a6b;
+      margin-bottom: 4px;
+    }
+    .upload-hint {
+      font-size: 0.85rem;
+      color: #7f95b0;
+    }
+    .file-name {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #1c8b4c;
+      font-weight: 500;
+      display: none;
+    }
+    .file-name.show {
+      display: block;
+    }
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Aadhar and PAN specific */
+    .aadhar-preview, .pan-preview {
+      margin-top: 12px;
+    }
+
+    /* Fee Section */
+    .fee-section {
+      background: #ecf7ff;
+      border-radius: 30px;
+      padding: 20px;
+      margin: 28px 0 22px;
+      border: 1px solid #b9d6f0;
+    }
+    .fee-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .fee-label {
+      font-size: 1.1rem;
+      color: #1f384f;
+      font-weight: 500;
+    }
+    .fee-amount {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #b45f2b;
+    }
+    .total-row {
+      border-top: 2px dashed #9bb7d4;
+      padding-top: 15px;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+    .total-row .fee-label {
+      font-size: 1.3rem;
+    }
+    .total-row .fee-amount {
+      font-size: 1.8rem;
+      color: #1c8b4c;
+    }
+    .gst-note {
+      font-size: 0.85rem;
+      color: #617e9c;
+      text-align: right;
+      margin-top: 8px;
+    }
+
+    /* Pay Button - Non Functional */
+    .pay-btn {
+      width: 100%;
+      background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
+      border: none;
+      padding: 22px 22px;
+      border-radius: 90px;
+      color: white;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 24px 34px -14px #0b3050, 0 4px 12px rgba(0,20,10,0.3);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+      margin: 10px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0.9;
+    }
+    .pay-btn:hover {
+      background: linear-gradient(105deg, #253a5a, #2f608b, #148573);
+      box-shadow: 0 30px 40px -12px #063048;
+      transform: scale(1.02) translateY(-3px);
+    }
+    .pay-btn:active {
+      transform: scale(0.99) translateY(2px);
+    }
+    /* Non-functional - no alert, just visual feedback */
+    .pay-btn:focus {
+      outline: 2px solid #ffffff;
+    }
+
+    /* Note about non-functional button */
+    .demo-note {
+      text-align: center;
+      color: #a0b8d0;
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-top: 10px;
     }
 
     .footer-note {
@@ -168,7 +281,7 @@
 </head>
 <body>
 
-<div class="withdrawal-container">
+<div class="kyc-container">
   <!-- Logo -->
   <div class="logo-area">
     <div class="logo-img">
@@ -178,32 +291,143 @@
     </div>
   </div>
 
-  <!-- Success Screen (only withdrawal successful message) -->
-  <div class="success-screen">
-    <div class="success-icon">✅</div>
-    <div class="success-title">Withdrawal Successful!</div>
-    <div class="success-message">
-      Your request has been processed successfully
-    </div>
-    
-    <!-- 24-48 hours message (as requested) -->
-    <div class="time-badge">
-      <span>⏳ 24-48 hours</span>
-      <small>amount will reflect in your bank account</small>
-    </div>
-
-    <!-- Amount display -->
-    <div class="amount-info">
-      <div>Your winning amount</div>
-      <span>₹22,00,000</span>
-    </div>
-
-    <!-- Home button (optional) -->
-    <button class="home-btn" onclick="alert('Thanks for using Fantasy Sports!')">🏠 Back to Home</button>
+  <!-- Header -->
+  <div class="kyc-header">
+    <div class="kyc-title">KYC Verification</div>
+    <div class="kyc-subtitle">Complete your verification to withdraw</div>
   </div>
 
-  <div class="footer-note">✨ Thank you for playing with us</div>
+  <!-- KYC Card -->
+  <div class="kyc-card">
+    <!-- User greeting -->
+    <div class="user-greeting">
+      Dear user; <i>user591700</i>
+    </div>
+
+    <!-- Aadhar Card Upload -->
+    <div class="upload-section">
+      <div class="section-label">
+        📇 Aadhar Card
+        <span>Required</span>
+      </div>
+      <div class="upload-box" id="aadharBox">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text">Click to upload Aadhar</div>
+        <div class="upload-hint">PDF or Image (max 5MB)</div>
+        <div class="file-name" id="aadharFileName"></div>
+        <input type="file" id="aadharUpload" accept=".jpg,.jpeg,.png,.pdf">
+      </div>
+    </div>
+
+    <!-- PAN Card Upload -->
+    <div class="upload-section">
+      <div class="section-label">
+        🪪 PAN Card
+        <span>Required</span>
+      </div>
+      <div class="upload-box" id="panBox">
+        <div class="upload-icon">📋</div>
+        <div class="upload-text">Click to upload PAN</div>
+        <div class="upload-hint">PDF or Image (max 5MB)</div>
+        <div class="file-name" id="panFileName"></div>
+        <input type="file" id="panUpload" accept=".jpg,.jpeg,.png,.pdf">
+      </div>
+    </div>
+
+    <!-- KYC Verification Fee: ₹1899 -->
+    <div class="fee-section">
+      <div class="fee-row">
+        <span class="fee-label">KYC Verification Fee</span>
+        <span class="fee-amount">₹1,899</span>
+      </div>
+      <div class="fee-row">
+        <span class="fee-label">GST (18%)</span>
+        <span class="fee-amount">₹342</span>
+      </div>
+      <div class="fee-row total-row">
+        <span class="fee-label">Total Amount</span>
+        <span class="fee-amount">₹2,241</span>
+      </div>
+      <div class="gst-note">* Inclusive of all taxes</div>
+    </div>
+
+    <!-- Pay Button - Non Functional (No alert, no action) -->
+    <button class="pay-btn" id="payNowBtn">
+      💰 Pay Now ₹2,241
+    </button>
+    <div class="demo-note">🔒 This is a demo button - no payment will be processed</div>
+  </div>
+
+  <div class="footer-note">✨ Secure KYC verification</div>
 </div>
+
+<script>
+  (function() {
+    // Aadhar Upload
+    const aadharInput = document.getElementById('aadharUpload');
+    const aadharBox = document.getElementById('aadharBox');
+    const aadharFileName = document.getElementById('aadharFileName');
+
+    // PAN Upload
+    const panInput = document.getElementById('panUpload');
+    const panBox = document.getElementById('panBox');
+    const panFileName = document.getElementById('panFileName');
+
+    // Trigger file input on box click
+    aadharBox.addEventListener('click', function() {
+      aadharInput.click();
+    });
+
+    panBox.addEventListener('click', function() {
+      panInput.click();
+    });
+
+    // Show file name after selection for Aadhar
+    aadharInput.addEventListener('change', function(e) {
+      if (aadharInput.files.length > 0) {
+        const fileName = aadharInput.files[0].name;
+        aadharFileName.textContent = '✓ ' + fileName;
+        aadharFileName.classList.add('show');
+        aadharBox.style.borderColor = '#2b8c5e';
+        aadharBox.style.background = '#f0f9f0';
+      } else {
+        aadharFileName.classList.remove('show');
+        aadharBox.style.borderColor = '#b9c8da';
+        aadharBox.style.background = '#f8fafd';
+      }
+    });
+
+    // Show file name after selection for PAN
+    panInput.addEventListener('change', function(e) {
+      if (panInput.files.length > 0) {
+        const fileName = panInput.files[0].name;
+        panFileName.textContent = '✓ ' + fileName;
+        panFileName.classList.add('show');
+        panBox.style.borderColor = '#2b8c5e';
+        panBox.style.background = '#f0f9f0';
+      } else {
+        panFileName.classList.remove('show');
+        panBox.style.borderColor = '#b9c8da';
+        panBox.style.background = '#f8fafd';
+      }
+    });
+
+    // Pay button - Non Functional (no alert, absolutely no action)
+    const payBtn = document.getElementById('payNowBtn');
+    payBtn.addEventListener('click', function(e) {
+      e.preventDefault();  // Prevent any default action
+      e.stopPropagation(); // Stop event bubbling
+      // Absolutely nothing happens - no alert, no console, no action
+      // Just visual feedback from CSS :active and :hover
+    });
+
+    // Also prevent any accidental form submissions (if any)
+    document.addEventListener('submit', function(e) {
+      e.preventDefault();
+    });
+
+  })();
+</script>
 
 </body>
 </html>
