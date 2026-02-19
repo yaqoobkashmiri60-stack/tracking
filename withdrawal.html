@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Document Submitted · KYC Processing · Fantasy Sports</title>
+  <title>Final Payment · Withdrawal · Fantasy Sports</title>
   <style>
     /* ----- CSS reset & modern font ----- */
     * {
@@ -24,7 +24,7 @@
     }
 
     /* main card – mobile friendly container */
-    .document-container {
+    .payment-container {
       max-width: 440px;
       width: 100%;
       background: rgba(255,255,255,0.75);
@@ -63,11 +63,11 @@
     }
 
     /* Header */
-    .doc-header {
+    .payment-header {
       text-align: center;
       margin-bottom: 24px;
     }
-    .doc-title {
+    .payment-title {
       font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
@@ -76,7 +76,7 @@
       color: transparent;
       margin-bottom: 8px;
     }
-    .doc-subtitle {
+    .payment-subtitle {
       font-size: 1rem;
       color: #617e9c;
       background: rgba(255,255,255,0.7);
@@ -86,7 +86,7 @@
     }
 
     /* Main Card */
-    .doc-card {
+    .payment-card {
       background: white;
       border-radius: 34px;
       padding: 24px 22px;
@@ -118,125 +118,115 @@
       font-weight: 500;
     }
 
-    /* Success Icon */
-    .success-icon {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(145deg, #0f614e, #1c8b4c);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 3.5rem;
-      color: white;
-      box-shadow: 0 20px 30px -10px #09432b;
-    }
-
-    /* Status Message */
-    .status-message {
+    /* Success Message */
+    .success-badge {
+      background: #dcfce7;
+      border-radius: 60px;
+      padding: 15px 20px;
+      margin-bottom: 25px;
       text-align: center;
-      margin-bottom: 28px;
+      border-left: 6px solid #2b8c5e;
     }
-    .status-title {
-      font-size: 1.8rem;
+    .success-badge .icon {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    .success-badge .title {
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #1f384f;
-      margin-bottom: 8px;
+      color: #0b5730;
+      margin-bottom: 5px;
     }
-    .status-text {
-      font-size: 1.1rem;
-      color: #617e9c;
-      line-height: 1.5;
-    }
-
-    /* Timer Box */
-    .timer-box {
-      background: #ecf7ff;
-      border-radius: 40px;
-      padding: 24px 20px;
-      margin: 20px 0 25px;
-      border: 2px dashed #3e7eb3;
-      text-align: center;
-    }
-    .timer-label {
-      font-size: 1.1rem;
-      color: #1f384f;
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-    .timer-display {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #17487a;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
-    .timer-subtext {
+    .success-badge .text {
       font-size: 1rem;
-      color: #38658f;
-      font-weight: 500;
-    }
-    .timer-note {
-      font-size: 0.9rem;
-      color: #617e9c;
-      margin-top: 15px;
-      background: rgba(255,255,255,0.7);
-      padding: 8px 15px;
-      border-radius: 40px;
-      display: inline-block;
+      color: #2e6b47;
     }
 
-    /* Documents Info */
-    .docs-info {
-      background: #f8fafd;
+    /* Info Box */
+    .info-box {
+      background: #ecf7ff;
       border-radius: 30px;
-      padding: 18px;
+      padding: 20px;
       margin: 20px 0;
+      border: 1px dashed #3e7eb3;
     }
-    .doc-item {
+    .info-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
       padding: 10px 0;
-      border-bottom: 1px solid #e0e8f0;
+      border-bottom: 1px solid #c9ddef;
     }
-    .doc-item:last-child {
+    .info-row:last-child {
       border-bottom: none;
     }
-    .doc-icon {
-      font-size: 1.8rem;
-    }
-    .doc-details {
-      flex: 1;
-    }
-    .doc-name {
-      font-weight: 600;
+    .info-label {
+      font-size: 1rem;
       color: #1f384f;
-      margin-bottom: 2px;
-    }
-    .doc-status {
-      font-size: 0.9rem;
-      color: #1c8b4c;
       font-weight: 500;
     }
-    .doc-status i {
-      color: #178f4f;
-      margin-right: 4px;
+    .info-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e2b4a;
+    }
+    .info-value.highlight {
+      color: #b45f2b;
+    }
+    .withdrawal-amount {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1c8b4c;
     }
 
-    /* Withdrawal Button (will be enabled after 24h) */
-    .withdraw-btn {
+    /* Final Payment Section */
+    .payment-box {
+      background: linear-gradient(145deg, #fef5e7, #fff3e0);
+      border-radius: 30px;
+      padding: 22px;
+      margin: 25px 0;
+      border: 2px solid #d4a373;
+    }
+    .payment-label {
+      font-size: 1.1rem;
+      color: #b45f2b;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .final-amount {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #b45f2b;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .final-amount small {
+      font-size: 1.2rem;
+      color: #7f5a3a;
+    }
+    .payment-note {
+      font-size: 0.9rem;
+      color: #7f5a3a;
+      text-align: center;
+      background: rgba(255,255,255,0.7);
+      padding: 8px;
+      border-radius: 40px;
+    }
+
+    /* Button */
+    .pay-btn {
       width: 100%;
-      background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
+      background: linear-gradient(105deg, #b45f2b, #d47b3a, #e69b5c);
       border: none;
-      padding: 18px 22px;
+      padding: 22px 22px;
       border-radius: 90px;
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: 700;
-      cursor: not-allowed;
-      opacity: 0.6;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 24px 34px -14px #b45f2b80;
       transition: all 0.25s ease;
       border: 1px solid rgba(255,255,255,0.3);
       margin: 15px 0 10px;
@@ -245,17 +235,12 @@
       justify-content: center;
       gap: 12px;
     }
-    .withdraw-btn.enabled {
-      opacity: 1;
-      cursor: pointer;
-      background: linear-gradient(105deg, #1e2b4a, #2f608b, #148573);
-      box-shadow: 0 24px 34px -14px #0b3050;
-    }
-    .withdraw-btn.enabled:hover {
+    .pay-btn:hover {
+      background: linear-gradient(105deg, #c96f2e, #e58b47, #f7ac6b);
       transform: scale(1.02) translateY(-3px);
-      box-shadow: 0 30px 40px -12px #063048;
+      box-shadow: 0 30px 40px -12px #a04e1f;
     }
-    .withdraw-btn.enabled:active {
+    .pay-btn:active {
       transform: scale(0.99) translateY(2px);
     }
 
@@ -286,7 +271,7 @@
 </head>
 <body>
 
-<div class="document-container">
+<div class="payment-container">
   <!-- Logo -->
   <div class="logo-area">
     <div class="logo-img">
@@ -297,182 +282,101 @@
   </div>
 
   <!-- Header -->
-  <div class="doc-header">
-    <div class="doc-title">Document Submitted</div>
-    <div class="doc-subtitle">KYC under verification</div>
+  <div class="payment-header">
+    <div class="payment-title">Final Step</div>
+    <div class="payment-subtitle">Complete your withdrawal</div>
   </div>
 
   <!-- Main Card -->
-  <div class="doc-card">
+  <div class="payment-card">
     <!-- User greeting -->
     <div class="user-greeting">
       Dear user; <i>user591700</i>
     </div>
 
-    <!-- Success Icon -->
-    <div class="success-icon">📄✅</div>
+    <!-- KYC Success Message -->
+    <div class="success-badge">
+      <div class="icon">✅</div>
+      <div class="title">KYC Verification Successful!</div>
+      <div class="text">Your documents have been verified</div>
+    </div>
 
-    <!-- Status Message -->
-    <div class="status-message">
-      <div class="status-title">Documents Received!</div>
-      <div class="status-text">
-        Your documents have been submitted successfully.<br>
-        Verification will be completed within 24 hours.
+    <!-- Withdrawal Info -->
+    <div class="info-box">
+      <div class="info-row">
+        <span class="info-label">Total Winning Amount</span>
+        <span class="info-value withdrawal-amount">₹22,00,000</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">KYC Verification Fee</span>
+        <span class="info-value">₹1,899 (Paid)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">GST (18%) on KYC</span>
+        <span class="info-value">₹342 (Paid)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Processing Fee</span>
+        <span class="info-value highlight">₹2,500</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">GST on Processing</span>
+        <span class="info-value highlight">₹450</span>
       </div>
     </div>
 
-    <!-- Timer Box - 24 Hours Countdown -->
-    <div class="timer-box" id="timerBox">
-      <div class="timer-label">⏳ Time remaining for verification</div>
-      <div class="timer-display" id="timer">24:00:00</div>
-      <div class="timer-subtext">hours : minutes : seconds</div>
-      <div class="timer-note">Withdrawal will be available after timer ends</div>
-    </div>
-
-    <!-- Submitted Documents Info -->
-    <div class="docs-info">
-      <div class="doc-item">
-        <div class="doc-icon">📇</div>
-        <div class="doc-details">
-          <div class="doc-name">Aadhar Card</div>
-          <div class="doc-status"><i>✓</i> Uploaded & Submitted</div>
-        </div>
+    <!-- Final Payment Box - ₹7,486 -->
+    <div class="payment-box">
+      <div class="payment-label">Final Payment Required</div>
+      <div class="final-amount">
+        ₹7,486 <small>only</small>
       </div>
-      <div class="doc-item">
-        <div class="doc-icon">🪪</div>
-        <div class="doc-details">
-          <div class="doc-name">PAN Card</div>
-          <div class="doc-status"><i>✓</i> Uploaded & Submitted</div>
-        </div>
+      <div class="payment-note">
+        ⚡ This is the final step to withdraw ₹22,00,000
       </div>
     </div>
 
-    <!-- Withdrawal Button (initially disabled) -->
-    <button class="withdraw-btn" id="withdrawBtn" disabled>
-      🔒 Withdrawal (24h pending)
+    <!-- Pay Button -->
+    <button class="pay-btn" id="payNowBtn">
+      💰 Pay ₹7,486 & Withdraw
     </button>
 
-    <!-- Alert Message (shown when withdrawal is clicked after enabled) -->
+    <!-- Alert Message -->
     <div class="alert-message" id="alertMessage">
-      ✅ Redirecting to withdrawal page...
+      ✅ Processing your final payment... Redirecting to withdrawal
+    </div>
+
+    <div style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: #728ea7;">
+      *Final payment includes processing fee + taxes
     </div>
   </div>
 
-  <div class="footer-note">✨ Verification in progress</div>
+  <div class="footer-note">✨ One last step to claim your winnings</div>
 </div>
 
 <script>
   (function() {
-    // ===== TIMER WITH LOCAL STORAGE =====
-    const timerDisplay = document.getElementById('timer');
-    const withdrawBtn = document.getElementById('withdrawBtn');
+    const payBtn = document.getElementById('payNowBtn');
     const alertMessage = document.getElementById('alertMessage');
-    
-    // Storage keys
-    const STORAGE_KEY = 'kyc_submission_time';
-    const VERIFICATION_HOURS = 24; // 24 hours
-    
-    // Get or set submission time
-    let submissionTime = localStorage.getItem(STORAGE_KEY);
-    const now = new Date().getTime();
-    
-    if (!submissionTime) {
-      // First time - set submission time to now
-      submissionTime = now;
-      localStorage.setItem(STORAGE_KEY, submissionTime);
-    } else {
-      submissionTime = parseInt(submissionTime);
-    }
-    
-    // Calculate end time (submission time + 24 hours)
-    const endTime = submissionTime + (VERIFICATION_HOURS * 60 * 60 * 1000);
-    
-    // Update timer every second
-    function updateTimer() {
-      const currentTime = new Date().getTime();
-      const timeLeft = endTime - currentTime;
+
+    // Pay button click handler
+    payBtn.addEventListener('click', function() {
+      // Show alert message
+      alertMessage.classList.add('show');
       
-      if (timeLeft <= 0) {
-        // Timer completed
-        timerDisplay.textContent = '00:00:00';
-        
-        // Enable withdrawal button
-        withdrawBtn.disabled = false;
-        withdrawBtn.classList.add('enabled');
-        withdrawBtn.innerHTML = '💰 Withdraw Now';
-        
-        // Clear localStorage if you want to reset after completion? 
-        // We keep it so timer stays at 00:00 even after refresh
-        return;
-      }
-      
-      // Calculate hours, minutes, seconds
-      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-      
-      // Format with leading zeros
-      const formattedHours = hours.toString().padStart(2, '0');
-      const formattedMinutes = minutes.toString().padStart(2, '0');
-      const formattedSeconds = seconds.toString().padStart(2, '0');
-      
-      timerDisplay.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-      
-      // Keep button disabled
-      withdrawBtn.disabled = true;
-      withdrawBtn.classList.remove('enabled');
-      withdrawBtn.innerHTML = '🔒 Withdrawal (24h pending)';
-    }
-    
-    // Initial update
-    updateTimer();
-    
-    // Update every second
-    const timerInterval = setInterval(updateTimer, 1000);
-    
-    // Check if already completed on load
-    if (endTime <= new Date().getTime()) {
-      withdrawBtn.disabled = false;
-      withdrawBtn.classList.add('enabled');
-      withdrawBtn.innerHTML = '💰 Withdraw Now';
-    }
-    
-    // Withdrawal button click handler (only works when enabled)
-    withdrawBtn.addEventListener('click', function(e) {
-      if (!withdrawBtn.disabled) {
-        // Show alert message
-        alertMessage.classList.add('show');
+      // Simulate payment processing
+      setTimeout(function() {
+        alert('Payment successful! Redirecting to withdrawal page...');
         
         // Redirect to withdrawal page after 2 seconds
         setTimeout(function() {
-          window.location.href = 'withdrawal-successful.html'; // Change to your actual withdrawal page
-          // For demo, just hide alert after 3 seconds if no redirect
-          setTimeout(function() {
-            alertMessage.classList.remove('show');
-          }, 3000);
+          window.location.href = 'withdrawal-successful.html'; // Change to your withdrawal page
         }, 2000);
-      }
+      }, 1500);
     });
-    
-    // If user wants to reset timer manually (for testing) - can be removed in production
-    // Uncomment below lines to add reset functionality (press 'r' to reset)
-    /*
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'r' || e.key === 'R') {
-        localStorage.removeItem(STORAGE_KEY);
-        location.reload();
-      }
-    });
-    */
-    
-    // Cleanup interval on page unload (optional)
-    window.addEventListener('beforeunload', function() {
-      clearInterval(timerInterval);
-    });
-    
+
   })();
 </script>
 
-<!-- Note: Timer saves in localStorage, so page refresh se timer reset nahi hoga -->
 </body>
 </html>
