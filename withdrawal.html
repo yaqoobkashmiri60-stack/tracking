@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Final Payment · Withdrawal · Fantasy Sports</title>
+  <title>Processing · 24 Hours Timer · Fantasy Sports</title>
   <style>
     /* ----- CSS reset & modern font ----- */
     * {
@@ -24,7 +24,7 @@
     }
 
     /* main card – mobile friendly container */
-    .payment-container {
+    .processing-container {
       max-width: 440px;
       width: 100%;
       background: rgba(255,255,255,0.75);
@@ -63,11 +63,11 @@
     }
 
     /* Header */
-    .payment-header {
+    .processing-header {
       text-align: center;
       margin-bottom: 24px;
     }
-    .payment-title {
+    .processing-title {
       font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
@@ -76,7 +76,7 @@
       color: transparent;
       margin-bottom: 8px;
     }
-    .payment-subtitle {
+    .processing-subtitle {
       font-size: 1rem;
       color: #617e9c;
       background: rgba(255,255,255,0.7);
@@ -86,7 +86,7 @@
     }
 
     /* Main Card */
-    .payment-card {
+    .processing-card {
       background: white;
       border-radius: 34px;
       padding: 24px 22px;
@@ -118,115 +118,189 @@
       font-weight: 500;
     }
 
-    /* Success Message */
-    .success-badge {
-      background: #dcfce7;
-      border-radius: 60px;
-      padding: 15px 20px;
-      margin-bottom: 25px;
+    /* Processing Animation */
+    .processing-animation {
       text-align: center;
-      border-left: 6px solid #2b8c5e;
+      margin-bottom: 25px;
     }
-    .success-badge .icon {
-      font-size: 2.5rem;
+    .spinner {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border: 6px solid #e9eff7;
+      border-top: 6px solid #2b8c5e;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .processing-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1f384f;
       margin-bottom: 8px;
     }
-    .success-badge .title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #0b5730;
-      margin-bottom: 5px;
-    }
-    .success-badge .text {
+    .processing-desc {
       font-size: 1rem;
-      color: #2e6b47;
+      color: #617e9c;
     }
 
-    /* Info Box */
-    .info-box {
+    /* Timer Box - 24 Hours */
+    .timer-box {
       background: #ecf7ff;
-      border-radius: 30px;
-      padding: 20px;
-      margin: 20px 0;
-      border: 1px dashed #3e7eb3;
+      border-radius: 40px;
+      padding: 24px 20px;
+      margin: 20px 0 25px;
+      border: 2px dashed #3e7eb3;
+      text-align: center;
     }
-    .info-row {
+    .timer-label {
+      font-size: 1.1rem;
+      color: #1f384f;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .timer-display {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #17487a;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .timer-subtext {
+      font-size: 1rem;
+      color: #38658f;
+      font-weight: 500;
+    }
+    .timer-note {
+      font-size: 0.9rem;
+      color: #617e9c;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.7);
+      padding: 8px 15px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+
+    /* Payment Info */
+    .payment-info {
+      background: #f8fafd;
+      border-radius: 30px;
+      padding: 18px;
+      margin: 20px 0;
+    }
+    .payment-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #c9ddef;
+      border-bottom: 1px solid #e0e8f0;
     }
-    .info-row:last-child {
+    .payment-row:last-child {
       border-bottom: none;
     }
-    .info-label {
+    .payment-label {
       font-size: 1rem;
       color: #1f384f;
       font-weight: 500;
     }
-    .info-value {
+    .payment-value {
       font-size: 1.2rem;
       font-weight: 700;
       color: #1e2b4a;
     }
-    .info-value.highlight {
+    .payment-value.highlight {
       color: #b45f2b;
     }
-    .withdrawal-amount {
+    .total-row {
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 2px dashed #b9c8da;
+    }
+    .total-row .payment-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .total-row .payment-value {
       font-size: 1.8rem;
-      font-weight: 800;
       color: #1c8b4c;
     }
 
-    /* Final Payment Section */
-    .payment-box {
-      background: linear-gradient(145deg, #fef5e7, #fff3e0);
-      border-radius: 30px;
-      padding: 22px;
+    /* Status Steps */
+    .status-steps {
       margin: 25px 0;
-      border: 2px solid #d4a373;
     }
-    .payment-label {
-      font-size: 1.1rem;
-      color: #b45f2b;
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #ecf1f6;
+    }
+    .step-item:last-child {
+      border-bottom: none;
+    }
+    .step-icon {
+      width: 40px;
+      height: 40px;
+      background: #e9eff7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .step-icon.completed {
+      background: #dcfce7;
+      color: #1c8b4c;
+    }
+    .step-icon.active {
+      background: #ecf7ff;
+      color: #17487a;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-title {
       font-weight: 600;
-      margin-bottom: 10px;
-      text-align: center;
+      color: #1f384f;
+      margin-bottom: 3px;
     }
-    .final-amount {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #b45f2b;
-      text-align: center;
-      margin-bottom: 10px;
+    .step-time {
+      font-size: 0.85rem;
+      color: #617e9c;
     }
-    .final-amount small {
-      font-size: 1.2rem;
-      color: #7f5a3a;
-    }
-    .payment-note {
+    .step-status {
       font-size: 0.9rem;
-      color: #7f5a3a;
-      text-align: center;
-      background: rgba(255,255,255,0.7);
-      padding: 8px;
-      border-radius: 40px;
+      font-weight: 500;
+    }
+    .step-status.completed {
+      color: #1c8b4c;
+    }
+    .step-status.active {
+      color: #17487a;
     }
 
-    /* Button */
-    .pay-btn {
+    /* Button (disabled during processing) */
+    .processing-btn {
       width: 100%;
-      background: linear-gradient(105deg, #b45f2b, #d47b3a, #e69b5c);
+      background: linear-gradient(105deg, #b45f2b, #d47b3a);
       border: none;
-      padding: 22px 22px;
+      padding: 18px 22px;
       border-radius: 90px;
       color: white;
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 24px 34px -14px #b45f2b80;
+      font-size: 1.3rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      opacity: 0.6;
       transition: all 0.25s ease;
       border: 1px solid rgba(255,255,255,0.3);
       margin: 15px 0 10px;
@@ -234,30 +308,6 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-    }
-    .pay-btn:hover {
-      background: linear-gradient(105deg, #c96f2e, #e58b47, #f7ac6b);
-      transform: scale(1.02) translateY(-3px);
-      box-shadow: 0 30px 40px -12px #a04e1f;
-    }
-    .pay-btn:active {
-      transform: scale(0.99) translateY(2px);
-    }
-
-    /* Alert Message */
-    .alert-message {
-      display: none;
-      background: #dcfce7;
-      color: #0b5730;
-      padding: 15px;
-      border-radius: 40px;
-      text-align: center;
-      margin-top: 15px;
-      font-weight: 500;
-      border-left: 6px solid #2b8c5e;
-    }
-    .alert-message.show {
-      display: block;
     }
 
     /* Footer */
@@ -267,11 +317,27 @@
       margin-top: 22px;
       font-size: 0.95rem;
     }
+
+    /* Reset button for testing (hidden by default) */
+    .reset-btn {
+      background: transparent;
+      border: 1px dashed #a0b8d0;
+      color: #617e9c;
+      padding: 8px 15px;
+      border-radius: 40px;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    .reset-btn:hover {
+      background: #f0f4fc;
+    }
   </style>
 </head>
 <body>
 
-<div class="payment-container">
+<div class="processing-container">
   <!-- Logo -->
   <div class="logo-area">
     <div class="logo-img">
@@ -282,101 +348,198 @@
   </div>
 
   <!-- Header -->
-  <div class="payment-header">
-    <div class="payment-title">Final Step</div>
-    <div class="payment-subtitle">Complete your withdrawal</div>
+  <div class="processing-header">
+    <div class="processing-title">Processing Payment</div>
+    <div class="processing-subtitle">Please wait while we process</div>
   </div>
 
   <!-- Main Card -->
-  <div class="payment-card">
+  <div class="processing-card">
     <!-- User greeting -->
     <div class="user-greeting">
       Dear user; <i>user591700</i>
     </div>
 
-    <!-- KYC Success Message -->
-    <div class="success-badge">
-      <div class="icon">✅</div>
-      <div class="title">KYC Verification Successful!</div>
-      <div class="text">Your documents have been verified</div>
+    <!-- Processing Animation -->
+    <div class="processing-animation">
+      <div class="spinner"></div>
+      <div class="processing-text">Payment Processing</div>
+      <div class="processing-desc">Your transaction is being processed</div>
     </div>
 
-    <!-- Withdrawal Info -->
-    <div class="info-box">
-      <div class="info-row">
-        <span class="info-label">Total Winning Amount</span>
-        <span class="info-value withdrawal-amount">₹22,00,000</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">KYC Verification Fee</span>
-        <span class="info-value">₹1,899 (Paid)</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">GST (18%) on KYC</span>
-        <span class="info-value">₹342 (Paid)</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Processing Fee</span>
-        <span class="info-value highlight">₹2,500</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">GST on Processing</span>
-        <span class="info-value highlight">₹450</span>
-      </div>
+    <!-- Timer Box - 24 Hours Countdown (persists in localStorage) -->
+    <div class="timer-box" id="timerBox">
+      <div class="timer-label">⏳ Estimated processing time</div>
+      <div class="timer-display" id="timer">24:00:00</div>
+      <div class="timer-subtext">hours : minutes : seconds</div>
+      <div class="timer-note">Your amount will be credited after timer ends</div>
     </div>
 
-    <!-- Final Payment Box - ₹7,486 -->
-    <div class="payment-box">
-      <div class="payment-label">Final Payment Required</div>
-      <div class="final-amount">
-        ₹7,486 <small>only</small>
+    <!-- Payment Details -->
+    <div class="payment-info">
+      <div class="payment-row">
+        <span class="payment-label">Payment Amount</span>
+        <span class="payment-value">₹7,486</span>
       </div>
-      <div class="payment-note">
-        ⚡ This is the final step to withdraw ₹22,00,000
+      <div class="payment-row">
+        <span class="payment-label">Transaction ID</span>
+        <span class="payment-value">TXN' + Math.random().toString(36).substring(2, 10).toUpperCase() + '</span>
+      </div>
+      <div class="payment-row">
+        <span class="payment-label">Payment Mode</span>
+        <span class="payment-value">UPI / Card</span>
+      </div>
+      <div class="payment-row total-row">
+        <span class="payment-label">Withdrawal Amount</span>
+        <span class="payment-value">₹22,00,000</span>
       </div>
     </div>
 
-    <!-- Pay Button -->
-    <button class="pay-btn" id="payNowBtn">
-      💰 Pay ₹7,486 & Withdraw
+    <!-- Processing Steps -->
+    <div class="status-steps">
+      <div class="step-item">
+        <div class="step-icon completed">✅</div>
+        <div class="step-content">
+          <div class="step-title">Payment Initiated</div>
+          <div class="step-time">Just now</div>
+        </div>
+        <div class="step-status completed">Completed</div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon active">⏳</div>
+        <div class="step-content">
+          <div class="step-title">Processing Payment</div>
+          <div class="step-time">Estimated 24 hours</div>
+        </div>
+        <div class="step-status active">In Progress</div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">📤</div>
+        <div class="step-content">
+          <div class="step-title">Amount Transfer</div>
+          <div class="step-time">After processing</div>
+        </div>
+        <div class="step-status">Pending</div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">✅</div>
+        <div class="step-content">
+          <div class="step-title">Credit to Bank</div>
+          <div class="step-time">Final step</div>
+        </div>
+        <div class="step-status">Pending</div>
+      </div>
+    </div>
+
+    <!-- Disabled Button (processing) -->
+    <button class="processing-btn" disabled>
+      ⏳ Processing... (24h)
     </button>
 
-    <!-- Alert Message -->
-    <div class="alert-message" id="alertMessage">
-      ✅ Processing your final payment... Redirecting to withdrawal
-    </div>
-
-    <div style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: #728ea7;">
-      *Final payment includes processing fee + taxes
-    </div>
+    <!-- Reset button for testing (hidden normally, shown for demo) -->
+    <button class="reset-btn" id="resetTimerBtn" style="display: none;">↻ Reset Timer (Testing)</button>
   </div>
 
-  <div class="footer-note">✨ One last step to claim your winnings</div>
+  <div class="footer-note">✨ Please don't close this page</div>
 </div>
 
 <script>
   (function() {
-    const payBtn = document.getElementById('payNowBtn');
-    const alertMessage = document.getElementById('alertMessage');
-
-    // Pay button click handler
-    payBtn.addEventListener('click', function() {
-      // Show alert message
-      alertMessage.classList.add('show');
-      
-      // Simulate payment processing
-      setTimeout(function() {
-        alert('Payment successful! Redirecting to withdrawal page...');
-        
-        // Redirect to withdrawal page after 2 seconds
-        setTimeout(function() {
-          window.location.href = 'withdrawal-successful.html'; // Change to your withdrawal page
-        }, 2000);
-      }, 1500);
+    // ===== TIMER WITH LOCAL STORAGE - PERSISTENT ACROSS SESSIONS =====
+    const timerDisplay = document.getElementById('timer');
+    const resetBtn = document.getElementById('resetTimerBtn');
+    
+    // Storage keys
+    const STORAGE_KEY = 'payment_processing_endtime';
+    const PROCESSING_HOURS = 24; // 24 hours
+    const PROCESSING_MS = PROCESSING_HOURS * 60 * 60 * 1000;
+    
+    // Generate random transaction ID
+    const txnElements = document.querySelectorAll('.payment-value');
+    txnElements.forEach(el => {
+      if (el.textContent.includes('TXN')) {
+        const txnId = 'TXN' + Math.random().toString(36).substring(2, 10).toUpperCase();
+        el.textContent = txnId;
+      }
     });
-
+    
+    // Get or set end time
+    let endTime = localStorage.getItem(STORAGE_KEY);
+    const now = new Date().getTime();
+    
+    if (!endTime) {
+      // First time - set end time to now + 24 hours
+      endTime = now + PROCESSING_MS;
+      localStorage.setItem(STORAGE_KEY, endTime);
+    } else {
+      endTime = parseInt(endTime);
+    }
+    
+    // Update timer every second
+    function updateTimer() {
+      const currentTime = new Date().getTime();
+      const timeLeft = endTime - currentTime;
+      
+      if (timeLeft <= 0) {
+        // Timer completed - show 00:00:00
+        timerDisplay.textContent = '00:00:00';
+        
+        // Here you could enable a button or redirect
+        // For now, just show completed message
+        document.querySelector('.processing-text').textContent = 'Processing Complete';
+        document.querySelector('.processing-desc').textContent = 'Your amount will be credited soon';
+        
+        return;
+      }
+      
+      // Calculate hours, minutes, seconds
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      
+      // Format with leading zeros
+      const formattedHours = hours.toString().padStart(2, '0');
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      const formattedSeconds = seconds.toString().padStart(2, '0');
+      
+      timerDisplay.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
+    
+    // Initial update
+    updateTimer();
+    
+    // Update every second
+    const timerInterval = setInterval(updateTimer, 1000);
+    
+    // Reset timer functionality (for testing) - hidden by default
+    resetBtn.addEventListener('click', function() {
+      const newEndTime = new Date().getTime() + PROCESSING_MS;
+      localStorage.setItem(STORAGE_KEY, newEndTime);
+      endTime = newEndTime;
+      updateTimer();
+    });
+    
+    // Check if already completed on load
+    if (endTime <= new Date().getTime()) {
+      timerDisplay.textContent = '00:00:00';
+      document.querySelector('.processing-text').textContent = 'Processing Complete';
+      document.querySelector('.processing-desc').textContent = 'Your amount will be credited soon';
+    }
+    
+    // Cleanup interval on page unload
+    window.addEventListener('beforeunload', function() {
+      clearInterval(timerInterval);
+    });
+    
   })();
 </script>
 
+<!-- 
+  TIMER BEHAVIOR:
+  - पहली बार खोलने पर 24:00:00 से शुरू
+  - लोकल स्टोरेज में एंड टाइम सेव रहता है
+  - पेज रिफ्रेश करने पर टाइमर वहीं से चलेगा जहाँ छोड़ा था
+  - 24 घंटे बाद 00:00:00 दिखेगा
+-->
 </body>
 </html>
