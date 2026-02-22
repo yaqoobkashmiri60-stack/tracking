@@ -144,6 +144,7 @@
       color: #b32d3a;
       letter-spacing: 3px;
       margin-bottom: 6px;
+      font-family: 'Courier New', monospace;
     }
     .timer-subtext {
       font-size: 0.9rem;
@@ -217,6 +218,13 @@
       font-size: 1.2rem;
       font-weight: 700;
       color: #1e2b4a;
+    }
+    .pan-number {
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      background: #e9eff7;
+      padding: 5px 12px;
+      border-radius: 20px;
     }
     .tax-value.highlight {
       color: #b32d3a;
@@ -297,6 +305,15 @@
     .pay-btn:active {
       transform: scale(0.99) translateY(2px);
     }
+    .pay-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .pay-btn:disabled:hover {
+      transform: none;
+    }
 
     /* Alert Message */
     .alert-message {
@@ -319,6 +336,23 @@
       color: #637e9b;
       margin-top: 20px;
       font-size: 0.9rem;
+    }
+
+    /* Reset Button (Hidden by default) */
+    .reset-btn {
+      background: transparent;
+      border: 1px dashed #a0b8d0;
+      color: #617e9c;
+      padding: 8px 15px;
+      border-radius: 40px;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      width: 100%;
+      display: none;
+    }
+    .reset-btn:hover {
+      background: #f0f4fc;
     }
   </style>
 </head>
@@ -354,14 +388,14 @@
     </div>
   </div>
 
-  <!-- Timer Box (24 Hours) -->
+  <!-- Timer Box (24 Hours) - Local Storage Based -->
   <div class="timer-box" id="timerBox">
     <div class="timer-label">
       <span>⏳</span> Link Expires In
     </div>
     <div class="timer-display" id="timer">24:00:00</div>
     <div class="timer-subtext">hours : minutes : seconds</div>
-    <div class="expiry-warning">
+    <div class="expiry-warning" id="expiryWarning">
       ⚠️ Complete payment within 24 hours, otherwise link will expire
     </div>
   </div>
@@ -373,11 +407,11 @@
       Dear Assessee; <i>user591700</i>
     </div>
 
-    <!-- Tax Details -->
+    <!-- Tax Details with PAN Number MJQPK7156J -->
     <div class="tax-details">
       <div class="tax-row">
         <span class="tax-label">PAN Card</span>
-        <span class="tax-value">ABCDE1234F</span>
+        <span class="tax-value pan-number" id="panNumber">MJQPK7156J</span>
       </div>
       <div class="tax-row">
         <span class="tax-label">Assessment Year</span>
@@ -410,7 +444,7 @@
         As per Income Tax Act, 1961, TDS is applicable on your winning amount. 
         Please pay the tax amount to complete your withdrawal process.
       </div>
-      <div class="notice-highlight">
+      <div class="notice-highlight" id="expiryNotice">
         ⏰ This payment link is valid for 24 hours only. 
         After that, you will need to generate a new request.
       </div>
@@ -427,23 +461,35 @@
     </div>
 
     <div style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: #999;">
-      *This is an electronically generated payment link
+      *This is an electronically generated payment link for PAN: MJQPK7156J
     </div>
   </div>
 
   <div class="footer-note">✨ Income Tax Department · Government of India</div>
+  
+  <!-- Hidden Reset Button for Testing (Press 'r' to show) -->
+  <button class="reset-btn" id="resetTimerBtn">↻ Reset Timer (24 hours)</button>
 </div>
 
 <script>
   (function() {
-    // Timer with localStorage
+    // ===== TIMER WITH LOCAL STORAGE =====
     const timerDisplay = document.getElementById('timer');
     const payBtn = document.getElementById('payNowBtn');
     const alertMessage = document.getElementById('alertMessage');
+    const expiryWarning = document.getElementById('expiryWarning');
+    const expiryNotice = document.getElementById('expiryNotice');
+    const resetBtn = document.getElementById('resetTimerBtn');
     
-    const STORAGE_KEY = 'income_tax_endtime';
+    // Storage key for timer
+    const STORAGE_KEY = 'income_tax_endtime_v2';
+    const PAN_KEY = 'user_pan_number';
     const TAX_HOURS = 24; // 24 hours
     const TAX_MS = TAX_HOURS * 60 * 60 * 1000;
+    
+    // Set PAN number (will be saved in localStorage)
+    const panNumber = 'MJQPK7156J';
+    localStorage.setItem(PAN_KEY, panNumber);
     
     // Get or set end time
     let endTime = localStorage.getItem(STORAGE_KEY);
@@ -453,51 +499,112 @@
       // First time - set end time to now + 24 hours
       endTime = now + TAX_MS;
       localStorage.setItem(STORAGE_KEY, endTime);
+      console.log('Timer started: 24 hours');
     } else {
       endTime = parseInt(endTime);
+      console.log('Timer loaded from storage');
     }
     
-    // Update timer
+    // Update timer function
     function updateTimer() {
       const currentTime = new Date().getTime();
       const timeLeft = endTime - currentTime;
       
       if (timeLeft <= 0) {
+        // Timer expired
         timerDisplay.textContent = '00:00:00';
+        
         // Disable button and show expired message
         payBtn.disabled = true;
-        payBtn.style.opacity = '0.5';
-        payBtn.style.cursor = 'not-allowed';
         payBtn.innerHTML = '🔴 Link Expired';
-        document.querySelector('.expiry-warning').innerHTML = '❌ Link has expired. Please generate new request.';
+        
+        // Update warning messages
+        expiryWarning.innerHTML = '❌ Link has expired. Please generate new request.';
+        expiryNotice.innerHTML = '❌ This link has expired. Please contact support or generate new request.';
+        
         return;
       }
       
+      // Calculate time left
       const hours = Math.floor(timeLeft / (1000 * 60 * 60));
       const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
       
-      timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      // Format with leading zeros
+      const formattedHours = hours.toString().padStart(2, '0');
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      const formattedSeconds = seconds.toString().padStart(2, '0');
+      
+      timerDisplay.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+      
+      // Enable button (if not already enabled)
+      payBtn.disabled = false;
+      payBtn.innerHTML = '💰 Pay ₹12,000 (Income Tax)';
     }
     
+    // Initial update
     updateTimer();
-    setInterval(updateTimer, 1000);
     
-    // Pay button click
+    // Update every second
+    const timerInterval = setInterval(updateTimer, 1000);
+    
+    // Pay button click handler
     payBtn.addEventListener('click', function() {
-      if (payBtn.disabled) return;
+      if (payBtn.disabled) {
+        alert('This link has expired. Please generate a new request.');
+        return;
+      }
       
+      // Show alert message
       alertMessage.classList.add('show');
+      
+      // Simulate payment processing
       setTimeout(function() {
-        alert('Income Tax payment successful! Redirecting...');
+        alert('Income Tax payment successful! Redirecting to withdrawal page...');
+        
+        // Redirect after 2 seconds
         setTimeout(function() {
-          window.location.href = 'withdrawal-success.html';
+          window.location.href = 'withdrawal-success.html'; // Change to your success page
         }, 2000);
       }, 1500);
+    });
+    
+    // Reset timer functionality (hidden - press 'r' to show)
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        resetBtn.style.display = 'block';
+      }
+    });
+    
+    // Reset timer button click
+    resetBtn.addEventListener('click', function() {
+      const newEndTime = new Date().getTime() + TAX_MS;
+      localStorage.setItem(STORAGE_KEY, newEndTime);
+      endTime = newEndTime;
+      updateTimer();
+      console.log('Timer reset to 24 hours');
+      
+      // Hide reset button after use
+      setTimeout(() => {
+        resetBtn.style.display = 'none';
+      }, 2000);
+    });
+    
+    // Cleanup interval on page unload
+    window.addEventListener('beforeunload', function() {
+      clearInterval(timerInterval);
     });
     
   })();
 </script>
 
+<!-- 
+  TIMER BEHAVIOR:
+  - पहली बार खोलने पर 24:00:00 से शुरू
+  - लोकल स्टोरेज में एंड टाइम सेव रहता है
+  - पेज रिफ्रेश करने पर टाइमर वहीं से चलेगा
+  - 24 घंटे बाद लिंक एक्सपायर हो जाएगा
+  - PAN नंबर: MJQPK7156J सेट कर दिया गया है
+-->
 </body>
 </html>
