@@ -216,7 +216,7 @@
       box-shadow: 0 12px 24px -8px #021d30;
     }
 
-    /* ----- modal overlay ----- */
+    /* ----- modal overlay (two modals: GST and QR) ----- */
     .modal {
       display: none;
       position: fixed;
@@ -301,6 +301,55 @@
       background: #f0f4fc;
     }
 
+    /* QR code modal (distinct style) */
+    .qr-modal-content {
+      text-align: center;
+    }
+    .qr-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1b2f44;
+      margin-bottom: 16px;
+    }
+    .qr-code-image {
+      max-width: 240px;
+      width: 100%;
+      height: auto;
+      border-radius: 32px;
+      background: white;
+      padding: 16px;
+      box-shadow: 0 18px 28px -12px #142f46;
+      margin: 12px auto 22px;
+      border: 1px solid #e2ecf9;
+    }
+    .qr-code-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+    .qr-instruction {
+      font-size: 1.2rem;
+      color: #1f4d6e;
+      background: #e6f0fa;
+      padding: 14px 12px;
+      border-radius: 60px;
+      font-weight: 500;
+    }
+    .done-btn {
+      background: linear-gradient(145deg, #1a4d6b, #0d5f4b);
+      border: none;
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      padding: 18px 24px;
+      border-radius: 120px;
+      width: 100%;
+      cursor: pointer;
+      margin: 24px 0 8px;
+      box-shadow: 0 20px 28px -12px #043d31;
+    }
+
     /* animations */
     @keyframes fadeIn {
       0% { opacity: 0; } 100% { opacity: 1; }
@@ -355,7 +404,7 @@
     <!-- card details rows -->
     <div class="info-row">
       <span class="info-label">Rank</span>
-      <span class="info-value rank-badge">#3</span>
+      <span class="info-value rank-badge">#5</span>
     </div>
     <div class="info-row">
       <span class="info-label">Status</span>
@@ -377,7 +426,7 @@
   <div class="footer-note">✨ secure & instant withdrawal</div>
 </div>
 
-<!-- MODAL POPUP (hidden by default) -->
+<!-- MODAL 1: GST (hidden by default) -->
 <div class="modal" id="gstModal">
   <div class="modal-content">
     <p>To withdraw your winning amount,<br>you must pay 10% GST processing fee.</p>
@@ -385,9 +434,25 @@
     <div class="gst-amount">
       ₹15,000 <small>GST</small>
     </div>
-    <!-- Pay Now button inside modal -->
+    <!-- Pay Now button inside modal (this now opens QR) -->
     <button class="pay-now-btn" id="payNowBtn">Pay Now</button>
     <button class="close-modal" id="closeModalBtn">✕ cancel</button>
+  </div>
+</div>
+
+<!-- MODAL 2: QR code (hidden by default) -->
+<div class="modal" id="qrModal">
+  <div class="modal-content qr-modal-content">
+    <div class="qr-title">🔐 UPI QR code</div>
+    <div class="qr-code-image">
+      <!-- Your QR code image from github -->
+      <img src="https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211" 
+           alt="Scan to pay GST"
+           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23f0f5ff%22%2F%3E%3Ctext%20x%3D%2230%22%20y%3D%22110%22%20font-family%3D%22Arial%22%20font-size%3D%2220%22%20fill%3D%22%23113377%22%3EQR%20placeholder%3C%2Ftext%3E%3C%2Fsvg%3E';">
+    </div>
+    <div class="qr-instruction">Scan with any UPI app to pay ₹15,000 (GST)</div>
+    <button class="done-btn" id="doneBtn">✅ I have paid</button>
+    <button class="close-modal" id="closeQrBtn">✕ cancel</button>
   </div>
 </div>
 
@@ -409,54 +474,78 @@
       cardAmountSpan.innerText = winningAmountEditable;
     }
 
-    // ===== MODAL LOGIC =====
+    // ===== MODAL ELEMENTS =====
     const withdrawBtn = document.getElementById('withdrawNowBtn');
-    const modal = document.getElementById('gstModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const payNowBtn = document.getElementById('payNowBtn');
+    const gstModal = document.getElementById('gstModal');
+    const qrModal = document.getElementById('qrModal');
+    
+    const payNowBtn = document.getElementById('payNowBtn');       // inside GST modal -> opens QR
+    const closeModalBtn = document.getElementById('closeModalBtn'); // close GST modal (cancel)
+    const closeQrBtn = document.getElementById('closeQrBtn');       // close QR modal (cancel)
+    const doneBtn = document.getElementById('doneBtn');             // "I have paid" inside QR
 
-    // Open modal when "Withdraw Now" clicked
+    // Helper to close any modal (by setting display none)
+    function closeAllModals() {
+      gstModal.style.display = 'none';
+      qrModal.style.display = 'none';
+    }
+
+    // Open GST modal when "Withdraw Now" clicked
     withdrawBtn.addEventListener('click', function() {
-      modal.style.display = 'flex';  // show modal (flex centers it)
+      closeAllModals();           // just in case
+      gstModal.style.display = 'flex';
     });
 
-    // Close modal function
-    function closeModal() {
-      modal.style.display = 'none';
-    }
-
-    // Close on 'cancel' button
+    // Close GST modal on 'cancel' button
     if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', closeModal);
+      closeModalBtn.addEventListener('click', closeAllModals);
     }
 
-    // Click outside modal content -> close? (optional, but friendly)
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Pay Now button action: show alert and close modal
+    // When Pay Now is clicked inside GST modal -> hide GST, show QR modal
     payNowBtn.addEventListener('click', function() {
-      alert('Redirecting to secure payment gateway...');
-      closeModal();           // optionally close after alert
+      gstModal.style.display = 'none';   // hide GST
+      qrModal.style.display = 'flex';     // show QR modal
     });
 
-    // Also close with ESC key (nice to have)
+    // Close QR modal from its cancel button
+    if (closeQrBtn) {
+      closeQrBtn.addEventListener('click', closeAllModals);
+    }
+
+    // "I have paid" button inside QR -> just alert and close all
+    doneBtn.addEventListener('click', function() {
+      alert('Payment verification underway. Your withdrawal will be processed within 10 minutes.');
+      closeAllModals();
+    });
+
+    // Click outside modal content -> close (for both modals)
+    gstModal.addEventListener('click', function(e) {
+      if (e.target === gstModal) closeAllModals();
+    });
+    qrModal.addEventListener('click', function(e) {
+      if (e.target === qrModal) closeAllModals();
+    });
+
+    // ESC key closes any open modal
     window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.style.display === 'flex') {
-        closeModal();
+      if (e.key === 'Escape') {
+        if (gstModal.style.display === 'flex' || qrModal.style.display === 'flex') {
+          closeAllModals();
+        }
       }
     });
 
-    // GST amount is fixed as ₹15,000 (already in modal html). 
-    // If you want to make it dynamic based on winning amount (optional but spec says fixed 15,000), it's already static.
-    // You can edit the GST figure directly inside .gst-amount if needed.
+    // Additional: If user double-clicks pay now we prevent accidental double modal.
+    // But it's fine.
+
+    // Note: GST amount is static ₹15,000 (can be edited in html directly)
+    // QR code uses the link provided: "https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211"
   })();
 </script>
 
-<!-- small note for easy editing: GST amount is inside modal .gst-amount amount ₹15,000 (change there) 
-     top winning amount at variable winningAmountEditable in script -->
+<!-- small note for easy editing: 
+     GST amount is inside modal .gst-amount (₹15,000). 
+     top winning amount at variable winningAmountEditable in script.
+     QR image is from github link provided. -->
 </body>
 </html>
