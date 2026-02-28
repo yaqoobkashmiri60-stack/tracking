@@ -19,79 +19,78 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 12px;  /* thoda kam padding for smaller screens */
       margin: 0;
     }
 
-    /* main card – mobile friendly container */
+    /* main card – android friendly, uses vw / flexible units */
     .withdrawal-container {
-      max-width: 440px;
+      max-width: 400px;   /* perfect for android ~360-400dp */
       width: 100%;
       background: rgba(255,255,255,0.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border-radius: 48px 48px 32px 32px;
-      box-shadow: 0 25px 50px -12px rgba(0,20,40,0.35), 0 4px 18px 0 rgba(0,0,0,0.06);
-      padding: 28px 22px 38px 22px;
+      border-radius: 40px 40px 28px 28px;  /* softer on small */
+      box-shadow: 0 20px 40px -12px rgba(0,20,40,0.4), 0 4px 12px 0 rgba(0,0,0,0.08);
+      padding: 22px 18px 32px 18px;
       transition: all 0.2s ease;
-      border: 1px solid rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.7);
     }
 
-    /* logo area with actual image from github */
+    /* logo area – image fit */
     .logo-area {
       display: flex;
       justify-content: center;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
     .logo-img {
-      max-width: 180px;
-      height: auto;
+      max-width: 160px;
+      width: auto;
       background: white;
-      border-radius: 60px;
-      padding: 10px 24px;
-      box-shadow: 0 12px 22px -10px rgba(0,40,80,0.25);
+      border-radius: 50px;
+      padding: 8px 20px;
+      box-shadow: 0 10px 18px -8px rgba(0,40,80,0.3);
       border: 1px solid rgba(255,255,255,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .logo-img img {
       width: 100%;
       height: auto;
-      max-height: 60px;
+      max-height: 48px;   /* thoda chhota for android */
       object-fit: contain;
+      display: block;
     }
 
     /* winning headline */
     .winning-header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
     .congrats {
-      font-size: 1.3rem;
+      font-size: 1.1rem;   /* reduced slightly */
       font-weight: 600;
       color: #1f384f;
       background: rgba(255,255,255,0.7);
-      padding: 8px 16px;
-      border-radius: 60px;
+      padding: 6px 14px;
+      border-radius: 50px;
       display: inline-block;
       backdrop-filter: blur(2px);
-      margin-bottom: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      margin-bottom: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
     }
     .winning-amount-large {
-      font-size: 2.7rem;
+      font-size: 2.3rem;    /* scaled for mobile */
       font-weight: 800;
       line-height: 1.2;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -1px;
-      text-shadow: 0 6px 14px rgba(0,60,130,0.2);
+      letter-spacing: -0.5px;
+      text-shadow: 0 5px 10px rgba(0,60,130,0.2);
+      word-break: break-word;
     }
     .winning-amount-large span {
-      font-size: 2rem;
+      font-size: 1.7rem;
       font-weight: 500;
       color: #496f92;
     }
@@ -99,38 +98,40 @@
     /* prize card */
     .prize-card {
       background: white;
-      border-radius: 34px;
-      padding: 24px 22px;
-      margin: 22px 0 26px 0;
-      box-shadow: 0 22px 38px -16px rgba(20, 40, 70, 0.3), inset 0 1px 4px white;
+      border-radius: 30px;
+      padding: 18px 16px;      /* kam padding for dense screen */
+      margin: 16px 0 18px 0;
+      box-shadow: 0 18px 30px -16px rgba(20, 40, 70, 0.3), inset 0 1px 4px white;
       border: 1px solid rgba(255,255,255,0.9);
-      transition: transform 0.2s;
-    }
-    .prize-card:hover {
-      transform: scale(1.01);
     }
 
     /* user greeting green */
     .user-greeting {
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
       background: #e2f0e8;
-      padding: 10px 20px;
-      border-radius: 50px;
+      padding: 8px 16px;
+      border-radius: 40px;
       display: inline-block;
       color: #0b5730;
-      border-left: 6px solid #2b8c5e;
-      box-shadow: 0 6px 12px rgba(0,80,50,0.1);
+      border-left: 5px solid #2b8c5e;
+      box-shadow: 0 5px 10px rgba(0,80,50,0.08);
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .user-greeting i {
       font-style: normal;
       background: #178f4f;
       color: white;
-      padding: 3px 12px;
-      border-radius: 40px;
-      margin-left: 10px;
+      padding: 2px 10px;
+      border-radius: 30px;
+      margin-left: 8px;
       font-weight: 500;
+      font-size: 0.95rem;
+      display: inline-block;
     }
 
     /* card rows */
@@ -138,8 +139,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 4px;
+      padding: 10px 2px;
       border-bottom: 1px solid #ecf1f6;
+      flex-wrap: wrap;       /* safety for extreme small */
+      gap: 5px;
     }
     .info-row:last-child {
       border-bottom: none;
@@ -147,76 +150,78 @@
     .info-label {
       color: #43586e;
       font-weight: 500;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     .info-value {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     .highlight-green {
       color: #1c8b4c;
       background: #dcfce7;
-      padding: 5px 16px;
+      padding: 4px 14px;
       border-radius: 40px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
     }
     .rank-badge {
       background: #232f49;
       color: white;
-      padding: 6px 18px;
+      padding: 5px 16px;
       border-radius: 40px;
       font-weight: 700;
-      box-shadow: 0 5px 12px rgba(0,30,60,0.3);
+      box-shadow: 0 4px 8px rgba(0,30,60,0.3);
+      font-size: 1rem;
     }
     .contest-name {
       font-weight: 700;
       color: #17222e;
       background: #f2f6fd;
-      padding: 6px 18px;
+      padding: 5px 16px;
       border-radius: 40px;
+      font-size: 0.95rem;
     }
     .winning-amount-card {
       color: #b45f2b;
       background: #fff1e0;
-      padding: 5px 18px;
+      padding: 4px 16px;
       border-radius: 40px;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
-    /* gradient withdraw button */
+    /* gradient withdraw button – big but fits */
     .withdraw-btn {
       width: 100%;
       background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
       border: none;
-      padding: 22px 22px;
-      border-radius: 90px;
+      padding: 18px 16px;      /* comfortable tap target */
+      border-radius: 70px;
       color: white;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      box-shadow: 0 24px 34px -14px #0b3050, 0 4px 12px rgba(0,20,10,0.3);
-      transition: all 0.25s ease;
+      box-shadow: 0 20px 28px -14px #0b3050, 0 4px 10px rgba(0,20,10,0.3);
+      transition: all 0.2s ease;
       border: 1px solid rgba(255,255,255,0.3);
-      margin-top: 14px;
+      margin-top: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
+      -webkit-tap-highlight-color: transparent;
     }
     .withdraw-btn:hover {
+      /* no hover effect on mobile, but keep for completeness */
       background: linear-gradient(105deg, #253a5a, #2f608b, #148573);
-      box-shadow: 0 30px 40px -12px #063048;
-      transform: scale(1.02) translateY(-3px);
     }
     .withdraw-btn:active {
-      transform: scale(0.99) translateY(2px);
-      box-shadow: 0 12px 24px -8px #021d30;
+      transform: scale(0.98);
+      box-shadow: 0 12px 20px -8px #021d30;
     }
 
-    /* ----- modal overlay (two modals: GST and QR) ----- */
+    /* ----- modals android optimized ----- */
     .modal {
       display: none;
       position: fixed;
@@ -226,41 +231,41 @@
       -webkit-backdrop-filter: blur(5px);
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
       z-index: 999;
       animation: fadeIn 0.2s ease;
     }
     .modal-content {
       background: white;
-      max-width: 380px;
+      max-width: 340px;      /* smaller for android */
       width: 100%;
-      border-radius: 50px;
-      padding: 32px 26px 36px 26px;
-      box-shadow: 0 40px 70px -10px #031120;
+      border-radius: 44px;
+      padding: 28px 20px 30px 20px;
+      box-shadow: 0 30px 50px -10px #031120;
       text-align: center;
       border: 2px solid rgba(255,255,255,0.8);
-      transform: scale(1);
       animation: slideUp 0.25s ease;
+      margin: 0 12px;        /* some side gap */
     }
     .modal-content p {
-      font-size: 1.5rem;
+      font-size: 1.3rem;     /* adjusted */
       font-weight: 600;
       color: #1b2f44;
       line-height: 1.4;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
     .gst-amount {
       background: #ecf7ff;
-      padding: 22px 12px;
-      border-radius: 48px;
-      font-size: 2.8rem;
+      padding: 16px 8px;
+      border-radius: 42px;
+      font-size: 2.3rem;
       font-weight: 800;
       color: #17487a;
-      margin: 20px 0 26px;
+      margin: 14px 0 20px;
       border: 1px dashed #3e7eb3;
     }
     .gst-amount small {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 500;
       color: #38658f;
     }
@@ -268,86 +273,85 @@
       background: linear-gradient(145deg, #1c3d5e, #0f614e);
       border: none;
       color: white;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      padding: 20px 24px;
-      border-radius: 120px;
+      padding: 16px 20px;
+      border-radius: 100px;
       width: 100%;
       cursor: pointer;
-      box-shadow: 0 26px 30px -16px #09432b;
-      transition: 0.2s;
+      box-shadow: 0 20px 25px -14px #09432b;
+      transition: 0.15s;
       border: 1px solid #93d4bc;
-    }
-    .pay-now-btn:hover {
-      background: linear-gradient(145deg, #25527a, #128065);
-      transform: scale(1.02);
-      box-shadow: 0 32px 34px -16px #063a27;
+      -webkit-tap-highlight-color: transparent;
     }
     .pay-now-btn:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
+      box-shadow: 0 12px 18px -10px #063a27;
     }
     .close-modal {
-      margin-top: 22px;
+      margin-top: 18px;
       background: transparent;
       border: none;
       color: #728ea7;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      padding: 8px 18px;
+      padding: 10px 16px;
       border-radius: 40px;
+      -webkit-tap-highlight-color: transparent;
     }
-    .close-modal:hover {
+    .close-modal:active {
       background: #f0f4fc;
     }
 
-    /* QR code modal (distinct style) */
+    /* QR code modal */
     .qr-modal-content {
       text-align: center;
     }
     .qr-title {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #1b2f44;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .qr-code-image {
-      max-width: 240px;
+      max-width: 200px;
       width: 100%;
       height: auto;
-      border-radius: 32px;
+      border-radius: 28px;
       background: white;
-      padding: 16px;
-      box-shadow: 0 18px 28px -12px #142f46;
-      margin: 12px auto 22px;
+      padding: 12px;
+      box-shadow: 0 15px 24px -12px #142f46;
+      margin: 8px auto 18px;
       border: 1px solid #e2ecf9;
     }
     .qr-code-image img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 18px;
+      border-radius: 16px;
     }
     .qr-instruction {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #1f4d6e;
       background: #e6f0fa;
-      padding: 14px 12px;
-      border-radius: 60px;
+      padding: 12px 10px;
+      border-radius: 50px;
       font-weight: 500;
     }
     .done-btn {
       background: linear-gradient(145deg, #1a4d6b, #0d5f4b);
       border: none;
       color: white;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      padding: 18px 24px;
-      border-radius: 120px;
+      padding: 16px 18px;
+      border-radius: 100px;
       width: 100%;
       cursor: pointer;
-      margin: 24px 0 8px;
-      box-shadow: 0 20px 28px -12px #043d31;
+      margin: 22px 0 6px;
+      box-shadow: 0 16px 22px -12px #043d31;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* animations */
@@ -355,53 +359,46 @@
       0% { opacity: 0; } 100% { opacity: 1; }
     }
     @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(40px); }
+      0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* small adjustments */
-    .editable-hint {
-      font-size: 0.9rem;
-      color: #617e9c;
-      margin-top: 6px;
-      letter-spacing: 0.2px;
-    }
     .footer-note {
       text-align: center;
       color: #637e9b;
-      margin-top: 22px;
-      font-size: 0.95rem;
+      margin-top: 16px;
+      font-size: 0.85rem;
     }
+    /* touch-friendly tuning */
+    button {
+      touch-action: manipulation;
+    }
+    /* no zoom on input (but we have none) */
   </style>
 </head>
 <body>
 
 <div class="withdrawal-container">
-  <!-- 1. LOGO top – with your github image link -->
+  <!-- LOGO with github image -->
   <div class="logo-area">
     <div class="logo-img">
       <img src="https://github.com/user-attachments/assets/9d722eec-f5d9-4f49-8053-833bbcb93a00" 
-           alt="Fantasy Sports Logo"
-           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%2260%22%20viewBox%3D%220%200%20160%2060%22%3E%3Crect%20width%3D%22160%22%20height%3D%2260%22%20fill%3D%22%231d267d%22%20rx%3D%2230%22%2F%3E%3Ctext%20x%3D%2230%22%20y%3D%2240%22%20font-family%3D%22Arial%22%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%3EFANTASY%3C%2Ftext%3E%3C%2Fsvg%3E';">
+           alt="Fantasy Sports"
+           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%2248%22%20viewBox%3D%220%200%20160%2048%22%3E%3Crect%20width%3D%22160%22%20height%3D%2248%22%20fill%3D%22%231d267d%22%20rx%3D%2224%22%2F%3E%3Ctext%20x%3D%2230%22%20y%3D%2232%22%20font-family%3D%22Arial%22%20font-size%3D%2218%22%20fill%3D%22%23ffffff%22%3EFANTASY%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
   </div>
 
-  <!-- winning message & dynamic amount -->
+  <!-- winning header -->
   <div class="winning-header">
-    <div class="congrats">🏆 Congratulations! You secured Rank #4</div>
-    <!-- editable winning amount: change text inside span -->
+    <div class="congrats">🏆 You secured Rank #4</div>
     <div class="winning-amount-large" id="dynamicWinningAmount">₹1,00,000 <span>prize</span></div>
-    <div class="editable-hint"></div>
   </div>
 
-  <!-- WINNING CARD (green user line, rank, status etc) -->
+  <!-- prize card -->
   <div class="prize-card">
-    <!-- Dear user [Khanna(80CV9)] in green -->
     <div class="user-greeting">
-      Dear user; <i>Khanna(80CV9)</i>
+      Dear user <i>Khanna(80CV9)</i>
     </div>
-
-    <!-- card details rows -->
     <div class="info-row">
       <span class="info-label">Rank</span>
       <span class="info-value rank-badge">#5</span>
@@ -419,38 +416,34 @@
       <span class="info-value contest-name">Mega Grand League</span>
     </div>
 
-    <!-- prominent withdraw button -->
     <button class="withdraw-btn" id="withdrawNowBtn">💸 Withdraw Now</button>
   </div>
 
-  <div class="footer-note">✨ secure & instant withdrawal</div>
+  <div class="footer-note">⚡ secure & instant withdrawal</div>
 </div>
 
-<!-- MODAL 1: GST (hidden by default) -->
+<!-- GST MODAL -->
 <div class="modal" id="gstModal">
   <div class="modal-content">
-    <p>To withdraw your winning amount,<br>you must pay 10% GST processing fee.</p>
-    <!-- GST amount fixed as ₹15,000 (editable here) -->
+    <p>To withdraw, pay 10% GST</p>
     <div class="gst-amount">
       ₹15,000 <small>GST</small>
     </div>
-    <!-- Pay Now button inside modal (this now opens QR) -->
     <button class="pay-now-btn" id="payNowBtn">Pay Now</button>
     <button class="close-modal" id="closeModalBtn">✕ cancel</button>
   </div>
 </div>
 
-<!-- MODAL 2: QR code (hidden by default) -->
+<!-- QR MODAL (with github QR) -->
 <div class="modal" id="qrModal">
   <div class="modal-content qr-modal-content">
-    <div class="qr-title">🔐 UPI QR code</div>
+    <div class="qr-title">📱 Scan & pay</div>
     <div class="qr-code-image">
-      <!-- Your QR code image from github -->
       <img src="https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211" 
-           alt="Scan to pay GST"
-           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23f0f5ff%22%2F%3E%3Ctext%20x%3D%2230%22%20y%3D%22110%22%20font-family%3D%22Arial%22%20font-size%3D%2220%22%20fill%3D%22%23113377%22%3EQR%20placeholder%3C%2Ftext%3E%3C%2Fsvg%3E';">
+           alt="UPI QR"
+           onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23eef3fc%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%22115%22%20font-family%3D%22Arial%22%20font-size%3D%2218%22%20fill%3D%22%231a3b5c%22%3EQR%20CODE%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
-    <div class="qr-instruction">Scan with any UPI app to pay ₹15,000 (GST)</div>
+    <div class="qr-instruction">Pay ₹15,000 via any UPI app</div>
     <button class="done-btn" id="doneBtn">✅ I have paid</button>
     <button class="close-modal" id="closeQrBtn">✕ cancel</button>
   </div>
@@ -458,67 +451,62 @@
 
 <script>
   (function() {
-    // ===== DYNAMIC / EDITABLE PLACEHOLDER AMOUNTS =====
-    // You can change these two values manually to reflect updated winning amount
-    // They sync the top large amount and the card amount.
-    const winningAmountEditable = "₹1,00,000";  // <-- CHANGE THIS 
+    // editable winning amount
+    const winningAmountEditable = "₹1,00,000";   // change as needed
     
-    // Apply to both places (top & card)
     const topAmountSpan = document.getElementById('dynamicWinningAmount');
     const cardAmountSpan = document.getElementById('cardWinningAmount');
     if (topAmountSpan) {
-      // keep the 'prize' suffix intact (optional)
       topAmountSpan.innerHTML = `${winningAmountEditable} <span>prize</span>`;
     }
     if (cardAmountSpan) {
       cardAmountSpan.innerText = winningAmountEditable;
     }
 
-    // ===== MODAL ELEMENTS =====
+    // get elements
     const withdrawBtn = document.getElementById('withdrawNowBtn');
     const gstModal = document.getElementById('gstModal');
     const qrModal = document.getElementById('qrModal');
     
-    const payNowBtn = document.getElementById('payNowBtn');       // inside GST modal -> opens QR
-    const closeModalBtn = document.getElementById('closeModalBtn'); // close GST modal (cancel)
-    const closeQrBtn = document.getElementById('closeQrBtn');       // close QR modal (cancel)
-    const doneBtn = document.getElementById('doneBtn');             // "I have paid" inside QR
+    const payNowBtn = document.getElementById('payNowBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeQrBtn = document.getElementById('closeQrBtn');
+    const doneBtn = document.getElementById('doneBtn');
 
-    // Helper to close any modal (by setting display none)
     function closeAllModals() {
       gstModal.style.display = 'none';
       qrModal.style.display = 'none';
     }
 
-    // Open GST modal when "Withdraw Now" clicked
+    // open GST modal
     withdrawBtn.addEventListener('click', function() {
-      closeAllModals();           // just in case
+      closeAllModals();
       gstModal.style.display = 'flex';
     });
 
-    // Close GST modal on 'cancel' button
+    // close GST via cancel
     if (closeModalBtn) {
       closeModalBtn.addEventListener('click', closeAllModals);
     }
 
-    // When Pay Now is clicked inside GST modal -> hide GST, show QR modal
+    // pay now -> show QR
     payNowBtn.addEventListener('click', function() {
-      gstModal.style.display = 'none';   // hide GST
-      qrModal.style.display = 'flex';     // show QR modal
+      gstModal.style.display = 'none';
+      qrModal.style.display = 'flex';
     });
 
-    // Close QR modal from its cancel button
+    // close QR via cancel
     if (closeQrBtn) {
       closeQrBtn.addEventListener('click', closeAllModals);
     }
 
-    // "I have paid" button inside QR -> just alert and close all
+    // done -> alert + close
     doneBtn.addEventListener('click', function() {
-      alert('Payment verification underway. Your withdrawal will be processed within 10 minutes.');
+      alert('Payment received! Your withdrawal will be processed within a few minutes.');
       closeAllModals();
     });
 
-    // Click outside modal content -> close (for both modals)
+    // click outside modal to close
     gstModal.addEventListener('click', function(e) {
       if (e.target === gstModal) closeAllModals();
     });
@@ -526,7 +514,7 @@
       if (e.target === qrModal) closeAllModals();
     });
 
-    // ESC key closes any open modal
+    // ESC key
     window.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         if (gstModal.style.display === 'flex' || qrModal.style.display === 'flex') {
@@ -535,17 +523,16 @@
       }
     });
 
-    // Additional: If user double-clicks pay now we prevent accidental double modal.
-    // But it's fine.
-
-    // Note: GST amount is static ₹15,000 (can be edited in html directly)
-    // QR code uses the link provided: "https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211"
+    // remove any hover side effects on android (no action needed)
   })();
 </script>
-
-<!-- small note for easy editing: 
-     GST amount is inside modal .gst-amount (₹15,000). 
-     top winning amount at variable winningAmountEditable in script.
-     QR image is from github link provided. -->
+<!-- 
+  Fully android-friendly:
+  - viewport with user-scalable=yes but controlled
+  - font sizes and touch targets (buttons > 48px)
+  - max-width 400px, padding optimised
+  - active state for buttons instead of hover
+  - qr image fits perfectly
+-->
 </body>
 </html>
