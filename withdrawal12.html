@@ -19,25 +19,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px;  /* thoda kam padding for smaller screens */
+      padding: 12px;
       margin: 0;
     }
 
-    /* main card – android friendly, uses vw / flexible units */
+    /* main card – android friendly */
     .withdrawal-container {
-      max-width: 400px;   /* perfect for android ~360-400dp */
+      max-width: 400px;
       width: 100%;
       background: rgba(255,255,255,0.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border-radius: 40px 40px 28px 28px;  /* softer on small */
+      border-radius: 40px 40px 28px 28px;
       box-shadow: 0 20px 40px -12px rgba(0,20,40,0.4), 0 4px 12px 0 rgba(0,0,0,0.08);
       padding: 22px 18px 32px 18px;
       transition: all 0.2s ease;
       border: 1px solid rgba(255,255,255,0.7);
     }
 
-    /* logo area – image fit */
     .logo-area {
       display: flex;
       justify-content: center;
@@ -45,7 +44,6 @@
     }
     .logo-img {
       max-width: 160px;
-      width: auto;
       background: white;
       border-radius: 50px;
       padding: 8px 20px;
@@ -55,18 +53,17 @@
     .logo-img img {
       width: 100%;
       height: auto;
-      max-height: 48px;   /* thoda chhota for android */
+      max-height: 48px;
       object-fit: contain;
       display: block;
     }
 
-    /* winning headline */
     .winning-header {
       text-align: center;
       margin-bottom: 18px;
     }
     .congrats {
-      font-size: 1.1rem;   /* reduced slightly */
+      font-size: 1.1rem;
       font-weight: 600;
       color: #1f384f;
       background: rgba(255,255,255,0.7);
@@ -75,10 +72,9 @@
       display: inline-block;
       backdrop-filter: blur(2px);
       margin-bottom: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
     }
     .winning-amount-large {
-      font-size: 2.3rem;    /* scaled for mobile */
+      font-size: 2.3rem;
       font-weight: 800;
       line-height: 1.2;
       background: linear-gradient(135deg, #0f2b3f, #1b4a6f);
@@ -95,17 +91,15 @@
       color: #496f92;
     }
 
-    /* prize card */
     .prize-card {
       background: white;
       border-radius: 30px;
-      padding: 18px 16px;      /* kam padding for dense screen */
+      padding: 18px 16px;
       margin: 16px 0 18px 0;
       box-shadow: 0 18px 30px -16px rgba(20, 40, 70, 0.3), inset 0 1px 4px white;
       border: 1px solid rgba(255,255,255,0.9);
     }
 
-    /* user greeting green */
     .user-greeting {
       font-size: 1.2rem;
       font-weight: 600;
@@ -134,14 +128,13 @@
       display: inline-block;
     }
 
-    /* card rows */
     .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 2px;
       border-bottom: 1px solid #ecf1f6;
-      flex-wrap: wrap;       /* safety for extreme small */
+      flex-wrap: wrap;
       gap: 5px;
     }
     .info-row:last-child {
@@ -190,12 +183,11 @@
       font-size: 1.2rem;
     }
 
-    /* gradient withdraw button – big but fits */
     .withdraw-btn {
       width: 100%;
       background: linear-gradient(105deg, #1e2b4a, #294d73, #126b5e);
       border: none;
-      padding: 18px 16px;      /* comfortable tap target */
+      padding: 18px 16px;
       border-radius: 70px;
       color: white;
       font-size: 1.5rem;
@@ -212,16 +204,12 @@
       gap: 8px;
       -webkit-tap-highlight-color: transparent;
     }
-    .withdraw-btn:hover {
-      /* no hover effect on mobile, but keep for completeness */
-      background: linear-gradient(105deg, #253a5a, #2f608b, #148573);
-    }
     .withdraw-btn:active {
       transform: scale(0.98);
       box-shadow: 0 12px 20px -8px #021d30;
     }
 
-    /* ----- modals android optimized ----- */
+    /* ----- modals ----- */
     .modal {
       display: none;
       position: fixed;
@@ -237,7 +225,7 @@
     }
     .modal-content {
       background: white;
-      max-width: 340px;      /* smaller for android */
+      max-width: 340px;
       width: 100%;
       border-radius: 44px;
       padding: 28px 20px 30px 20px;
@@ -245,10 +233,10 @@
       text-align: center;
       border: 2px solid rgba(255,255,255,0.8);
       animation: slideUp 0.25s ease;
-      margin: 0 12px;        /* some side gap */
+      margin: 0 12px;
     }
     .modal-content p {
-      font-size: 1.3rem;     /* adjusted */
+      font-size: 1.3rem;
       font-weight: 600;
       color: #1b2f44;
       line-height: 1.4;
@@ -304,7 +292,7 @@
       background: #f0f4fc;
     }
 
-    /* QR code modal */
+    /* QR modal – without any "i have paid" button */
     .qr-modal-content {
       text-align: center;
     }
@@ -315,7 +303,7 @@
       margin-bottom: 12px;
     }
     .qr-code-image {
-      max-width: 200px;
+      max-width: 220px;
       width: 100%;
       height: auto;
       border-radius: 28px;
@@ -332,26 +320,32 @@
       border-radius: 16px;
     }
     .qr-instruction {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #1f4d6e;
       background: #e6f0fa;
-      padding: 12px 10px;
+      padding: 14px 12px;
       border-radius: 50px;
       font-weight: 500;
+      margin-bottom: 20px;
     }
-    .done-btn {
-      background: linear-gradient(145deg, #1a4d6b, #0d5f4b);
-      border: none;
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 700;
-      padding: 16px 18px;
-      border-radius: 100px;
+    /* simple close button only – no extra action */
+    .qr-close-btn {
+      background: #f2f6fc;
+      border: 1.5px solid #b6cde0;
+      color: #2b4b6f;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 14px 18px;
+      border-radius: 60px;
       width: 100%;
       cursor: pointer;
-      margin: 22px 0 6px;
-      box-shadow: 0 16px 22px -12px #043d31;
+      margin-top: 8px;
+      transition: 0.1s;
       -webkit-tap-highlight-color: transparent;
+    }
+    .qr-close-btn:active {
+      background: #dde6f2;
+      transform: scale(0.98);
     }
 
     /* animations */
@@ -369,17 +363,15 @@
       margin-top: 16px;
       font-size: 0.85rem;
     }
-    /* touch-friendly tuning */
     button {
       touch-action: manipulation;
     }
-    /* no zoom on input (but we have none) */
   </style>
 </head>
 <body>
 
 <div class="withdrawal-container">
-  <!-- LOGO with github image -->
+  <!-- LOGO -->
   <div class="logo-area">
     <div class="logo-img">
       <img src="https://github.com/user-attachments/assets/9d722eec-f5d9-4f49-8053-833bbcb93a00" 
@@ -422,7 +414,7 @@
   <div class="footer-note">⚡ secure & instant withdrawal</div>
 </div>
 
-<!-- GST MODAL -->
+<!-- GST MODAL (first popup) -->
 <div class="modal" id="gstModal">
   <div class="modal-content">
     <p>To withdraw, pay 10% GST</p>
@@ -434,25 +426,25 @@
   </div>
 </div>
 
-<!-- QR MODAL (with github QR) -->
+<!-- QR MODAL – WITHOUT "I HAVE PAID" BUTTON, only close option -->
 <div class="modal" id="qrModal">
   <div class="modal-content qr-modal-content">
-    <div class="qr-title">📱 Scan & pay</div>
+    <div class="qr-title">📲 Scan to pay GST</div>
     <div class="qr-code-image">
       <img src="https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211" 
            alt="UPI QR"
            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23eef3fc%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%22115%22%20font-family%3D%22Arial%22%20font-size%3D%2218%22%20fill%3D%22%231a3b5c%22%3EQR%20CODE%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
-    <div class="qr-instruction">Pay ₹15,000 via any UPI app</div>
-    <button class="done-btn" id="doneBtn">✅ I have paid</button>
-    <button class="close-modal" id="closeQrBtn">✕ cancel</button>
+    <div class="qr-instruction">Use any UPI app to pay ₹15,000</div>
+    <!-- Only a close button, no "I have paid" -->
+    <button class="qr-close-btn" id="closeQrBtn">✕ Close</button>
   </div>
 </div>
 
 <script>
   (function() {
     // editable winning amount
-    const winningAmountEditable = "₹1,00,000";   // change as needed
+    const winningAmountEditable = "₹1,00,000";   // change if needed
     
     const topAmountSpan = document.getElementById('dynamicWinningAmount');
     const cardAmountSpan = document.getElementById('cardWinningAmount');
@@ -463,15 +455,14 @@
       cardAmountSpan.innerText = winningAmountEditable;
     }
 
-    // get elements
+    // elements
     const withdrawBtn = document.getElementById('withdrawNowBtn');
     const gstModal = document.getElementById('gstModal');
     const qrModal = document.getElementById('qrModal');
     
     const payNowBtn = document.getElementById('payNowBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const closeQrBtn = document.getElementById('closeQrBtn');
-    const doneBtn = document.getElementById('doneBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');   // closes GST
+    const closeQrBtn = document.getElementById('closeQrBtn');         // closes QR
 
     function closeAllModals() {
       gstModal.style.display = 'none';
@@ -489,24 +480,18 @@
       closeModalBtn.addEventListener('click', closeAllModals);
     }
 
-    // pay now -> show QR
+    // pay now -> hide GST, show QR (only QR, no extra button)
     payNowBtn.addEventListener('click', function() {
       gstModal.style.display = 'none';
       qrModal.style.display = 'flex';
     });
 
-    // close QR via cancel
+    // close QR via its close button
     if (closeQrBtn) {
       closeQrBtn.addEventListener('click', closeAllModals);
     }
 
-    // done -> alert + close
-    doneBtn.addEventListener('click', function() {
-      alert('Payment received! Your withdrawal will be processed within a few minutes.');
-      closeAllModals();
-    });
-
-    // click outside modal to close
+    // click outside modal to close (for both)
     gstModal.addEventListener('click', function(e) {
       if (e.target === gstModal) closeAllModals();
     });
@@ -514,7 +499,7 @@
       if (e.target === qrModal) closeAllModals();
     });
 
-    // ESC key
+    // ESC key closes
     window.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         if (gstModal.style.display === 'flex' || qrModal.style.display === 'flex') {
@@ -522,17 +507,11 @@
         }
       }
     });
-
-    // remove any hover side effects on android (no action needed)
   })();
 </script>
 <!-- 
-  Fully android-friendly:
-  - viewport with user-scalable=yes but controlled
-  - font sizes and touch targets (buttons > 48px)
-  - max-width 400px, padding optimised
-  - active state for buttons instead of hover
-  - qr image fits perfectly
+  No "I have paid" button – only QR code with simple close.
+  Fully android-friendly: large touch targets, proper viewport, no hover.
 -->
 </body>
 </html>
