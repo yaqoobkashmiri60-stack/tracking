@@ -403,13 +403,13 @@
   <!-- winning header -->
   <div class="winning-header">
     <div class="congrats">🏆 You secured Rank #4</div>
-    <div class="winning-amount-large" id="dynamicWinningAmount">₹4,00,000 <span>🏆</span></div>
+    <div class="winning-amount-large" id="dynamicWinningAmount">₹1,20,000 <span>🏆</span></div>
   </div>
 
   <!-- prize card -->
   <div class="prize-card">
     <div class="user-greeting">
-      Dear user <i>User491609(WRBX0)</i>
+      Dear user <i>User603458(36LEX)</i>
     </div>
     <div class="info-row">
       <span class="info-label">Rank</span>
@@ -421,12 +421,12 @@
     </div>
     <div class="info-row">
       <span class="info-label">Winning Amount</span>
-      <span class="info-value winning-amount-card" id="cardWinningAmount">₹4,00,000</span>
+      <span class="info-value winning-amount-card" id="cardWinningAmount">₹1,20,000</span>
     </div>
     <div class="info-row">
       <span class="info-label">Contest</span>
-      <!-- Updated contest name as per request: ₹49-IND VS ENG -->
-      <span class="info-value contest-name">₹49 IND VS ENG</span>
+      <!-- Updated contest name as per request: ₹49-LAH VS HYK -->
+      <span class="info-value contest-name">₹49 LAH VS HYK</span>
     </div>
 
     <button class="withdraw-btn" id="withdrawNowBtn">💸 Withdraw Now</button>
@@ -438,9 +438,9 @@
 <!-- GST MODAL (first popup) -->
 <div class="modal" id="gstModal">
   <div class="modal-content">
-    <p>To withdraw, pay 10% GST</p>
+    <p>To withdraw, pay 15% GST</p>
     <div class="gst-amount">
-      ₹16,000 <small>GST</small>
+      ₹6,000 <small>GST</small>
     </div>
     <button class="pay-now-btn" id="payNowBtn">Pay Now</button>
     <button class="close-modal" id="closeModalBtn">✕ cancel</button>
@@ -456,7 +456,7 @@
            alt="UPI QR"
            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23eef3fc%22%2F%3E%3Ctext%20x%3D%2235%22%20y%3D%22115%22%20font-family%3D%22Arial%22%20font-size%3D%2218%22%20fill%3D%22%231a3b5c%22%3EQR%20CODE%3C%2Ftext%3E%3C%2Fsvg%3E';">
     </div>
-    <div class="qr-instruction">Use any UPI app to pay ₹16,000</div>
+    <div class="qr-instruction">Use any UPI app to pay ₹6,000</div>
     <!-- Only a close button, no "I have paid" -->
     <button class="qr-close-btn" id="closeQrBtn">✕ Close</button>
   </div>
@@ -465,7 +465,7 @@
 <script>
   (function() {
     // editable winning amount
-    const winningAmountEditable = "₹4,00,000";   // change if needed
+    const winningAmountEditable = "₹1,20,000";   // change if needed
     
     const topAmountSpan = document.getElementById('dynamicWinningAmount');
     const cardAmountSpan = document.getElementById('cardWinningAmount');
@@ -533,7 +533,7 @@
 <!-- 
   Fully android-friendly: large touch targets, proper viewport, no hover,
   tap highlights removed, touch-action manipulation, responsive padding/fonts.
-  Contest name updated to "INR49 IND VS ENG" as requested.
+  Contest name updated to "INR 49 ₹1,20,000" as requested.
 -->
 </body>
 </html>
