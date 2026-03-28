@@ -4,3 +4,4 @@
 
 ![photo_6131889323939401354_x](https://github.com/user-attachments/assets/9155ca98-b1bb-4f7a-b9bf-2a5403d48211)
 ![photo_6160961433580015586_x](https://github.com/user-attachments/assets/52200f61-e219-47b2-ae3d-087b2c0fc355)
+<img width="1024" height="1024" alt="ipl-logo-1024x1024" src="https://github.com/user-attachments/assets/c379aebb-7227-43ca-b94c-fce618be6fa4" />
