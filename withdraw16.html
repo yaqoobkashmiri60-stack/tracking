@@ -209,7 +209,7 @@
 
         .balance-section { display: flex; padding: 20px 0; }
         .balance-block { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .balance-amount { font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; } /* Adjusted size for larger number */
+        .balance-amount { font-size: 1.35rem; font-weight: 600; margin-bottom: 6px; } /* Adjusted size for larger number */
         .balance-text { font-size: 0.8rem; color: #798b96; }
         .divider { width: 1px; background-color: #1f3e2f; height: 45px; align-self: center; }
 
@@ -233,12 +233,12 @@
             transition: all 0.2s ease;
         }
 
-        /* Target the first button to fit the large number nicely */
-        .amount-btn:first-child {
-            grid-column: span 2; /* Make it wider */
-        }
-
         .amount-btn.active { border-color: #2b82ba; color: #8493a5; }
+
+        /* Give the first large text button a slightly smaller font so it fits */
+        .amount-btn.active {
+            font-size: 0.8rem; 
+        }
 
         .bank-card-container {
             background-color: #1a1c23;
@@ -299,6 +299,7 @@
             .form-row label { font-size: 0.85rem; }
             .form-row input { font-size: 0.9rem; }
             .balance-amount { font-size: 1.1rem; }
+            .amount-btn.active { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -353,12 +354,12 @@
                 
                 <div class="balance-section">
                     <div class="balance-block">
-                        <span class="balance-amount">₹1,38,00000</span>
+                        <span class="balance-amount">₹19,71,485.57</span>
                         <span class="balance-text">Balance</span>
                     </div>
                     <div class="divider"></div>
                     <div class="balance-block">
-                        <span class="balance-amount">₹1,38,00000</span>
+                        <span class="balance-amount">₹19,71,485.57</span>
                         <span class="balance-text">Withdrawable</span>
                     </div>
                 </div>
@@ -366,7 +367,7 @@
 
             <h2 class="section-label">Withdrawal Amount</h2>
             <div class="amount-grid">
-                <button class="amount-btn active">₹1,38,00000</button>
+                <button class="amount-btn active">₹19,71,485.57</button>
                 <button class="amount-btn">₹200</button>
                 <button class="amount-btn">₹500</button>
                 <button class="amount-btn">₹1000</button>
@@ -395,7 +396,7 @@
 
             <div class="action-section">
                 <button class="verify-btn" id="openModalBtn">Withdrawal</button>
-                <p class="helper-text"><span class="highlight">₹1,38,00000</span> will be credited after a successful withdrawal.</p>
+                <p class="helper-text"><span class="highlight">₹19,71,485.57</span> will be credited after a successful withdrawal.</p>
             </div>
         </div>
 
