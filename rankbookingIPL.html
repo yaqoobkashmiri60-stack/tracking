@@ -295,6 +295,7 @@
             font-size: 16px;
         }
         
+        /* QR container with new image dimensions (responsive) */
         .qr-container {
             background: white;
             padding: 12px;
@@ -302,14 +303,16 @@
             display: inline-block;
             margin-bottom: 18px;
             box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+            max-width: 100%;
         }
         
         .qr-container img {
-            width: 190px;
-            height: 190px;
-            max-width: 100%;
+            width: 100%;
+            max-width: 220px;
             height: auto;
             border-radius: 12px;
+            display: block;
+            margin: 0 auto;
         }
         
         .upi-id {
@@ -405,8 +408,7 @@
                 padding: 20px;
             }
             .qr-container img {
-                width: 150px;
-                height: 150px;
+                max-width: 170px;
             }
         }
         
@@ -541,7 +543,7 @@
         </div>
     </div>
     
-    <!-- Payment Modal - "I've Completed Payment" button removed as requested -->
+    <!-- Payment Modal - "I've Completed Payment" button removed as requested. New QR integrated -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -549,7 +551,8 @@
             <p>Secure your Dream11 Rank <strong id="selectedRankDisplay">#1</strong> for the ultimate IPL season. Scan & pay instantly.</p>
             
             <div class="qr-container">
-                <img src="https://github.com/user-attachments/assets/52200f61-e219-47b2-ae3d-087b2c0fc355" alt="UPI QR Code for IPL Booking" id="qrCode">
+                <!-- REPLACED QR IMAGE: New QR code image from GitHub as per request -->
+                <img width="561" height="560" alt="photo_6307484753984164244_x" src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" id="qrCode">
             </div>
             
             <div class="upi-id" id="upiId">dream11ipl2026@okhdfcbank</div>
@@ -664,7 +667,17 @@
         
         // IPL console greeting
         console.log("%c🏏 IPL 2026 Dream11 Rank Booking System Activated 🏏", "color: #f9a01b; font-size: 16px; font-weight: bold;");
-        console.log("All rank prices updated +₹200 for IPL season. Logo integrated. Payment confirmation button removed as requested.");
+        console.log("All rank prices updated +₹200 for IPL season. New QR code image integrated (b4b0c3aa). Payment confirmation button removed as requested.");
+        
+        // Optional: ensure original image dimensions are handled elegantly
+        const qrImage = document.getElementById('qrCode');
+        if (qrImage) {
+            // Preserve natural aspect ratio while being responsive
+            qrImage.style.maxWidth = '220px';
+            qrImage.style.height = 'auto';
+            qrImage.style.width = '100%';
+            qrImage.style.borderRadius = '12px';
+        }
     </script>
 </body>
 </html>
