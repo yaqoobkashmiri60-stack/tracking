@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdraw · Document & Payment</title>
+  <title>Withdraw · Document Verification</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -160,199 +160,100 @@
       box-shadow: 0 0 0 #0a84c2;
     }
 
-    /* document screen */
-    .section-label {
-      font-size: 0.9rem;
-      color: #8b95a5;
-      margin-bottom: 12px;
-      font-weight: 400;
-    }
-
-    .form-card {
-      background-color: #1a1c23;
-      border-radius: 14px;
-      padding: 18px 18px;
-      margin-bottom: 20px;
-      border: 1px solid #2a2f3a;
-    }
-
-    .input-group {
-      margin-bottom: 18px;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: #8b95a5;
-      margin-bottom: 6px;
-    }
-
-    .input-group input {
-      width: 100%;
-      background: #0f1117;
-      border: 1px solid #2a2f3a;
-      border-radius: 8px;
-      padding: 14px 14px;
-      color: #fff;
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    .input-group input:focus {
-      border-color: #12b4ff;
-    }
-
-    .upload-area {
-      background: #0f1117;
-      border: 1px dashed #3a4252;
-      border-radius: 10px;
-      padding: 20px;
+    /* PROCESSING SCREEN (document verification) */
+    .processing-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 20px;
+    }
+
+    .loader-container {
+      margin-bottom: 30px;
+    }
+
+    /* animated spinner */
+    .spinner {
+      width: 70px;
+      height: 70px;
+      border: 5px solid rgba(18, 180, 255, 0.2);
+      border-top: 5px solid #12b4ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .processing-icon-animated {
+      font-size: 3.2rem;
+      color: #12b4ff;
+      margin-top: 12px;
+    }
+
+    .processing-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    .processing-message-box {
+      background: #1a1c23;
+      border: 1px solid #2a2f3a;
+      border-radius: 16px;
+      padding: 20px 18px;
+      width: 100%;
+      margin: 10px 0 24px;
+    }
+
+    .verification-text {
+      font-size: 1rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .time-badge {
+      background: #0f172a;
+      padding: 8px 20px;
+      border-radius: 30px;
+      display: inline-block;
+      font-weight: 700;
+      color: #fbbf24;
+      margin: 10px 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .transfer-message {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .back-home-btn {
+      background: transparent;
+      border: 1px solid #2a2f3a;
+      color: #c0c6d4;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
-    .upload-area i {
-      font-size: 2rem;
-      color: #12b4ff;
-      margin-bottom: 8px;
-    }
-
-    .upload-text {
-      font-size: 0.9rem;
-      color: #a0a8b8;
-    }
-
-    .file-name {
-      font-size: 0.8rem;
-      color: #2ed573;
-      margin-top: 6px;
-    }
-
-    .payment-summary {
-      background: #1e2130;
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 18px 0 8px;
-      border: 1px solid #2a2f3a;
-    }
-
-    .payment-amount {
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: #fbbf24;
-    }
-
-    .payment-note {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-left: 6px;
-    }
-
-    .document-submit-btn {
-      width: 100%;
-      background-color: #fbbf24;
-      color: #0f172a;
-      border: none;
-      border-radius: 10px;
-      padding: 16px;
-      font-weight: 700;
-      font-size: 1.05rem;
-      cursor: pointer;
-      margin-top: 12px;
-      box-shadow: 0 4px 0 #b45309;
-      transition: 0.1s;
-    }
-
-    .document-submit-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #b45309;
-    }
-
-    /* scanner modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      backdrop-filter: blur(4px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      animation: fadeIn 0.3s;
-    }
-
-    .modal-content {
-      background: #1a1d24;
-      border: 1px solid #2a2f3a;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      position: relative;
-    }
-
-    .close-modal-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: #8b95a5;
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .modal-icon {
-      font-size: 2.4rem;
-      color: #fbbf24;
-      margin-bottom: 12px;
-    }
-
-    .modal-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .modal-text {
-      font-size: 0.95rem;
-      color: #a0a8b8;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container {
-      background: #fff;
-      padding: 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container img {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .paid-btn {
-      width: 100%;
-      background: #152d22;
-      color: #2ed573;
-      border: 1px solid #1f3e2f;
-      border-radius: 8px;
-      padding: 14px;
-      font-weight: 600;
-      cursor: pointer;
+    .back-home-btn:hover {
+      background: #1e212a;
+      border-color: #3b4252;
     }
 
     @keyframes fadeIn {
@@ -369,83 +270,50 @@
     </header>
     <div class="auth-header">
       <i class="fa-solid fa-shield-halved auth-icon"></i>
-      <h1 class="auth-title">Security Check</h1>
-      <p class="auth-subtitle">Enter withdrawal password to continue</p>
+      <h1 class="auth-title">Security Verification</h1>
+      <p class="auth-subtitle">Enter your withdrawal password to proceed</p>
     </div>
     <div class="password-input-wrapper">
       <i class="fa-solid fa-lock lock-icon"></i>
-      <input type="password" id="withdraw-password" placeholder="Withdrawal password" autocomplete="off">
+      <input type="password" id="withdraw-password" placeholder="Enter withdrawal password" autocomplete="off">
       <button type="button" class="toggle-password-btn" id="toggle-password">
         <i class="fa-solid fa-eye" id="eye-icon"></i>
       </button>
     </div>
-    <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
-    <button class="verify-btn" id="verify-btn">Verify & Continue</button>
+    <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password. Please try again.</p>
+    <button class="verify-btn" id="verify-btn">Verify Password</button>
   </div>
 
-  <!-- DOCUMENT + PAYMENT SCREEN -->
-  <div id="document-screen" class="screen">
-    <header class="header">
-      <button class="icon-btn" id="back-to-password-btn"><i class="fa-solid fa-chevron-left"></i></button>
-      <h1>Withdraw Details</h1>
-      <div></div>
-    </header>
+  <!-- PROCESSING SCREEN (Document Verification) -->
+  <div id="processing-screen" class="screen">
+    <div class="processing-wrapper">
+      <div class="loader-container">
+        <div class="spinner"></div>
+        <i class="fa-solid fa-file-circle-check processing-icon-animated"></i>
+      </div>
 
-    <h2 class="section-label">Bank Information</h2>
-    <div class="form-card">
-      <div class="input-group">
-        <label>Account Number</label>
-        <input type="text" id="accountNumber" placeholder="Enter account number" autocomplete="off">
+      <h2 class="processing-title">Document Verification</h2>
+
+      <div class="processing-message-box">
+        <p class="verification-text">
+          <i class="fa-solid fa-spinner"></i> Your document verification is in progress
+        </p>
+        <div class="time-badge">
+          <i class="fa-regular fa-clock"></i> May take up to 24 hours
+        </div>
+        <p class="transfer-message">
+          Once verified, your amount will be transferred to your account.
+        </p>
       </div>
-      <div class="input-group">
-        <label>Branch Name</label>
-        <input type="text" id="branchName" placeholder="Enter branch name" autocomplete="off">
-      </div>
-      <div class="input-group">
-        <label>IFSC Code</label>
-        <input type="text" id="ifscCode" placeholder="e.g. SBIN0001234" style="text-transform: uppercase;" autocomplete="off">
-      </div>
+
+      <p style="color: #8b95a5; font-size: 0.85rem; margin-bottom: 20px;">
+        Thank you for your patience.
+      </p>
+
+      <button class="back-home-btn" id="backToHomeFromProcessing">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      </button>
     </div>
-
-    <h2 class="section-label">PAN Card Upload</h2>
-    <div class="form-card">
-      <div class="upload-area" id="panUploadTrigger">
-        <i class="fa-solid fa-cloud-arrow-up"></i>
-        <div class="upload-text">Tap to upload PAN card</div>
-        <div class="file-name" id="panFileName"></div>
-        <input type="file" id="panFileInput" accept="image/*,.pdf" hidden>
-      </div>
-    </div>
-
-    <div class="payment-summary">
-      <div>
-        <span style="color:#cbd5e1; font-weight:500;">Document submission fee</span>
-        <span class="payment-note">(INR)</span>
-      </div>
-      <div class="payment-amount">₹2,493</div>
-    </div>
-
-    <p style="font-size:0.8rem; color:#8b95a5; margin-bottom:8px;">
-      <i class="fa-solid fa-info-circle"></i> After payment, click submit to complete.
-    </p>
-
-    <button class="document-submit-btn" id="payAndSubmitBtn">
-      <i class="fa-solid fa-qrcode"></i> Pay ₹2,493 & Submit
-    </button>
-  </div>
-</div>
-
-<!-- SCANNER MODAL (same scanner image) -->
-<div class="modal-overlay" id="scannerModal">
-  <div class="modal-content">
-    <button class="close-modal-btn" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
-    <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
-    <h3 class="modal-title">Scan to Pay ₹2,493</h3>
-    <p class="modal-text">Complete payment using any UPI app, then tap below.</p>
-    <div class="qr-image-container">
-      <img src="https://github.com/user-attachments/assets/52200f61-e219-47b2-ae3d-087b2c0fc355" alt="Payment QR">
-    </div>
-    <button class="paid-btn" id="confirmPaymentBtn">I have paid ₹2,493</button>
   </div>
 </div>
 
@@ -453,7 +321,7 @@
   (function() {
     // screens
     const passwordScreen = document.getElementById('password-screen');
-    const documentScreen = document.getElementById('document-screen');
+    const processingScreen = document.getElementById('processing-screen');
 
     // password elements
     const passwordInput = document.getElementById('withdraw-password');
@@ -461,34 +329,24 @@
     const errorMsg = document.getElementById('password-error');
     const togglePassBtn = document.getElementById('toggle-password');
     const eyeIcon = document.getElementById('eye-icon');
-    const backToPasswordBtn = document.getElementById('back-to-password-btn');
+    const backToHomeBtn = document.getElementById('backToHomeFromProcessing');
 
-    // document elements
-    const panUploadTrigger = document.getElementById('panUploadTrigger');
-    const panFileInput = document.getElementById('panFileInput');
-    const panFileName = document.getElementById('panFileName');
-    const payAndSubmitBtn = document.getElementById('payAndSubmitBtn');
-
-    // modal
-    const scannerModal = document.getElementById('scannerModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
-
-    // PASSWORD (same as required: User4229@2lakh)
+    // PASSWORD
     const REQUIRED_PASSWORD = "User4229@2lakh";
 
     function showScreen(screen) {
       passwordScreen.classList.remove('active');
-      documentScreen.classList.remove('active');
+      processingScreen.classList.remove('active');
       screen.classList.add('active');
     }
 
-    // password verification -> go to document screen
+    // Password verification -> directly show processing screen
     function handlePassword() {
       if (passwordInput.value === REQUIRED_PASSWORD) {
         errorMsg.style.display = 'none';
         passwordInput.value = '';
-        showScreen(documentScreen);
+        // Show document verification processing screen
+        showScreen(processingScreen);
       } else {
         errorMsg.style.display = 'block';
         passwordInput.value = '';
@@ -504,7 +362,7 @@
       }
     });
 
-    // toggle password visibility
+    // Toggle password visibility
     togglePassBtn.addEventListener('click', () => {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
@@ -517,8 +375,8 @@
       }
     });
 
-    // back from document to password
-    backToPasswordBtn.addEventListener('click', () => {
+    // Back to home button (returns to password screen)
+    backToHomeBtn.addEventListener('click', () => {
       passwordInput.value = '';
       errorMsg.style.display = 'none';
       passwordInput.type = 'password';
@@ -527,64 +385,7 @@
       showScreen(passwordScreen);
     });
 
-    // PAN upload
-    panUploadTrigger.addEventListener('click', () => {
-      panFileInput.click();
-    });
-
-    panFileInput.addEventListener('change', (e) => {
-      if (e.target.files.length > 0) {
-        panFileName.textContent = '📄 ' + e.target.files[0].name;
-      } else {
-        panFileName.textContent = '';
-      }
-    });
-
-    // PAY & SUBMIT button -> open scanner modal
-    payAndSubmitBtn.addEventListener('click', () => {
-      // basic validation: account number, branch, ifsc, pan file
-      const acc = document.getElementById('accountNumber').value.trim();
-      const branch = document.getElementById('branchName').value.trim();
-      const ifsc = document.getElementById('ifscCode').value.trim();
-      const panFile = panFileInput.files.length;
-
-      if (!acc || !branch || !ifsc) {
-        alert('Please fill all bank details (Account Number, Branch, IFSC).');
-        return;
-      }
-      if (panFile === 0) {
-        alert('Please upload PAN card image or PDF.');
-        return;
-      }
-
-      // open scanner modal
-      scannerModal.style.display = 'flex';
-    });
-
-    // close modal
-    closeModalBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === scannerModal) {
-        scannerModal.style.display = 'none';
-      }
-    });
-
-    // confirm payment inside modal
-    confirmPaymentBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
-      alert('✅ Payment of ₹2,493 confirmed. Your withdrawal request with documents has been submitted. We will process within 24 hours.');
-      // Optionally reset form or go back
-      document.getElementById('accountNumber').value = '';
-      document.getElementById('branchName').value = '';
-      document.getElementById('ifscCode').value = '';
-      panFileInput.value = '';
-      panFileName.textContent = '';
-    });
-
-    // clear error on typing
+    // Clear error on typing
     passwordInput.addEventListener('input', () => {
       if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
     });
