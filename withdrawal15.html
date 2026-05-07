@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdraw · Step 2</title>
+  <title>Withdrawal Success</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -71,20 +71,20 @@
     /* Password Section */
     .auth-header {
       text-align: center;
-      margin-top: 30px;
-      margin-bottom: 30px;
+      margin-top: 40px;
+      margin-bottom: 35px;
     }
 
     .auth-icon {
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: #12b4ff;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .auth-title {
       font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .auth-subtitle {
@@ -98,7 +98,7 @@
       border-radius: 12px;
       display: flex;
       align-items: center;
-      padding: 14px 18px;
+      padding: 15px 18px;
       margin-bottom: 15px;
       transition: border-color 0.2s;
     }
@@ -134,8 +134,8 @@
 
     .error-message {
       color: #ff4757;
-      font-size: 0.8rem;
-      margin-bottom: 16px;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
       display: none;
     }
 
@@ -145,13 +145,12 @@
       color: #fff;
       border: none;
       border-radius: 10px;
-      padding: 15px;
-      font-size: 1rem;
+      padding: 16px;
+      font-size: 1.05rem;
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 4px 0 #0a84c2;
       transition: transform 0.1s ease, box-shadow 0.1s ease;
-      margin-bottom: 10px;
     }
 
     .verify-btn:active {
@@ -159,256 +158,217 @@
       box-shadow: 0 0 0 #0a84c2;
     }
 
-    .verify-btn:disabled {
-      background-color: #152d22;
-      color: #2ed573;
-      box-shadow: 0 4px 0 #0f3d2a;
-      cursor: not-allowed;
-    }
-
-    .divider-line {
-      border: none;
-      border-top: 1px solid #2a2f3a;
-      margin: 20px 0;
-    }
-
-    .section-label {
-      font-size: 0.85rem;
-      color: #8b95a5;
-      margin-bottom: 10px;
-    }
-
-    .warning-box {
-      background: #1a1c23;
-      border: 1px solid #fbbf24;
-      border-radius: 14px;
-      padding: 20px;
-      text-align: center;
-      margin: 16px 0;
-    }
-
-    .warning-icon {
-      font-size: 2.8rem;
-      color: #fbbf24;
-      margin-bottom: 12px;
-    }
-
-    .warning-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #fbbf24;
-    }
-
-    .warning-text {
-      font-size: 0.85rem;
-      color: #cbd5e1;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .payment-summary {
-      background: #1e2130;
-      border-radius: 12px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 16px 0 8px;
-      border: 1px solid #2a2f3a;
-    }
-
-    .payment-amount {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #fbbf24;
-    }
-
-    .payment-note {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      margin-left: 4px;
-    }
-
-    .pay-now-btn {
-      width: 100%;
-      background-color: #fbbf24;
-      color: #0f172a;
-      border: none;
-      border-radius: 10px;
-      padding: 15px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #b45309;
-      transition: 0.1s;
-      margin-top: 8px;
-    }
-
-    .pay-now-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #b45309;
-    }
-
-    /* Processing Section */
-    .processing-wrapper {
+    /* Success Screen */
+    .success-wrapper {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px 0;
+      padding: 20px 0;
     }
 
-    .spinner {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(18, 180, 255, 0.2);
-      border-top: 4px solid #12b4ff;
+    .success-icon-container {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .success-circle {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 12px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .processing-icon-animated {
-      font-size: 2.8rem;
-      color: #12b4ff;
-      margin-top: 8px;
-    }
-
-    .processing-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .processing-message-box {
-      background: #1a1c23;
-      border: 1px solid #2a2f3a;
-      border-radius: 14px;
-      padding: 16px 14px;
-      width: 100%;
-      margin: 8px 0 20px;
-    }
-
-    .verification-text {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      margin-bottom: 10px;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .time-badge {
-      background: #0f172a;
-      padding: 7px 18px;
-      border-radius: 30px;
-      display: inline-block;
-      font-weight: 700;
-      color: #fbbf24;
-      margin: 8px 0;
-      font-size: 0.9rem;
-    }
-
-    .transfer-message {
-      color: #94a3b8;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      line-height: 1.5;
-    }
-
-    .hidden-section {
-      display: none;
-    }
-
-    .hidden-section.visible {
-      display: block;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      backdrop-filter: blur(4px);
-      display: none;
-      justify-content: center;
+      background: linear-gradient(135deg, #0d3320, #152d22);
+      border: 3px solid #2ed573;
+      display: flex;
       align-items: center;
-      z-index: 1000;
-      animation: fadeIn 0.3s;
-    }
-
-    .modal-content {
-      background: #1a1d24;
-      border: 1px solid #2a2f3a;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
+      justify-content: center;
+      animation: popIn 0.6s ease;
       position: relative;
     }
 
-    .close-modal-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: #8b95a5;
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .modal-icon {
-      font-size: 2.4rem;
-      color: #fbbf24;
-      margin-bottom: 12px;
-    }
-
-    .modal-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .modal-text {
-      font-size: 0.9rem;
-      color: #a0a8b8;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container {
-      background: #fff;
-      padding: 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container img {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .paid-btn {
-      width: 100%;
-      background: #152d22;
+    .success-circle i {
+      font-size: 3rem;
       color: #2ed573;
-      border: 1px solid #1f3e2f;
-      border-radius: 8px;
-      padding: 14px;
+      animation: checkmark 0.5s ease 0.3s both;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes checkmark {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confetti-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confetti 1.5s ease infinite;
+    }
+
+    .confetti-particle:nth-child(1) { background: #2ed573; top: -10px; left: 20px; animation-delay: 0s; }
+    .confetti-particle:nth-child(2) { background: #12b4ff; top: -15px; right: 20px; animation-delay: 0.3s; }
+    .confetti-particle:nth-child(3) { background: #fbbf24; bottom: -10px; left: 40px; animation-delay: 0.6s; }
+    .confetti-particle:nth-child(4) { background: #ff4757; bottom: -15px; right: 30px; animation-delay: 0.9s; }
+    .confetti-particle:nth-child(5) { background: #a855f7; top: 30px; left: -10px; animation-delay: 0.4s; }
+    .confetti-particle:nth-child(6) { background: #fb923c; top: 25px; right: -10px; animation-delay: 0.7s; }
+
+    @keyframes confetti {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      50% { transform: translate(15px, -20px) rotate(180deg); opacity: 0.7; }
+      100% { transform: translate(-10px, 10px) rotate(360deg); opacity: 0; }
+    }
+
+    .greeting-text {
+      font-size: 1.1rem;
+      color: #8b95a5;
+      margin-bottom: 6px;
+    }
+
+    .user-id {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #12b4ff;
+      margin-bottom: 4px;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2ed573;
+      margin: 12px 0 20px;
+    }
+
+    .amount-card {
+      background: linear-gradient(135deg, #1a1c23, #1e2130);
+      border: 1px solid #2a2f3a;
+      border-radius: 16px;
+      padding: 24px 20px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .amount-label {
+      font-size: 0.85rem;
+      color: #8b95a5;
+      margin-bottom: 8px;
+    }
+
+    .amount-value {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .amount-currency {
+      font-size: 1.2rem;
+      color: #12b4ff;
       font-weight: 600;
+    }
+
+    .transfer-info {
+      background: #1a1c23;
+      border: 1px solid #2a2f3a;
+      border-radius: 12px;
+      padding: 16px;
+      width: 100%;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .transfer-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .transfer-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .transfer-row i {
+      color: #2ed573;
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .timer-container {
+      background: #0f172a;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      padding: 16px;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 0.8rem;
+      color: #8b95a5;
+      margin-bottom: 6px;
+    }
+
+    .timer-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+      font-family: 'Courier New', monospace;
+    }
+
+    .timer-display i {
+      font-size: 1.2rem;
+      color: #fbbf24;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .timer-unit {
+      font-size: 0.7rem;
+      color: #8b95a5;
+      font-weight: 400;
+    }
+
+    .thank-you-text {
+      font-size: 0.9rem;
+      color: #8b95a5;
+      margin-bottom: 20px;
+    }
+
+    .back-home-btn {
+      background: transparent;
+      border: 1px solid #2a2f3a;
+      color: #c0c6d4;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 500;
       cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .back-home-btn:hover {
+      background: #1e212a;
+      border-color: #3b4252;
     }
 
     @keyframes fadeIn {
@@ -418,163 +378,198 @@
 </head>
 <body>
 <div class="app-container">
-  <!-- MAIN SCREEN: Password + ₹3,000 Fee + Processing Combined -->
-  <div id="main-screen" class="screen active">
+  <!-- PASSWORD SCREEN -->
+  <div id="password-screen" class="screen active">
     <header class="header">
       <button class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
-      <h1>Final Verification</h1>
+    </header>
+    <div class="auth-header">
+      <i class="fa-solid fa-shield-halved auth-icon"></i>
+      <h1 class="auth-title">Security Verification</h1>
+      <p class="auth-subtitle">Enter your password to view withdrawal status</p>
+    </div>
+    <div class="password-input-wrapper">
+      <i class="fa-solid fa-lock lock-icon"></i>
+      <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off">
+      <button type="button" class="toggle-password-btn" id="toggle-password">
+        <i class="fa-solid fa-eye" id="eye-icon"></i>
+      </button>
+    </div>
+    <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
+    <button class="verify-btn" id="verify-btn">Verify & View Status</button>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div id="success-screen" class="screen">
+    <header class="header">
+      <button class="icon-btn" id="back-btn"><i class="fa-solid fa-chevron-left"></i></button>
+      <h1>Withdrawal Status</h1>
       <div></div>
     </header>
 
-    <!-- PASSWORD SECTION -->
-    <div id="password-section">
-      <div class="auth-header">
-        <i class="fa-solid fa-shield-halved auth-icon"></i>
-        <h2 class="auth-title">Security Verification</h2>
-        <p class="auth-subtitle">Enter password to access verification</p>
-      </div>
-
-      <div class="password-input-wrapper">
-        <i class="fa-solid fa-lock lock-icon"></i>
-        <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off">
-        <button type="button" class="toggle-password-btn" id="toggle-password">
-          <i class="fa-solid fa-eye" id="eye-icon"></i>
-        </button>
-      </div>
-      <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
-      <button class="verify-btn" id="verify-btn">Verify & Unlock</button>
-    </div>
-
-    <hr class="divider-line" id="divider1">
-
-    <!-- ₹3,000 FEE SECTION (Initially hidden) -->
-    <div id="fee-section" class="hidden-section">
-      <div class="warning-box">
-        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
-        <h2 class="warning-title">Additional Verification Fee</h2>
-        <p class="warning-text">
-          Your documents have been received. To complete the verification and release your withdrawal amount, an additional fee of <strong>₹3,000</strong> is required.
-        </p>
-      </div>
-
-      <div class="payment-summary">
-        <div>
-          <span style="color:#cbd5e1; font-weight:500;">Verification processing fee</span>
-          <span class="payment-note">(INR)</span>
+    <div class="success-wrapper">
+      <!-- Animated Success Icon -->
+      <div class="success-icon-container">
+        <div class="success-circle">
+          <i class="fa-solid fa-check"></i>
+          <div class="confetti-particle"></div>
+          <div class="confetti-particle"></div>
+          <div class="confetti-particle"></div>
+          <div class="confetti-particle"></div>
+          <div class="confetti-particle"></div>
+          <div class="confetti-particle"></div>
         </div>
-        <div class="payment-amount">₹3,000</div>
       </div>
 
-      <p style="font-size:0.75rem; color:#8b95a5; margin-bottom:6px; text-align:center;">
-        <i class="fa-solid fa-info-circle"></i> Final step before withdrawal is processed.
+      <!-- User Greeting -->
+      <p class="greeting-text">Dear User</p>
+      <p class="user-id">User422945HB</p>
+
+      <!-- Success Message -->
+      <h2 class="success-title">Withdrawal Successful!</h2>
+
+      <!-- Amount Card -->
+      <div class="amount-card">
+        <p class="amount-label">Your withdrawal amount</p>
+        <p class="amount-value"><span class="amount-currency">₹</span> 2,05,000</p>
+      </div>
+
+      <!-- Transfer Info -->
+      <div class="transfer-info">
+        <div class="transfer-row">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Amount will be transferred to your account</span>
+        </div>
+        <div class="transfer-row">
+          <i class="fa-solid fa-clock"></i>
+          <span>Estimated time: <strong>24-48 hours</strong></span>
+        </div>
+        <div class="transfer-row">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Status: <strong style="color:#2ed573;">Processing</strong></span>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <p class="timer-label">Time remaining for transfer completion</p>
+        <div class="timer-display">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <span id="timer-hours">48</span><span class="timer-unit">h</span> :
+          <span id="timer-minutes">00</span><span class="timer-unit">m</span> :
+          <span id="timer-seconds">00</span><span class="timer-unit">s</span>
+        </div>
+      </div>
+
+      <!-- Thank You -->
+      <p class="thank-you-text">
+        <i class="fa-solid fa-heart" style="color:#ff4757;"></i> Thanks for your patience
       </p>
 
-      <button class="pay-now-btn" id="payAdditionalBtn">
-        <i class="fa-solid fa-qrcode"></i> Pay ₹3,000 Now
+      <button class="back-home-btn" id="back-home-btn">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
       </button>
     </div>
-
-    <hr class="divider-line" id="divider2" style="display:none;">
-
-    <!-- PROCESSING SECTION (Initially hidden) -->
-    <div id="processing-section" class="hidden-section">
-      <div class="processing-wrapper">
-        <div class="spinner"></div>
-        <i class="fa-solid fa-file-circle-check processing-icon-animated"></i>
-
-        <h2 class="processing-title">Document Verification</h2>
-
-        <div class="processing-message-box">
-          <p class="verification-text">
-            <i class="fa-solid fa-spinner"></i> Your document verification is in progress
-          </p>
-          <div class="time-badge">
-            <i class="fa-regular fa-clock"></i> May take up to 24 hours
-          </div>
-          <p class="transfer-message">
-            Once verified, your amount will be transferred to your account.
-          </p>
-        </div>
-
-        <p style="color: #8b95a5; font-size: 0.8rem;">
-          Thank you for your patience.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SCANNER MODAL for ₹3,000 -->
-<div class="modal-overlay" id="scannerModal">
-  <div class="modal-content">
-    <button class="close-modal-btn" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
-    <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
-    <h3 class="modal-title">Scan to Pay ₹3,000</h3>
-    <p class="modal-text">Complete payment using any UPI app, then tap below.</p>
-    <div class="qr-image-container">
-      <img src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" alt="Payment QR">
-    </div>
-    <button class="paid-btn" id="confirmPaymentBtn">I have paid ₹3,000</button>
   </div>
 </div>
 
 <script>
   (function() {
-    // Password elements
+    // Password
+    const REQUIRED_PASSWORD = "User4229@2lakh";
+    const passwordScreen = document.getElementById('password-screen');
+    const successScreen = document.getElementById('success-screen');
     const passwordInput = document.getElementById('withdraw-password');
     const verifyBtn = document.getElementById('verify-btn');
     const errorMsg = document.getElementById('password-error');
     const togglePassBtn = document.getElementById('toggle-password');
     const eyeIcon = document.getElementById('eye-icon');
-    const passwordSection = document.getElementById('password-section');
 
-    // Fee & Processing elements
-    const feeSection = document.getElementById('fee-section');
-    const processingSection = document.getElementById('processing-section');
-    const divider1 = document.getElementById('divider1');
-    const divider2 = document.getElementById('divider2');
+    // Timer elements
+    const timerHours = document.getElementById('timer-hours');
+    const timerMinutes = document.getElementById('timer-minutes');
+    const timerSeconds = document.getElementById('timer-seconds');
 
-    // Modal elements
-    const payAdditionalBtn = document.getElementById('payAdditionalBtn');
-    const scannerModal = document.getElementById('scannerModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+    // localStorage key
+    const STORAGE_KEY = 'withdrawalTimerEnd_User422945HB';
 
-    // Password: User4229@2lakh
-    const REQUIRED_PASSWORD = "User4229@2lakh";
+    function showScreen(screen) {
+      passwordScreen.classList.remove('active');
+      successScreen.classList.remove('active');
+      screen.classList.add('active');
+    }
 
-    // Verify password -> Show fee section
-    verifyBtn.addEventListener('click', () => {
+    // Get or create timer end time
+    function getTimerEndTime() {
+      let endTime = localStorage.getItem(STORAGE_KEY);
+      if (!endTime) {
+        // Set end time to 48 hours from now
+        endTime = Date.now() + (48 * 60 * 60 * 1000);
+        localStorage.setItem(STORAGE_KEY, endTime);
+      }
+      return parseInt(endTime);
+    }
+
+    // Update timer display
+    function updateTimer() {
+      const endTime = getTimerEndTime();
+      const now = Date.now();
+      let remaining = Math.max(0, endTime - now);
+
+      const hours = Math.floor(remaining / (1000 * 60 * 60));
+      remaining -= hours * 1000 * 60 * 60;
+      const minutes = Math.floor(remaining / (1000 * 60));
+      remaining -= minutes * 1000 * 60;
+      const seconds = Math.floor(remaining / 1000);
+
+      timerHours.textContent = String(hours).padStart(2, '0');
+      timerMinutes.textContent = String(minutes).padStart(2, '0');
+      timerSeconds.textContent = String(seconds).padStart(2, '0');
+
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        // Timer finished - update status
+        const statusEl = document.querySelector('.transfer-row:last-child strong');
+        if (statusEl) {
+          statusEl.textContent = 'Completed';
+          statusEl.style.color = '#2ed573';
+        }
+      }
+    }
+
+    let timerInterval = null;
+
+    // Start timer on success screen
+    function startTimer() {
+      // Initialize timer in localStorage if not exists
+      getTimerEndTime();
+      updateTimer();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    // Password verification
+    function handlePassword() {
       if (passwordInput.value === REQUIRED_PASSWORD) {
         errorMsg.style.display = 'none';
-        passwordInput.disabled = true;
-        togglePassBtn.disabled = true;
-        verifyBtn.textContent = '✅ Verified';
-        verifyBtn.disabled = true;
-        verifyBtn.style.backgroundColor = '#152d22';
-        verifyBtn.style.color = '#2ed573';
-        verifyBtn.style.boxShadow = '0 4px 0 #0f3d2a';
-
-        // Show fee section
-        feeSection.classList.add('visible');
-        divider2.style.display = 'block';
-        feeSection.scrollIntoView({ behavior: 'smooth' });
+        passwordInput.value = '';
+        showScreen(successScreen);
+        startTimer();
       } else {
         errorMsg.style.display = 'block';
         passwordInput.value = '';
         passwordInput.focus();
       }
-    });
+    }
 
-    // Enter key support
+    verifyBtn.addEventListener('click', handlePassword);
     passwordInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        verifyBtn.click();
+        handlePassword();
       }
     });
 
-    // Toggle password visibility
+    // Toggle password
     togglePassBtn.addEventListener('click', () => {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
@@ -592,29 +587,27 @@
       if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
     });
 
-    // Pay ₹3,000 -> Open scanner
-    payAdditionalBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'flex';
+    // Back buttons
+    document.getElementById('back-btn').addEventListener('click', () => {
+      if (timerInterval) clearInterval(timerInterval);
+      passwordInput.value = '';
+      errorMsg.style.display = 'none';
+      showScreen(passwordScreen);
     });
 
-    // Close modal
-    closeModalBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
+    document.getElementById('back-home-btn').addEventListener('click', () => {
+      if (timerInterval) clearInterval(timerInterval);
+      passwordInput.value = '';
+      errorMsg.style.display = 'none';
+      showScreen(passwordScreen);
     });
 
-    window.addEventListener('click', (e) => {
-      if (e.target === scannerModal) scannerModal.style.display = 'none';
-    });
-
-    // Confirm payment -> Show processing
-    confirmPaymentBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
-      feeSection.style.display = 'none';
-      divider1.style.display = 'none';
-      divider2.style.display = 'none';
-      processingSection.classList.add('visible');
-      processingSection.scrollIntoView({ behavior: 'smooth' });
-    });
+    // Check if timer already exists on page load (for returning users)
+    const existingTimer = localStorage.getItem(STORAGE_KEY);
+    if (existingTimer && parseInt(existingTimer) > Date.now()) {
+      // Timer still active, could auto-show success screen
+      // For now, user still needs password
+    }
 
   })();
 </script>
