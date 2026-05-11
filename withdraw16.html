@@ -160,6 +160,13 @@
       box-shadow: 0 0 0 #0a84c2;
     }
 
+    .verify-btn:disabled {
+      background-color: #152d22;
+      color: #2ed573;
+      box-shadow: 0 4px 0 #0f3d2a;
+      cursor: not-allowed;
+    }
+
     /* PROCESSING SCREEN (document verification) */
     .processing-wrapper {
       flex: 1;
@@ -239,6 +246,72 @@
       line-height: 1.5;
     }
 
+    /* Timer Container */
+    .timer-container {
+      background: #0f172a;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      padding: 16px;
+      width: 100%;
+      margin: 8px 0 20px;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 0.8rem;
+      color: #8b95a5;
+      margin-bottom: 8px;
+    }
+
+    .timer-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+      font-family: 'Courier New', monospace;
+    }
+
+    .timer-display i {
+      font-size: 1.1rem;
+      color: #fbbf24;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .timer-unit {
+      font-size: 0.7rem;
+      color: #8b95a5;
+      font-weight: 400;
+    }
+
+    .user-greeting {
+      color: #8b95a5;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .user-id {
+      color: #12b4ff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .amount-show {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2ed573;
+      margin: 8px 0;
+    }
+
     .back-home-btn {
       background: transparent;
       border: 1px solid #2a2f3a;
@@ -249,6 +322,7 @@
       cursor: pointer;
       transition: 0.2s;
       margin-top: 10px;
+      width: 100%;
     }
 
     .back-home-btn:hover {
@@ -284,9 +358,14 @@
     <button class="verify-btn" id="verify-btn">Verify Password</button>
   </div>
 
-  <!-- PROCESSING SCREEN (Document Verification) -->
+  <!-- PROCESSING SCREEN (Document Verification with Timer) -->
   <div id="processing-screen" class="screen">
     <div class="processing-wrapper">
+      <!-- User Info -->
+      <p class="user-greeting">Dear User</p>
+      <p class="user-id">User422945HB</p>
+
+      <!-- Animated Loader -->
       <div class="loader-container">
         <div class="spinner"></div>
         <i class="fa-solid fa-file-circle-check processing-icon-animated"></i>
@@ -306,8 +385,26 @@
         </p>
       </div>
 
+      <!-- Withdrawal Amount -->
+      <p class="amount-show">₹ 2,05,000</p>
+      <p style="color: #8b95a5; font-size: 0.8rem; margin-bottom: 16px;">
+        <i class="fa-solid fa-building-columns"></i> Will be credited after verification
+      </p>
+
+      <!-- Countdown Timer -->
+      <div class="timer-container">
+        <p class="timer-label">
+          <i class="fa-solid fa-hourglass-half"></i> Time remaining for verification
+        </p>
+        <div class="timer-display">
+          <span id="timer-hours">24</span><span class="timer-unit">h</span> :
+          <span id="timer-minutes">00</span><span class="timer-unit">m</span> :
+          <span id="timer-seconds">00</span><span class="timer-unit">s</span>
+        </div>
+      </div>
+
       <p style="color: #8b95a5; font-size: 0.85rem; margin-bottom: 20px;">
-        Thank you for your patience.
+        <i class="fa-solid fa-heart" style="color:#ff4757;"></i> Thank you for your patience
       </p>
 
       <button class="back-home-btn" id="backToHomeFromProcessing">
@@ -331,8 +428,18 @@
     const eyeIcon = document.getElementById('eye-icon');
     const backToHomeBtn = document.getElementById('backToHomeFromProcessing');
 
-    // PASSWORD - Updated to User5895@2lakh
+    // Timer elements
+    const timerHours = document.getElementById('timer-hours');
+    const timerMinutes = document.getElementById('timer-minutes');
+    const timerSeconds = document.getElementById('timer-seconds');
+
+    // localStorage key
+    const STORAGE_KEY = 'docVerificationTimerEnd_User422945HB';
+
+    // Password
     const REQUIRED_PASSWORD = "User5895@2lakh";
+
+    let timerInterval = null;
 
     function showScreen(screen) {
       passwordScreen.classList.remove('active');
@@ -340,13 +447,61 @@
       screen.classList.add('active');
     }
 
-    // Password verification -> directly show processing screen
+    // Timer functions
+    function getTimerEndTime() {
+      let endTime = localStorage.getItem(STORAGE_KEY);
+      if (!endTime) {
+        // Set end time to 24 hours from now
+        endTime = Date.now() + (24 * 60 * 60 * 1000);
+        localStorage.setItem(STORAGE_KEY, endTime);
+      }
+      return parseInt(endTime);
+    }
+
+    function updateTimer() {
+      const endTime = getTimerEndTime();
+      const now = Date.now();
+      let remaining = Math.max(0, endTime - now);
+
+      const hours = Math.floor(remaining / (1000 * 60 * 60));
+      remaining -= hours * 1000 * 60 * 60;
+      const minutes = Math.floor(remaining / (1000 * 60));
+      remaining -= minutes * 1000 * 60;
+      const seconds = Math.floor(remaining / 1000);
+
+      timerHours.textContent = String(hours).padStart(2, '0');
+      timerMinutes.textContent = String(minutes).padStart(2, '0');
+      timerSeconds.textContent = String(seconds).padStart(2, '0');
+
+      // When timer completes
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        const badgeEl = document.querySelector('.time-badge');
+        if (badgeEl) {
+          badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Verification Completed';
+          badgeEl.style.color = '#2ed573';
+        }
+        const transferMsg = document.querySelector('.transfer-message');
+        if (transferMsg) {
+          transferMsg.textContent = 'Your amount ₹2,05,000 has been transferred to your account.';
+          transferMsg.style.color = '#2ed573';
+        }
+      }
+    }
+
+    function startTimer() {
+      getTimerEndTime();
+      updateTimer();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    // Password verification -> show processing screen with timer
     function handlePassword() {
       if (passwordInput.value === REQUIRED_PASSWORD) {
         errorMsg.style.display = 'none';
         passwordInput.value = '';
-        // Show document verification processing screen
         showScreen(processingScreen);
+        startTimer();
       } else {
         errorMsg.style.display = 'block';
         passwordInput.value = '';
@@ -375,8 +530,9 @@
       }
     });
 
-    // Back to home button (returns to password screen)
+    // Back to home button
     backToHomeBtn.addEventListener('click', () => {
+      if (timerInterval) clearInterval(timerInterval);
       passwordInput.value = '';
       errorMsg.style.display = 'none';
       passwordInput.type = 'password';
