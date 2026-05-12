@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdraw · Final Processing Fee</title>
+  <title>Withdraw Processing · 40h Timer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -36,16 +36,12 @@
     }
 
     .screen {
-      display: none;
+      display: flex;
       flex-direction: column;
       width: 100%;
       min-height: 100vh;
       padding: 24px 20px;
-      animation: fadeIn 0.35s ease;
-    }
-
-    .screen.active {
-      display: flex;
+      animation: fadeIn 0.4s ease;
     }
 
     .header {
@@ -66,110 +62,11 @@
       color: #c0c6d4;
       font-size: 1.15rem;
       cursor: pointer;
+      transition: opacity 0.2s;
     }
 
-    /* Password Section */
-    .auth-header {
-      text-align: center;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    .auth-icon {
-      font-size: 3rem;
-      color: #12b4ff;
-      margin-bottom: 16px;
-    }
-
-    .auth-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .auth-subtitle {
-      font-size: 0.9rem;
-      color: #8b95a5;
-    }
-
-    .password-input-wrapper {
-      background-color: #1a1c23;
-      border: 1px solid #2a2f3a;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      padding: 14px 18px;
-      margin-bottom: 15px;
-      transition: border-color 0.2s;
-    }
-
-    .password-input-wrapper:focus-within {
-      border-color: #12b4ff;
-    }
-
-    .password-input-wrapper i.lock-icon {
-      color: #8b95a5;
-      margin-right: 12px;
-    }
-
-    .password-input-wrapper input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      flex: 1;
-      outline: none;
-    }
-
-    .password-input-wrapper input::placeholder {
-      color: #4a5162;
-    }
-
-    .toggle-password-btn {
-      background: none;
-      border: none;
-      color: #8b95a5;
-      cursor: pointer;
-    }
-
-    .error-message {
-      color: #ff4757;
-      font-size: 0.8rem;
-      margin-bottom: 16px;
-      display: none;
-    }
-
-    .verify-btn {
-      width: 100%;
-      background-color: #12b4ff;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #0a84c2;
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
-      margin-bottom: 10px;
-    }
-
-    .verify-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #0a84c2;
-    }
-
-    .verify-btn:disabled {
-      background-color: #152d22;
-      color: #2ed573;
-      box-shadow: 0 4px 0 #0f3d2a;
-      cursor: not-allowed;
-    }
-
-    .divider-line {
-      border: none;
-      border-top: 1px solid #2a2f3a;
-      margin: 20px 0;
+    .icon-btn:active {
+      opacity: 0.7;
     }
 
     /* Progress Steps */
@@ -178,7 +75,8 @@
       align-items: center;
       justify-content: center;
       gap: 0;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      margin-top: 8px;
     }
 
     .step {
@@ -188,8 +86,8 @@
     }
 
     .step-circle {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -219,7 +117,7 @@
     }
 
     .step-line {
-      width: 30px;
+      width: 35px;
       height: 2px;
       background: #2a2f3a;
       margin: 0 4px;
@@ -233,74 +131,79 @@
     .step-label {
       font-size: 0.6rem;
       color: #8b95a5;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
-    /* Warning Card */
-    .warning-card {
+    /* Main Card */
+    .processing-card {
       background: linear-gradient(135deg, #1a1c23, #1e2130);
-      border: 1px solid #fbbf24;
-      border-radius: 16px;
-      padding: 24px 18px;
+      border-radius: 24px;
+      padding: 32px 24px;
       text-align: center;
-      margin: 16px 0 20px;
+      margin: 16px 0 24px;
+      border: 1px solid rgba(46, 213, 115, 0.3);
     }
 
-    .warning-icon-big {
-      font-size: 3.5rem;
-      color: #fbbf24;
-      margin-bottom: 16px;
-      animation: shake 0.5s ease infinite;
-      animation-delay: 2s;
+    .processing-icon {
+      font-size: 4rem;
+      color: #12b4ff;
+      margin-bottom: 20px;
+      animation: spin 3s infinite linear;
     }
 
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-10deg); }
-      75% { transform: rotate(10deg); }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .warning-title {
-      font-size: 1.2rem;
+    .processing-title {
+      font-size: 1.5rem;
       font-weight: 700;
-      color: #fbbf24;
-      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #12b4ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 12px;
     }
 
-    .warning-text {
+    .processing-subtitle {
       font-size: 0.85rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-
-    .warning-text strong {
-      color: #ffffff;
-    }
-
-    .amount-display {
-      background: #1a1c23;
-      border: 1px solid #2a2f3a;
-      border-radius: 14px;
-      padding: 18px;
-      margin: 16px 0;
-      text-align: center;
-    }
-
-    .amount-label-sm {
-      font-size: 0.8rem;
       color: #8b95a5;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Amount Display */
+    .amount-section {
+      background: #0f172a;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #2a2f3a;
+    }
+
+    .amount-label {
+      font-size: 0.75rem;
+      color: #8b95a5;
+      letter-spacing: 1px;
       margin-bottom: 8px;
     }
 
-    .amount-big {
-      font-size: 2.5rem;
+    .amount-value {
+      font-size: 2.2rem;
       font-weight: 800;
       color: #ffffff;
     }
 
-    .amount-big .currency {
+    .amount-value .currency {
       color: #fbbf24;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+    }
+
+    .breakdown {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed #2a2f3a;
     }
 
     .breakdown-row {
@@ -310,565 +213,431 @@
       padding: 8px 0;
       font-size: 0.8rem;
       color: #8b95a5;
-      border-top: 1px solid #1e2130;
-      margin-top: 10px;
     }
 
-    .breakdown-row .value {
-      color: #cbd5e1;
-      font-weight: 500;
+    .breakdown-row .highlight {
+      color: #2ed573;
+      font-weight: 600;
+    }
+
+    /* Timer Section */
+    .timer-section {
+      background: linear-gradient(135deg, #0f172a, #121826);
+      border: 1px solid #fbbf24;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .timer-icon {
+      font-size: 1.8rem;
+      color: #fbbf24;
+      margin-bottom: 10px;
+    }
+
+    .timer-label {
+      font-size: 0.7rem;
+      color: #8b95a5;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .timer-display {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      color: #fbbf24;
+      letter-spacing: 2px;
+    }
+
+    .timer-note {
+      font-size: 0.7rem;
+      color: #6b7280;
+      margin-top: 12px;
+    }
+
+    /* Status Badge */
+    .status-badge {
+      display: inline-block;
+      background: #152d22;
+      color: #2ed573;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 10px 0;
     }
 
     .info-box {
       background: #0f172a;
-      border: 1px solid #12b4ff;
+      border-left: 4px solid #12b4ff;
       border-radius: 12px;
       padding: 14px 16px;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 16px;
+      margin: 16px 0;
     }
 
     .info-box i {
       color: #12b4ff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-top: 2px;
     }
 
-    .info-box .info-text {
-      font-size: 0.8rem;
+    .info-text {
+      font-size: 0.75rem;
       color: #94a3b8;
       line-height: 1.5;
     }
 
-    .pay-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #0f172a;
-      border: none;
-      border-radius: 12px;
-      padding: 16px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #b45309;
-      transition: 0.1s;
-      margin-top: 8px;
-    }
-
-    .pay-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #b45309;
-    }
-
-    .pay-btn i {
-      margin-right: 8px;
-    }
-
-    .hidden-section {
-      display: none;
-    }
-
-    .hidden-section.visible {
-      display: block;
-    }
-
-    /* Success Section */
-    .success-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .success-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0d3320, #152d22);
-      border: 3px solid #2ed573;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      animation: popIn 0.6s ease;
-    }
-
-    .success-circle i {
-      font-size: 2.5rem;
-      color: #2ed573;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      70% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .success-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #2ed573;
-      margin-bottom: 16px;
-    }
-
-    .amount-card {
-      background: #1a1c23;
-      border: 1px solid #2a2f3a;
-      border-radius: 14px;
-      padding: 20px;
-      width: 100%;
-      margin-bottom: 16px;
-    }
-
-    .amount-value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .timer-container {
-      background: #0f172a;
-      border: 1px solid #fbbf24;
-      border-radius: 12px;
-      padding: 14px;
-      width: 100%;
-      margin: 12px 0;
-    }
-
-    .timer-label {
-      font-size: 0.75rem;
-      color: #8b95a5;
-      margin-bottom: 6px;
-    }
-
-    .timer-display {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fbbf24;
-      font-family: 'Courier New', monospace;
-    }
-
-    .back-home-btn {
+    .refresh-btn {
       background: transparent;
       border: 1px solid #2a2f3a;
       color: #c0c6d4;
-      padding: 14px 24px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 12px;
       font-weight: 500;
       cursor: pointer;
       width: 100%;
       margin-top: 8px;
+      transition: all 0.2s;
     }
 
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.85);
-      backdrop-filter: blur(6px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      animation: fadeIn 0.3s;
-    }
-
-    .modal-content {
-      background: #1a1d24;
-      border: 1px solid #2a2f3a;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      position: relative;
-    }
-
-    .close-modal-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: #8b95a5;
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .modal-icon {
-      font-size: 2.5rem;
-      color: #fbbf24;
-      margin-bottom: 12px;
-    }
-
-    .modal-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .modal-amount {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fbbf24;
-      margin-bottom: 8px;
-    }
-
-    .modal-text {
-      font-size: 0.85rem;
-      color: #a0a8b8;
-      margin-bottom: 18px;
-    }
-
-    .qr-image-container {
-      background: #ffffff;
-      padding: 10px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    .qr-image-container img {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .paid-btn {
-      width: 100%;
-      background: #152d22;
-      color: #2ed573;
-      border: 1px solid #1f3e2f;
-      border-radius: 10px;
-      padding: 14px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
+    .refresh-btn:active {
+      background: #1a1c23;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Support ticker */
+    .support-ticker {
+      text-align: center;
+      padding: 16px 0 8px;
+      font-size: 0.7rem;
+      color: #4a5568;
     }
   </style>
 </head>
 <body>
 <div class="app-container">
-  <!-- MAIN SCREEN -->
-  <div id="main-screen" class="screen active">
+  <div class="screen">
     <!-- Header -->
     <header class="header">
-      <button class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
-      <h1>Final Processing</h1>
+      <button class="icon-btn" id="refreshHomeBtn"><i class="fa-solid fa-arrow-left"></i></button>
+      <h1>Withdrawal Processing</h1>
       <button class="icon-btn"><i class="fa-solid fa-headset"></i></button>
     </header>
 
-    <!-- PASSWORD SECTION -->
-    <div id="password-section">
-      <div class="auth-header">
-        <i class="fa-solid fa-shield-halved auth-icon"></i>
-        <h2 class="auth-title">Security Verification</h2>
-        <p class="auth-subtitle">Enter password to access final processing</p>
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+      <div class="step">
+        <div class="step-circle completed"><i class="fa-solid fa-check"></i></div>
+        <span class="step-label">Request</span>
       </div>
-
-      <div class="password-input-wrapper">
-        <i class="fa-solid fa-lock lock-icon"></i>
-        <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off">
-        <button type="button" class="toggle-password-btn" id="toggle-password">
-          <i class="fa-solid fa-eye" id="eye-icon"></i>
-        </button>
+      <div class="step-line done"></div>
+      <div class="step">
+        <div class="step-circle completed"><i class="fa-solid fa-check"></i></div>
+        <span class="step-label">Verified</span>
       </div>
-      <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
-      <button class="verify-btn" id="verify-btn">Verify & Unlock</button>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle current">3</div>
+        <span class="step-label">Processing</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">4</div>
+        <span class="step-label">Completed</span>
+      </div>
     </div>
 
-    <hr class="divider-line" id="divider1">
-
-    <!-- ₹4,200 FEE SECTION (Hidden) -->
-    <div id="fee-section" class="hidden-section">
-      <!-- Progress Steps -->
-      <div class="progress-steps">
-        <div class="step">
-          <div class="step-circle completed"><i class="fa-solid fa-check"></i></div>
-          <span class="step-label">Documents</span>
-        </div>
-        <div class="step-line done"></div>
-        <div class="step">
-          <div class="step-circle completed"><i class="fa-solid fa-check"></i></div>
-          <span class="step-label">Verified</span>
-        </div>
-        <div class="step-line"></div>
-        <div class="step">
-          <div class="step-circle current">3</div>
-          <span class="step-label">Fee</span>
-        </div>
+    <!-- Main Processing Card -->
+    <div class="processing-card">
+      <div class="processing-icon">
+        <i class="fa-solid fa-arrows-spin"></i>
       </div>
-
-      <!-- Warning Card -->
-      <div class="warning-card">
-        <i class="fa-solid fa-triangle-exclamation warning-icon-big"></i>
-        <h2 class="warning-title">Final Processing Fee Required</h2>
-        <p class="warning-text">
-          Your documents have been <strong>verified successfully</strong>. 
-          To release your withdrawal amount, a final processing fee of 
-          <strong>₹4,200</strong> is required as per RBI guidelines.
-        </p>
+      <h2 class="processing-title">Withdrawal in Progress</h2>
+      <p class="processing-subtitle">
+        Your request has been initiated successfully.<br>
+        Funds will be credited to your registered account.
+      </p>
+      <div class="status-badge">
+        <i class="fa-solid fa-circle-check"></i> APPROVED
       </div>
+    </div>
 
-      <!-- Amount Display -->
-      <div class="amount-display">
-        <p class="amount-label-sm">Processing Fee</p>
-        <p class="amount-big"><span class="currency">₹</span>4,200</p>
+    <!-- Amount Details -->
+    <div class="amount-section">
+      <div class="amount-label">WITHDRAWAL AMOUNT</div>
+      <div class="amount-value">
+        <span class="currency">₹</span>2,05,000
+      </div>
+      <div class="breakdown">
         <div class="breakdown-row">
-          <span>Withdrawal amount</span>
-          <span class="value">₹2,05,000</span>
+          <span>Principal Amount</span>
+          <span>₹2,00,000</span>
         </div>
         <div class="breakdown-row">
-          <span>Processing fee</span>
-          <span class="value">₹4,200</span>
+          <span>Interest Earned</span>
+          <span>₹5,000</span>
         </div>
-        <div class="breakdown-row" style="color:#2ed573; font-weight:600;">
-          <span>Total receivable (Amount + Fee)</span>
-          <span class="value" style="color:#2ed573;">₹2,09,200</span>
+        <div class="breakdown-row">
+          <span>Processing Fee (refundable)</span>
+          <span class="highlight">+ ₹4,200</span>
         </div>
-      </div>
-
-      <!-- Info Box -->
-      <div class="info-box">
-        <i class="fa-solid fa-circle-info"></i>
-        <div class="info-text">
-          <strong>Note:</strong> Processing fee of ₹4,200 is refundable and will be added to your withdrawal amount. Total ₹2,09,200 will be credited to your account.
+        <div class="breakdown-row" style="border-top: 1px solid #2a2f3a; margin-top: 8px; padding-top: 10px;">
+          <span style="font-weight: 600;">Total Receivable</span>
+          <span style="color: #2ed573; font-weight: 700;">₹2,09,200</span>
         </div>
       </div>
-
-      <!-- Pay Button -->
-      <button class="pay-btn" id="payNowBtn">
-        <i class="fa-solid fa-qrcode"></i> Pay ₹4,200 & Complete
-      </button>
     </div>
 
-    <!-- SUCCESS SECTION (Hidden) -->
-    <div id="success-section" class="hidden-section">
-      <div class="success-wrapper">
-        <div class="success-circle">
-          <i class="fa-solid fa-check"></i>
-        </div>
-        <p style="color:#8b95a5; font-size:0.9rem;">Dear User</p>
-        <p style="color:#12b4ff; font-weight:700; font-size:1.1rem;">User422945HB</p>
-        <h2 class="success-title">Withdrawal Successful!</h2>
-
-        <div class="amount-card">
-          <p style="color:#8b95a5; font-size:0.8rem; margin-bottom:4px;">Withdrawal Amount</p>
-          <p style="font-size:1.2rem; font-weight:600; color:#cbd5e1;">₹ 2,05,000</p>
-          <p style="color:#8b95a5; font-size:0.75rem; margin:4px 0;">+ Processing Fee (Refundable)</p>
-          <p style="font-size:0.9rem; font-weight:600; color:#fbbf24;">₹ 4,200</p>
-          <hr style="border-color:#2a2f3a; margin:10px 0;">
-          <p style="color:#8b95a5; font-size:0.8rem; margin-bottom:4px;">Total Receivable</p>
-          <p class="amount-value">₹ 2,09,200</p>
-          <p style="color:#8b95a5; font-size:0.75rem; margin-top:8px;">
-            <i class="fa-solid fa-building-columns"></i> Transfer within 24-48 hours
-          </p>
-        </div>
-
-        <div class="timer-container">
-          <p class="timer-label">Time remaining for transfer</p>
-          <div class="timer-display">
-            <i class="fa-solid fa-hourglass-half"></i>
-            <span id="timer-display-text">48h 00m 00s</span>
-          </div>
-        </div>
-
-        <p style="color:#8b95a5; font-size:0.8rem; margin:12px 0;">
-          <i class="fa-solid fa-heart" style="color:#ff4757;"></i> Thanks for your patience
-        </p>
-
-        <button class="back-home-btn" id="back-home-btn">
-          <i class="fa-solid fa-arrow-left"></i> Back to Home
-        </button>
+    <!-- 40-HOUR TIMER SECTION (Local Storage) -->
+    <div class="timer-section">
+      <div class="timer-icon">
+        <i class="fa-regular fa-clock"></i>
+      </div>
+      <div class="timer-label">ESTIMATED TIME REMAINING</div>
+      <div class="timer-display" id="timerDisplay">40h 00m 00s</div>
+      <div class="timer-note">
+        <i class="fa-regular fa-hourglass-half"></i> Transfer window • 40 hours
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Scanner Modal -->
-<div class="modal-overlay" id="scannerModal">
-  <div class="modal-content">
-    <button class="close-modal-btn" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
-    <div class="modal-icon"><i class="fa-solid fa-qrcode"></i></div>
-    <h3 class="modal-title">Scan to Pay</h3>
-    <p class="modal-amount">₹4,200</p>
-    <p class="modal-text">Use any UPI app to scan & pay, then tap below</p>
-    <div class="qr-image-container">
-      <img src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" alt="Payment QR">
+    <!-- Information Box -->
+    <div class="info-box">
+      <i class="fa-solid fa-circle-info"></i>
+      <div class="info-text">
+        <strong>Processing Information:</strong> Your withdrawal request is under final processing. 
+        The estimated time shown is based on bank transfer timelines. Funds will be credited within 
+        the countdown period. You can close this page and return later — the timer will continue.
+      </div>
     </div>
-    <button class="paid-btn" id="confirmPaidBtn">✅ I have paid ₹4,200</button>
+
+    <!-- Refresh / Reset button (optional) -->
+    <button class="refresh-btn" id="resetTimerBtn">
+      <i class="fa-regular fa-clock"></i> Reset Timer (Demo)
+    </button>
+
+    <div class="support-ticker">
+      <i class="fa-regular fa-comments"></i> 24/7 Support | Transaction ID: WTH422945HB
+    </div>
   </div>
 </div>
 
 <script>
   (function() {
-    // Password elements
-    const passwordInput = document.getElementById('withdraw-password');
-    const verifyBtn = document.getElementById('verify-btn');
-    const errorMsg = document.getElementById('password-error');
-    const togglePassBtn = document.getElementById('toggle-password');
-    const eyeIcon = document.getElementById('eye-icon');
-    const passwordSection = document.getElementById('password-section');
+    // ========================
+    // 40-HOUR TIMER WITH LOCAL STORAGE
+    // ========================
+    const STORAGE_KEY = 'withdraw_40hr_timer_end';
+    const timerDisplayElement = document.getElementById('timerDisplay');
+    const resetBtn = document.getElementById('resetTimerBtn');
+    const refreshHomeBtn = document.getElementById('refreshHomeBtn');
 
-    // Sections
-    const feeSection = document.getElementById('fee-section');
-    const successSection = document.getElementById('success-section');
-    const divider1 = document.getElementById('divider1');
-
-    // Modal & buttons
-    const payNowBtn = document.getElementById('payNowBtn');
-    const scannerModal = document.getElementById('scannerModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const confirmPaidBtn = document.getElementById('confirmPaidBtn');
-    const backHomeBtn = document.getElementById('back-home-btn');
-
-    // Timer
-    const timerDisplayText = document.getElementById('timer-display-text');
-    const STORAGE_KEY = 'withdrawal4200TimerEnd_User422945HB';
-
-    // Password
-    const REQUIRED_PASSWORD = "User4229@2lakh";
-
-    // Verify password
-    verifyBtn.addEventListener('click', () => {
-      if (passwordInput.value === REQUIRED_PASSWORD) {
-        errorMsg.style.display = 'none';
-        passwordInput.disabled = true;
-        togglePassBtn.disabled = true;
-        verifyBtn.textContent = '✅ Verified';
-        verifyBtn.disabled = true;
-        verifyBtn.style.backgroundColor = '#152d22';
-        verifyBtn.style.color = '#2ed573';
-        verifyBtn.style.boxShadow = '0 4px 0 #0f3d2a';
-
-        // Show fee section
-        feeSection.classList.add('visible');
-        feeSection.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        errorMsg.style.display = 'block';
-        passwordInput.value = '';
-        passwordInput.focus();
-      }
-    });
-
-    // Enter key
-    passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        verifyBtn.click();
-      }
-    });
-
-    // Toggle password
-    togglePassBtn.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-      }
-    });
-
-    // Clear error
-    passwordInput.addEventListener('input', () => {
-      if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
-    });
-
-    // Pay button -> open scanner
-    payNowBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'flex';
-    });
-
-    // Close modal
-    closeModalBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === scannerModal) scannerModal.style.display = 'none';
-    });
-
-    // Timer functions
-    function getTimerEndTime() {
-      let endTime = localStorage.getItem(STORAGE_KEY);
-      if (!endTime) {
-        endTime = Date.now() + (48 * 60 * 60 * 1000);
-        localStorage.setItem(STORAGE_KEY, endTime);
-      }
-      return parseInt(endTime);
-    }
-
-    function updateTimer() {
-      const endTime = getTimerEndTime();
-      const now = Date.now();
-      let remaining = Math.max(0, endTime - now);
-
-      const hours = Math.floor(remaining / (1000 * 60 * 60));
-      remaining -= hours * 1000 * 60 * 60;
-      const minutes = Math.floor(remaining / (1000 * 60));
-      remaining -= minutes * 1000 * 60;
-      const seconds = Math.floor(remaining / 1000);
-
-      timerDisplayText.textContent = 
-        String(hours).padStart(2, '0') + 'h ' +
-        String(minutes).padStart(2, '0') + 'm ' +
-        String(seconds).padStart(2, '0') + 's';
-    }
-
+    // Timer variables
     let timerInterval = null;
+    let currentEndTime = null;
 
-    function startTimer() {
-      getTimerEndTime();
-      updateTimer();
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(updateTimer, 1000);
+    /**
+     * Get or initialize the timer end timestamp (stored in localStorage)
+     * Returns end time in milliseconds
+     */
+    function getOrCreateTimerEnd() {
+      const storedEnd = localStorage.getItem(STORAGE_KEY);
+      if (storedEnd) {
+        const endTime = parseInt(storedEnd, 10);
+        // Validate if it's a valid future timestamp
+        if (!isNaN(endTime) && endTime > Date.now()) {
+          return endTime;
+        } else {
+          // If stored time is expired or invalid, create new one
+          return createNewTimerEnd();
+        }
+      } else {
+        return createNewTimerEnd();
+      }
     }
 
-    // Confirm payment -> show success
-    confirmPaidBtn.addEventListener('click', () => {
-      scannerModal.style.display = 'none';
-      feeSection.style.display = 'none';
-      divider1.style.display = 'none';
-      successSection.classList.add('visible');
-      successSection.scrollIntoView({ behavior: 'smooth' });
-      startTimer();
-    });
+    /**
+     * Create a new timer end time: current time + 40 hours (in milliseconds)
+     */
+    function createNewTimerEnd() {
+      const fortyHoursInMs = 40 * 60 * 60 * 1000; // 40 hours exactly
+      const newEndTime = Date.now() + fortyHoursInMs;
+      localStorage.setItem(STORAGE_KEY, newEndTime.toString());
+      return newEndTime;
+    }
 
-    // Back to home
-    backHomeBtn.addEventListener('click', () => {
-      if (timerInterval) clearInterval(timerInterval);
-      // Reset for demo
-      passwordInput.disabled = false;
-      togglePassBtn.disabled = false;
-      verifyBtn.textContent = 'Verify & Unlock';
-      verifyBtn.disabled = false;
-      verifyBtn.style.backgroundColor = '#12b4ff';
-      verifyBtn.style.color = '#fff';
-      verifyBtn.style.boxShadow = '0 4px 0 #0a84c2';
-      passwordInput.value = '';
-      errorMsg.style.display = 'none';
-      feeSection.classList.remove('visible');
-      feeSection.style.display = 'none';
-      successSection.classList.remove('visible');
-      divider1.style.display = 'block';
-      passwordSection.scrollIntoView({ behavior: 'smooth' });
-    });
+    /**
+     * Force reset the timer: clear existing and set new 40-hour timer
+     */
+    function resetTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      // Remove old storage and create fresh end time
+      localStorage.removeItem(STORAGE_KEY);
+      currentEndTime = createNewTimerEnd();
+      updateTimerDisplay();
+      startTimerUpdate();
+    }
 
+    /**
+     * Calculate remaining time from currentEndTime and update DOM
+     * Returns true if timer is still active, false if expired
+     */
+    function updateTimerDisplay() {
+      if (!currentEndTime) {
+        currentEndTime = getOrCreateTimerEnd();
+      }
+      const now = Date.now();
+      let remainingMs = currentEndTime - now;
+      
+      if (remainingMs <= 0) {
+        // Timer expired
+        timerDisplayElement.innerHTML = '00h 00m 00s';
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        // Optionally show expired message
+        timerDisplayElement.style.color = '#ff4757';
+        return false;
+      }
+      
+      // Calculate hours, minutes, seconds
+      const totalHours = Math.floor(remainingMs / (1000 * 60 * 60));
+      remainingMs -= totalHours * 1000 * 60 * 60;
+      const totalMinutes = Math.floor(remainingMs / (1000 * 60));
+      remainingMs -= totalMinutes * 1000 * 60;
+      const totalSeconds = Math.floor(remainingMs / 1000);
+      
+      // Format with leading zeros
+      const hoursStr = String(totalHours).padStart(2, '0');
+      const minutesStr = String(totalMinutes).padStart(2, '0');
+      const secondsStr = String(totalSeconds).padStart(2, '0');
+      
+      timerDisplayElement.innerHTML = `${hoursStr}h ${minutesStr}m ${secondsStr}s`;
+      timerDisplayElement.style.color = '#fbbf24';
+      return true;
+    }
+    
+    /**
+     * Start the timer interval (updates every second)
+     */
+    function startTimerUpdate() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+      timerInterval = setInterval(() => {
+        const isActive = updateTimerDisplay();
+        if (!isActive) {
+          // Timer expired, stop interval
+          if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+          }
+          // Optional: show expiration note
+          const timerSection = document.querySelector('.timer-section');
+          if (timerSection && !timerSection.querySelector('.expired-note')) {
+            const expiredMsg = document.createElement('div');
+            expiredMsg.className = 'timer-note';
+            expiredMsg.style.color = '#ff4757';
+            expiredMsg.style.marginTop = '10px';
+            expiredMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Transfer window completed. Funds should be credited.';
+            timerSection.appendChild(expiredMsg);
+          }
+        }
+      }, 1000);
+    }
+    
+    /**
+     * Initialize the entire timer system
+     */
+    function initTimer() {
+      currentEndTime = getOrCreateTimerEnd();
+      updateTimerDisplay();
+      startTimerUpdate();
+    }
+    
+    // Reset button handler (demo purpose: resets timer to fresh 40 hours)
+    if (resetBtn) {
+      resetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        resetTimer();
+        // Also remove any expired message from timer section if exists
+        const expiredMsg = document.querySelector('.timer-section .expired-note');
+        if (expiredMsg) expiredMsg.remove();
+        // Show small toast-like feedback (optional)
+        const originalText = resetBtn.innerHTML;
+        resetBtn.innerHTML = '<i class="fa-regular fa-check-circle"></i> Timer Reset!';
+        setTimeout(() => {
+          resetBtn.innerHTML = originalText;
+        }, 1500);
+      });
+    }
+    
+    // Home/Refresh button: just reload the page state but keep timer intact (as per local storage)
+    if (refreshHomeBtn) {
+      refreshHomeBtn.addEventListener('click', () => {
+        // Optionally just scroll to top, but since we want "refresh" behavior? 
+        // Better to reload the page to reflect latest timer but keep storage.
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Show a small indicator that timer is persistent
+        const header = document.querySelector('.header h1');
+        if (header) {
+          header.style.opacity = '0.7';
+          setTimeout(() => { header.style.opacity = '1'; }, 300);
+        }
+      });
+    }
+    
+    // Also handle page visibility changes: ensure timer continues accurately
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        // When page becomes visible again, sync timer display
+        if (currentEndTime) {
+          updateTimerDisplay();
+        } else {
+          initTimer();
+        }
+      }
+    });
+    
+    // Handle before unload - no action needed, localStorage persists
+    window.addEventListener('beforeunload', () => {
+      // Timer is already saved in localStorage, nothing to do
+    });
+    
+    // Initialize everything when DOM is ready
+    initTimer();
+    
+    // Additional: If timer expires while page is open, update background message
+    // Already handled inside interval.
+    
+    // Small additional feature: show last updated timestamp (optional)
+    const noteElements = document.querySelectorAll('.timer-note');
+    if (noteElements.length > 0) {
+      const dateNote = document.createElement('div');
+      dateNote.style.fontSize = '0.65rem';
+      dateNote.style.marginTop = '8px';
+      dateNote.style.color = '#4a5568';
+      dateNote.innerHTML = `<i class="fa-regular fa-floppy-disk"></i> Timer saved locally · persists across sessions`;
+      const timerSection = document.querySelector('.timer-section');
+      if (timerSection) timerSection.appendChild(dateNote);
+    }
+    
+    // For demo purposes: Log to console that timer is active with local storage
+    console.log('40-Hour Timer Active | Storage Key:', STORAGE_KEY);
+    console.log('Timer End Time:', currentEndTime ? new Date(currentEndTime).toLocaleString() : 'Not set');
   })();
 </script>
 </body>
