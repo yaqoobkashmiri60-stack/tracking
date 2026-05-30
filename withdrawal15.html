@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Withdraw · RMG 2026 Tax Required</title>
+  <title>Withdraw · Payment Processing</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -35,6 +35,700 @@
       overflow-y: auto;
     }
 
+    .screen {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      min-height: 100vh;
+      padding: 24px 20px;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #c0c6d4;
+      font-size: 1.15rem;
+      cursor: pointer;
+    }
+
+    /* Password Section */
+    .auth-header {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .auth-icon {
+      font-size: 3rem;
+      color: #12b4ff;
+      margin-bottom: 16px;
+    }
+
+    .auth-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .auth-subtitle {
+      font-size: 0.9rem;
+      color: #8b95a5;
+    }
+
+    .password-input-wrapper {
+      background-color: #1a1c23;
+      border: 1px solid #2a2f3a;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      padding: 14px 18px;
+      margin-bottom: 15px;
+      transition: border-color 0.2s;
+    }
+
+    .password-input-wrapper:focus-within {
+      border-color: #12b4ff;
+    }
+
+    .password-input-wrapper i.lock-icon {
+      color: #8b95a5;
+      margin-right: 12px;
+    }
+
+    .password-input-wrapper input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      flex: 1;
+      outline: none;
+    }
+
+    .password-input-wrapper input::placeholder {
+      color: #4a5162;
+    }
+
+    .toggle-password-btn {
+      background: none;
+      border: none;
+      color: #8b95a5;
+      cursor: pointer;
+    }
+
+    .error-message {
+      color: #ff4757;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .verify-btn {
+      width: 100%;
+      background-color: #12b4ff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #0a84c2;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      margin-bottom: 10px;
+    }
+
+    .verify-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #0a84c2;
+    }
+
+    .verify-btn:disabled {
+      background-color: #152d22;
+      color: #2ed573;
+      box-shadow: 0 4px 0 #0f3d2a;
+      cursor: not-allowed;
+    }
+
+    .divider-line {
+      border: none;
+      border-top: 1px solid #2a2f3a;
+      margin: 20px 0;
+    }
+
+    /* Processing Section */
+    .processing-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* Animated Processing Icon */
+    .processing-icon-container {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .processing-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid #2a2f3a;
+      position: relative;
+      animation: rotateRing 2s linear infinite;
+    }
+
+    .processing-ring::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      border-top-color: #12b4ff;
+      border-right-color: #fbbf24;
+      animation: rotateRing 1.5s linear infinite;
+    }
+
+    .processing-ring::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-bottom-color: #2ed573;
+      border-left-color: #a855f7;
+      animation: rotateRing 2.5s linear infinite reverse;
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .processing-icon-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.2rem;
+      color: #12b4ff;
+      animation: pulse 1.5s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Dots Animation */
+    .dots-container {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin: 16px 0;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #12b4ff;
+      animation: dotBounce 1.4s ease infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    .dot:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .processing-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .processing-subtitle {
+      font-size: 0.9rem;
+      color: #fbbf24;
+      margin-bottom: 20px;
+    }
+
+    /* Status Card */
+    .status-card {
+      background: #1a1c23;
+      border: 1px solid #2a2f3a;
+      border-radius: 14px;
+      padding: 20px 16px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #1e2130;
+    }
+
+    .status-row:last-child {
+      border-bottom: none;
+    }
+
+    .status-label {
+      font-size: 0.8rem;
+      color: #8b95a5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-label i {
+      font-size: 0.9rem;
+      width: 18px;
+      text-align: center;
+    }
+
+    .status-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .status-value.pending {
+      color: #fbbf24;
+    }
+
+    .status-value.processing {
+      color: #12b4ff;
+    }
+
+    .status-value.completed {
+      color: #2ed573;
+    }
+
+    /* Amount Card */
+    .amount-card {
+      background: linear-gradient(135deg, #1a1c23, #1e2130);
+      border: 1px solid #2a2f3a;
+      border-radius: 14px;
+      padding: 16px;
+      width: 100%;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .amount-label {
+      font-size: 0.75rem;
+      color: #8b95a5;
+      margin-bottom: 4px;
+    }
+
+    .amount-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Timer Card */
+    .timer-card {
+      background: #0f172a;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      color: #8b95a5;
+      margin-bottom: 6px;
+    }
+
+    .timer-display {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fbbf24;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .timer-display i {
+      font-size: 1rem;
+      animation: pulse 1s infinite;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-bg {
+      background: #1e2130;
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #12b4ff, #2ed573);
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s ease;
+      animation: progressShine 2s ease infinite;
+    }
+
+    @keyframes progressShine {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+
+    .back-home-btn {
+      background: transparent;
+      border: 1px solid #2a2f3a;
+      color: #c0c6d4;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .back-home-btn:hover {
+      background: #1e212a;
+      border-color: #3b4252;
+    }
+
+    .hidden-section {
+      display: none;
+    }
+
+    .hidden-section.visible {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <!-- MAIN SCREEN -->
+  <div id="main-screen" class="screen active">
+    <!-- Header -->
+    <header class="header">
+      <button class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
+      <h1>Payment Processing</h1>
+      <button class="icon-btn"><i class="fa-solid fa-headset"></i></button>
+    </header>
+
+    <!-- PASSWORD SECTION -->
+    <div id="password-section">
+      <div class="auth-header">
+        <i class="fa-solid fa-shield-halved auth-icon"></i>
+        <h2 class="auth-title">Security Verification</h2>
+        <p class="auth-subtitle">Enter password to view payment status</p>
+      </div>
+
+      <div class="password-input-wrapper">
+        <i class="fa-solid fa-lock lock-icon"></i>
+        <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off">
+        <button type="button" class="toggle-password-btn" id="toggle-password">
+          <i class="fa-solid fa-eye" id="eye-icon"></i>
+        </button>
+      </div>
+      <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
+      <button class="verify-btn" id="verify-btn">Verify & View Status</button>
+    </div>
+
+    <hr class="divider-line" id="divider1">
+
+    <!-- PROCESSING SECTION (Hidden) -->
+    <div id="processing-section" class="hidden-section">
+      <div class="processing-wrapper">
+        <!-- User Info -->
+        <p style="color:#8b95a5; font-size:0.85rem;">Welcome</p>
+        <p style="color:#12b4ff; font-weight:700; font-size:1rem; margin-bottom:16px;">User422945HB</p>
+
+        <!-- Animated Processing Icon -->
+        <div class="processing-icon-container">
+          <div class="processing-ring">
+            <div class="processing-icon-inner">
+              <i class="fa-solid fa-credit-card"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dots Animation -->
+        <div class="dots-container">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <h2 class="processing-title">Payment Processing</h2>
+        <p class="processing-subtitle">
+          <i class="fa-solid fa-spinner fa-spin"></i> Your transaction is being processed
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBar" style="width: 35%;"></div>
+          </div>
+        </div>
+
+        <!-- Status Card -->
+        <div class="status-card">
+          <div class="status-row">
+            <span class="status-label">
+              <i class="fa-solid fa-file-invoice-dollar" style="color:#fbbf24;"></i> Transfer Tax
+            </span>
+            <span class="status-value completed">₹7,000 Paid ✓</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">
+              <i class="fa-solid fa-building-columns" style="color:#12b4ff;"></i> Withdrawal Amount
+            </span>
+            <span class="status-value">₹2,05,000</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">
+              <i class="fa-solid fa-clock" style="color:#a855f7;"></i> Status
+            </span>
+            <span class="status-value processing" id="statusText">Processing...</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">
+              <i class="fa-solid fa-check-circle" style="color:#2ed573;"></i> Expected
+            </span>
+            <span class="status-value" style="color:#2ed573;">Within 1 hour</span>
+          </div>
+        </div>
+
+        <!-- Amount Card -->
+        <div class="amount-card">
+          <p class="amount-label">Total Receivable Amount</p>
+          <p class="amount-value">₹2,05,000</p>
+        </div>
+
+        <!-- Timer Card -->
+        <div class="timer-card">
+          <p class="timer-label">
+            <i class="fa-solid fa-hourglass-half"></i> Time remaining for transfer
+          </p>
+          <div class="timer-display">
+            <span id="timer-hours">01</span>h :
+            <span id="timer-minutes">00</span>m :
+            <span id="timer-seconds">00</span>s
+          </div>
+        </div>
+
+        <p style="color:#8b95a5; font-size:0.75rem; margin-bottom:16px;">
+          <i class="fa-solid fa-shield-halved"></i> RMG 2026 Compliant · Secure Transaction
+        </p>
+
+        <button class="back-home-btn" id="back-home-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Password elements
+    const passwordInput = document.getElementById('withdraw-password');
+    const verifyBtn = document.getElementById('verify-btn');
+    const errorMsg = document.getElementById('password-error');
+    const togglePassBtn = document.getElementById('toggle-password');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    // Sections
+    const processingSection = document.getElementById('processing-section');
+    const divider1 = document.getElementById('divider1');
+
+    // Timer elements
+    const timerHours = document.getElementById('timer-hours');
+    const timerMinutes = document.getElementById('timer-minutes');
+    const timerSeconds = document.getElementById('timer-seconds');
+    const progressBar = document.getElementById('progressBar');
+    const statusText = document.getElementById('statusText');
+
+    // Back button
+    const backHomeBtn = document.getElementById('back-home-btn');
+
+    // localStorage key
+    const STORAGE_KEY = 'paymentProcessingTimer_User422945HB';
+
+    // Password: User4229@2lakh
+    const REQUIRED_PASSWORD = "User4229@2lakh";
+
+    let timerInterval = null;
+
+    // Timer functions
+    function getTimerEndTime() {
+      let endTime = localStorage.getItem(STORAGE_KEY);
+      if (!endTime) {
+        // Set end time to 1 hour from now
+        endTime = Date.now() + (60 * 60 * 1000);
+        localStorage.setItem(STORAGE_KEY, endTime);
+      }
+      return parseInt(endTime);
+    }
+
+    function updateTimer() {
+      const endTime = getTimerEndTime();
+      const startTime = endTime - (60 * 60 * 1000);
+      const now = Date.now();
+      let remaining = Math.max(0, endTime - now);
+      
+      // Calculate progress percentage
+      const totalDuration = 60 * 60 * 1000;
+      const elapsed = now - startTime;
+      const progressPercent = Math.min(100, Math.floor((elapsed / totalDuration) * 100));
+      
+      progressBar.style.width = progressPercent + '%';
+
+      const hours = Math.floor(remaining / (1000 * 60 * 60));
+      remaining -= hours * 1000 * 60 * 60;
+      const minutes = Math.floor(remaining / (1000 * 60));
+      remaining -= minutes * 1000 * 60;
+      const seconds = Math.floor(remaining / 1000);
+
+      timerHours.textContent = String(hours).padStart(2, '0');
+      timerMinutes.textContent = String(minutes).padStart(2, '0');
+      timerSeconds.textContent = String(seconds).padStart(2, '0');
+
+      // When timer completes
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        statusText.textContent = 'Completed ✓';
+        statusText.className = 'status-value completed';
+        progressBar.style.width = '100%';
+        if (timerInterval) clearInterval(timerInterval);
+      } else if (progressPercent > 70) {
+        statusText.textContent = 'Finalizing...';
+      }
+    }
+
+    function startTimer() {
+      getTimerEndTime();
+      updateTimer();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    // Verify password -> Show processing section
+    verifyBtn.addEventListener('click', () => {
+      if (passwordInput.value === REQUIRED_PASSWORD) {
+        errorMsg.style.display = 'none';
+        passwordInput.disabled = true;
+        togglePassBtn.disabled = true;
+        verifyBtn.textContent = '✅ Verified';
+        verifyBtn.disabled = true;
+        verifyBtn.style.backgroundColor = '#152d22';
+        verifyBtn.style.color = '#2ed573';
+        verifyBtn.style.boxShadow = '0 4px 0 #0f3d2a';
+
+        // Show processing section
+        processingSection.classList.add('visible');
+        processingSection.scrollIntoView({ behavior: 'smooth' });
+        startTimer();
+      } else {
+        errorMsg.style.display = 'block';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    });
+
+    // Enter key
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        verifyBtn.click();
+      }
+    });
+
+    // Toggle password
+    togglePassBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    });
+
+    // Clear error
+    passwordInput.addEventListener('input', () => {
+      if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
+    });
+
+    // Back to home
+    backHomeBtn.addEventListener('click', () => {
+      if (timerInterval) clearInterval(timerInterval);
+      passwordInput.disabled = false;
+      togglePassBtn.disabled = false;
+      verifyBtn.textContent = 'Verify & View Status';
+      verifyBtn.disabled = false;
+      verifyBtn.style.backgroundColor = '#12b4ff';
+      verifyBtn.style.color = '#fff';
+      verifyBtn.style.boxShadow = '0 4px 0 #0a84c2';
+      passwordInput.value = '';
+      errorMsg.style.display = 'none';
+      processingSection.classList.remove('visible');
+      divider1.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+  })();
+</script>
+</body>
+</html>
     .screen {
       display: none;
       flex-direction: column;
