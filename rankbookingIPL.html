@@ -20,7 +20,7 @@
             padding-bottom: 20px;
         }
         
-        /* IPL Theme Accents */
+        /* India vs England Theme Accents */
         .header {
             display: flex;
             justify-content: center;
@@ -50,7 +50,7 @@
             transition: transform 0.2s ease;
         }
         
-        .ipl-logo-img {
+        .series-logo-img {
             height: 60px;
             width: auto;
             border-radius: 12px;
@@ -373,8 +373,8 @@
             line-height: 1.5;
         }
         
-        /* IPL 2026 flair */
-        .ipl-tag {
+        /* India vs England flair */
+        .series-tag {
             display: inline-block;
             background: #f9a01b20;
             border-radius: 30px;
@@ -385,11 +385,16 @@
             color: #ffcd7e;
         }
         
+        .flag-icon {
+            font-size: 16px;
+            margin: 0 3px;
+        }
+        
         @media (max-width: 550px) {
-            .logo-img, .ipl-logo-img {
+            .logo-img, .series-logo-img {
                 height: 45px;
             }
-            .ipl-logo-img {
+            .series-logo-img {
                 height: 48px;
             }
             .logo-text {
@@ -433,7 +438,7 @@
             transform: scale(0.97);
         }
         
-        /* ipl specific shimmer */
+        /* series specific shimmer */
         @keyframes subtleGlow {
             0% { border-color: rgba(249,160,27,0.3); }
             100% { border-color: rgba(249,160,27,0.8); }
@@ -446,22 +451,22 @@
 <body>
     <div class="header">
         <div class="logo">
-            <!-- IPL 2026 Logo (new) + Dream11 Logo -->
-            <img src="https://github.com/user-attachments/assets/5b12e8d2-5966-4008-8ad0-e7f06493541e" alt="IPL 2026 Official Logo" class="ipl-logo-img">
+            <!-- India vs England Series Logo + Dream11 Logo -->
+            <img src="https://github.com/user-attachments/assets/5b12e8d2-5966-4008-8ad0-e7f06493541e" alt="IND vs ENG Series Logo" class="series-logo-img">
             <img src="https://github.com/user-attachments/assets/ff2ac056-b9f7-4e44-ae77-f3f62ff387c3" alt="Dream11 Logo" class="logo-img">
-            <div class="logo-text"> 2026 | Rank Booking</div>
+            <div class="logo-text">IND vs ENG | Rank Booking</div>
         </div>
     </div>
     
     <div class="container">
         <div class="title">
-            <h1>🔥2026 Mega Rank Booking 🔥</h1>
-            <p>Guaranteed Winning Spots • Premium Allocation • Limited Slots • Prices updated for IPL Season</p>
-            <div class="ipl-tag"><i class="fas fa-trophy"></i> cricket 2026 Official Partner <i class="fas fa-cricket-bat"></i></div>
+            <h1>🇮🇳 IND vs ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Mega Rank Booking</h1>
+            <p>Guaranteed Winning Spots • Premium Allocation • Limited Slots • India vs England Series 2025-26</p>
+            <div class="series-tag"><i class="fas fa-trophy"></i> India vs England Series Official Partner <i class="fas fa-cricket-bat"></i></div>
         </div>
         
         <div class="ranks-container">
-            <!-- Rank 1 : Updated +200 Rs => old 6699 -> 6899 -->
+            <!-- Rank 1 -->
             <div class="rank-card">
                 <div class="rank-badge">#1 GOLD</div>
                 <h3>🏆 Champion Rank</h3>
@@ -469,7 +474,7 @@
                 <ul class="rank-features">
                     <li><i class="fas fa-crown"></i> 100% Winning Probability</li>
                     <li><i class="fas fa-bolt"></i> Priority VIP Support</li>
-                    <li><i class="fas fa-chart-line"></i> IPL 2026 Exclusive Tips</li>
+                    <li><i class="fas fa-chart-line"></i> IND vs ENG Exclusive Tips</li>
                     <li><i class="fas fa-users"></i> Personal Team Mentor</li>
                 </ul>
                 <button class="book-btn" data-rank="1 (Champion)" data-price="₹6899">
@@ -477,7 +482,7 @@
                 </button>
             </div>
             
-            <!-- Rank 2 : old 5599 -> 5799 -->
+            <!-- Rank 2 -->
             <div class="rank-card">
                 <div class="rank-badge">#2 SILVER</div>
                 <h3>🥈 Elite Rank</h3>
@@ -493,7 +498,7 @@
                 </button>
             </div>
             
-            <!-- Rank 3 : old 4399 -> 4599 -->
+            <!-- Rank 3 -->
             <div class="rank-card">
                 <div class="rank-badge">#3 BRONZE</div>
                 <h3>🥉 Power Rank</h3>
@@ -501,7 +506,7 @@
                 <ul class="rank-features">
                     <li><i class="fas fa-check-circle"></i> 100% Winning Probability</li>
                     <li><i class="fas fa-message"></i> Priority Chat Support</li>
-                    <li><i class="fas fa-chart-line"></i> Expert IPL Tips</li>
+                    <li><i class="fas fa-chart-line"></i> Expert Series Tips</li>
                     <li><i class="fas fa-users-viewfinder"></i> Custom team suggestions</li>
                 </ul>
                 <button class="book-btn" data-rank="3 (Power)" data-price="₹4599">
@@ -509,7 +514,7 @@
                 </button>
             </div>
             
-            <!-- Rank 4 : old 3299 -> 3499 -->
+            <!-- Rank 4 -->
             <div class="rank-card">
                 <div class="rank-badge">#4 PRO</div>
                 <h3>⚡ Pro Rank</h3>
@@ -525,7 +530,7 @@
                 </button>
             </div>
             
-            <!-- Rank 5 : old 2199 -> 2399 -->
+            <!-- Rank 5 -->
             <div class="rank-card">
                 <div class="rank-badge">#5 BASIC</div>
                 <h3>🎯 Starter Rank</h3>
@@ -533,7 +538,7 @@
                 <ul class="rank-features">
                     <li><i class="fas fa-check-circle"></i> 100% Winning Probability</li>
                     <li><i class="fas fa-question-circle"></i> FAQ & Community Access</li>
-                    <li><i class="fas fa-chart-simple"></i> Weekly IPL Insights</li>
+                    <li><i class="fas fa-chart-simple"></i> Weekly Series Insights</li>
                     <li><i class="fas fa-thumbs-up"></i> Team Suggestions</li>
                 </ul>
                 <button class="book-btn" data-rank="5 (Starter)" data-price="₹2399">
@@ -543,41 +548,38 @@
         </div>
     </div>
     
-    <!-- Payment Modal - "I've Completed Payment" button removed as requested. New QR integrated -->
+    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2><i class="fas fa-ticket-alt"></i> IPL 2026 Payment</h2>
-            <p>Secure your Dream11 Rank <strong id="selectedRankDisplay">#1</strong> for the ultimate IPL season. Scan & pay instantly.</p>
+            <h2><i class="fas fa-ticket-alt"></i> IND vs ENG Payment</h2>
+            <p>Secure your Dream11 Rank <strong id="selectedRankDisplay">#1</strong> for the India vs England Series. Scan & pay instantly.</p>
             
             <div class="qr-container">
-                <!-- REPLACED QR IMAGE: New QR code image from GitHub as per request -->
-                <img width="561" height="560" alt="photo_6307484753984164244_x" src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" id="qrCode">
+                <img width="561" height="560" alt="Payment QR Code" src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" id="qrCode">
             </div>
             
-            <div class="upi-id" id="upiId">dream11ipl2026@okhdfcbank</div>
+            <div class="upi-id" id="upiId">dream11indvseng@okhdfcbank</div>
             
-            <p class="payment-amount">🏏 Total Amount: <strong>₹<span id="paymentAmount">6899</span></strong> (incl. all taxes & IPL surcharge)</p>
+            <p class="payment-amount">🏏 Total Amount: <strong>₹<span id="paymentAmount">6899</span></strong> (incl. all taxes & series surcharge)</p>
             
             <div class="instructions">
-                <h4><i class="fab fa-telegram"></i> Payment Steps (IPL 2026):</h4>
+                <h4><i class="fab fa-telegram"></i> Payment Steps (IND vs ENG Series):</h4>
                 <ol>
                     <li>Scan QR using any UPI app (PhonePe, GPay, Paytm).</li>
-                    <li>Or send to UPI ID: <strong>dream11ipl2026@okhdfcbank</strong></li>
+                    <li>Or send to UPI ID: <strong>dream11indvseng@okhdfcbank</strong></li>
                     <li>After successful payment, take screenshot with transaction ID.</li>
-                    <li>Share screenshot on our official Telegram support → @IPL_Dream11_Support</li>
+                    <li>Share screenshot on our official Telegram support → @INDvsENG_Dream11_Support</li>
                     <li>Your rank will be activated within 10-15 minutes before match deadline.</li>
                 </ol>
-                <p style="margin-top: 10px; font-size:12px; color:#ffcd7e;"><i class="fas fa-shield-alt"></i> 100% secure & verified IPL 2026 booking</p>
+                <p style="margin-top: 10px; font-size:12px; color:#ffcd7e;"><i class="fas fa-shield-alt"></i> 100% secure & verified IND vs ENG Series booking</p>
             </div>
-            
-            <!-- "I've Completed Payment" button has been removed as requested -->
         </div>
     </div>
     
     <footer>
-        <p>🏏 CRICKET 2026 | Official Dream11 Rank Booking Partner 🏏</p>
-        <p>© 2025-26 Dream11 IPL Rank Services. This is a demonstration interface for educational & booking assistance.</p>
+        <p>🇮🇳 IND vs ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Official Dream11 Rank Booking Partner</p>
+        <p>© 2025-26 Dream11 India vs England Rank Services. This is a demonstration interface for educational & booking assistance.</p>
         <p><i class="fas fa-cricket"></i> Limited ranks available — first come first serve!</p>
     </footer>
 
@@ -593,11 +595,9 @@
         // Helper to format modal content
         function updateModalContent(rankText, priceRaw) {
             selectedRankSpan.textContent = rankText;
-            // priceRaw example "₹6899" or "₹5799"
             let cleanPrice = priceRaw.replace('₹', '').trim();
             paymentAmountSpan.textContent = cleanPrice;
-            // Update UPI ID to include reference amount (clean)
-            upiIdDiv.innerHTML = `dream11ipl2026@okhdfcbank <span style="font-size:12px; opacity:0.8;">(Amount: ₹${cleanPrice})</span>`;
+            upiIdDiv.innerHTML = `dream11indvseng@okhdfcbank <span style="font-size:12px; opacity:0.8;">(Amount: ₹${cleanPrice})</span>`;
         }
         
         // Open modal when any book button is clicked
@@ -609,11 +609,9 @@
                 
                 updateModalContent(rankVal, priceVal);
                 
-                // Show modal and prevent background scroll
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 
-                // Optional: small haptic for mobile
                 if (window.navigator && window.navigator.vibrate) {
                     window.navigator.vibrate(50);
                 }
@@ -655,7 +653,6 @@
             });
         });
         
-        // Prevent zoom double-tap on mobile but keep responsive
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function(event) {
             const now = Date.now();
@@ -665,14 +662,11 @@
             lastTouchEnd = now;
         }, false);
         
-        // IPL console greeting
-        console.log("%c🏏 IPL 2026 Dream11 Rank Booking System Activated 🏏", "color: #f9a01b; font-size: 16px; font-weight: bold;");
-        console.log("All rank prices updated +₹200 for season. New QR code image integrated (b4b0c3aa). Payment confirmation button removed as requested.");
+        console.log("%c🇮🇳 IND vs ENG 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Dream11 Rank Booking System Activated", "color: #f9a01b; font-size: 16px; font-weight: bold;");
+        console.log("India vs England Series 2025-26. QR code image: b4b0c3aa. Payment confirmation button removed as requested.");
         
-        // Optional: ensure original image dimensions are handled elegantly
         const qrImage = document.getElementById('qrCode');
         if (qrImage) {
-            // Preserve natural aspect ratio while being responsive
             qrImage.style.maxWidth = '220px';
             qrImage.style.height = 'auto';
             qrImage.style.width = '100%';
