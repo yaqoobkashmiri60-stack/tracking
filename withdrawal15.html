@@ -3,332 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#12141a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Withdraw · Bank</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>7 Days Process Started</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',-apple-system,sans-serif; }
-    body { background:#0b0c10; display:flex; justify-content:center; align-items:center; min-height:100vh; min-height:100dvh; color:#fff; -webkit-font-smoothing:antialiased; }
-    .app-container { background:#12141a; width:100%; max-width:430px; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; box-shadow:0 0 30px rgba(0,0,0,0.6); overflow-y:auto; overflow-x:hidden; padding:20px 16px 30px; }
-    @media(min-width:380px){ .app-container{ padding:24px 20px 30px; } }
-    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-    .header h1 { font-size:clamp(1rem,3.5vw,1.2rem); font-weight:600; letter-spacing:-0.01em; }
-    .icon-btn { background:none; border:none; color:#c0c6d4; font-size:clamp(1rem,3.5vw,1.15rem); padding:8px; border-radius:8px; cursor:pointer; transition:background 0.2s; }
-    .icon-btn:active { background:rgba(255,255,255,0.05); }
-    .card { background:#1a1c23; border:1px solid #2a2f3a; border-radius:16px; padding:16px 14px; margin-bottom:16px; }
-    .card-title { font-size:0.85rem; font-weight:500; color:#8b95a5; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
-    .input-group { margin-bottom:12px; }
-    .input-group label { font-size:0.7rem; color:#8b95a5; display:block; margin-bottom:4px; font-weight:500; letter-spacing:0.3px; }
-    .input-group input, .input-group select { width:100%; background:#0f1118; border:1px solid #2a2f3a; border-radius:10px; padding:12px 14px; color:#fff; font-size:0.9rem; outline:none; transition:border 0.2s; }
-    .input-group input:focus, .input-group select:focus { border-color:#12b4ff; }
-    .input-group select option { background:#1a1c23; color:#fff; }
-    .bank-search-wrap { position:relative; }
-    .bank-search-wrap input { padding-left:36px; }
-    .bank-search-wrap i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#8b95a5; font-size:0.9rem; }
-    .speed-options { display:flex; flex-direction:column; gap:12px; margin:10px 0 8px; }
-    .speed-option { background:#0f1118; border:1.5px solid #2a2f3a; border-radius:14px; padding:14px 14px 12px; cursor:pointer; transition:all 0.15s; display:flex; flex-direction:column; }
-    .speed-option.selected { border-color:#12b4ff; background:#18222e; box-shadow:0 0 0 1px #12b4ff44; }
-    .speed-option .top-row { display:flex; justify-content:space-between; align-items:center; }
-    .speed-option .label { font-weight:600; font-size:0.95rem; }
-    .speed-option .fee { background:#1e293b; padding:4px 12px; border-radius:30px; font-size:0.75rem; font-weight:600; color:#fbbf24; }
-    .speed-option .desc { font-size:0.7rem; color:#8b95a5; margin-top:6px; line-height:1.4; }
-    .speed-option .sub-desc { font-size:0.65rem; color:#5a6375; margin-top:2px; }
-    .continue-btn { width:100%; background:#12b4ff; border:none; border-radius:12px; padding:14px; font-weight:600; font-size:1rem; color:#fff; box-shadow:0 4px 0 #0a84c2; transition:all 0.1s; cursor:pointer; margin-top:6px; }
-    .continue-btn:active { transform:translateY(3px); box-shadow:0 1px 0 #0a84c2; }
-    .continue-btn:disabled { background:#2a2f3a; box-shadow:none; color:#6a7285; cursor:not-allowed; }
-    .payment-page { display:none; flex-direction:column; animation:fadeIn 0.3s; }
-    .payment-page.active { display:flex; }
-    .main-page { display:flex; flex-direction:column; }
-    .main-page.hidden { display:none; }
-    .qr-section { text-align:center; margin:12px 0; }
-    .qr-section img { max-width:200px; width:100%; border-radius:12px; background:#fff; padding:8px; box-shadow:0 0 20px rgba(18,180,255,0.2); }
-    .payment-detail-grid { display:flex; flex-direction:column; gap:6px; background:#0f1118; padding:12px 14px; border-radius:12px; margin:8px 0 10px; }
-    .payment-detail-grid .row { display:flex; justify-content:space-between; font-size:0.85rem; padding:4px 0; border-bottom:1px solid #1e2130; }
-    .payment-detail-grid .row:last-child { border-bottom:none; }
-    .payment-detail-grid .label { color:#8b95a5; }
-    .payment-detail-grid .value { font-weight:500; color:#fff; }
-    .highlight-fee { color:#fbbf24; font-weight:700; }
-    .back-home-btn { background:transparent; border:1px solid #2a2f3a; color:#c0c6d4; padding:12px; border-radius:10px; font-weight:500; font-size:0.85rem; cursor:pointer; width:100%; margin-top:8px; transition:0.2s; }
-    .back-home-btn:active { background:#1e212a; }
-    .text-muted { color:#8b95a5; font-size:0.7rem; }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    @media(max-width:340px){ .app-container{ padding:14px 10px; } .speed-option{ padding:12px; } }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #0b0c10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      padding: 16px;
+    }
+    .container {
+      background: #12141a;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 28px;
+      padding: 28px 22px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      border: 1px solid #1e212a;
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(18,180,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #e8edf5;
+    }
+    .header .icon-btn {
+      background: none;
+      border: none;
+      color: #6a7285;
+      font-size: 1.1rem;
+      padding: 6px 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      border-radius: 8px;
+    }
+    .header .icon-btn:active { background: rgba(255,255,255,0.04); }
+    .header .icon-btn.placeholder {
+      visibility: hidden;
+    }
+
+    /* MAIN STATUS CARD */
+    .status-card {
+      background: linear-gradient(145deg, #0f1822, #0a111a);
+      border-radius: 24px;
+      padding: 28px 20px 24px;
+      border: 1px solid #1e2a3a;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .status-card .big-icon {
+      font-size: 3.2rem;
+      color: #12b4ff;
+      background: #0a1a2a;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      border: 2px solid #1a3a5a;
+      box-shadow: 0 0 30px rgba(18,180,255,0.15);
+    }
+    .status-card .big-icon i {
+      animation: pulseIcon 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseIcon {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    .status-card .title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7ad0ff, #12b4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .status-card .subtitle {
+      font-size: 0.85rem;
+      color: #8b9aad;
+      font-weight: 500;
+    }
+    .status-card .badge-7d {
+      display: inline-block;
+      background: #0a2a3a;
+      border: 1px solid #1a5a7a;
+      color: #7ad0ff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 16px;
+      border-radius: 30px;
+      margin-top: 12px;
+      letter-spacing: 0.5px;
+      animation: glowBadge 2s infinite;
+    }
+    @keyframes glowBadge {
+      0% { box-shadow: 0 0 0px rgba(18,180,255,0.2); }
+      50% { box-shadow: 0 0 16px rgba(18,180,255,0.25); }
+      100% { box-shadow: 0 0 0px rgba(18,180,255,0.2); }
+    }
+
+    /* TIMELINE */
+    .timeline {
+      background: #0f1118;
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin: 16px 0 18px;
+      border-left: 3px solid #12b4ff;
+    }
+    .timeline .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #1a1e28;
+    }
+    .timeline .step:last-child { border-bottom: none; }
+    .timeline .step-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0a1a2a;
+      border: 1px solid #1a3a5a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #12b4ff;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .timeline .step-content .step-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #e8edf5;
+    }
+    .timeline .step-content .step-desc {
+      font-size: 0.7rem;
+      color: #7a8a9a;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+    .timeline .step.active .step-icon {
+      background: #12b4ff;
+      color: #0b0c10;
+      border-color: #12b4ff;
+      box-shadow: 0 0 20px rgba(18,180,255,0.3);
+    }
+    .timeline .step.active .step-title {
+      color: #12b4ff;
+    }
+
+    /* DETAILS GRID - simplified, only amount & fee */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0 18px;
+    }
+    .details-grid .item {
+      background: #0f1118;
+      border-radius: 14px;
+      padding: 14px 16px;
+      border: 1px solid #1a1e28;
+      text-align: center;
+    }
+    .details-grid .item .label {
+      font-size: 0.6rem;
+      color: #6a7a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .details-grid .item .value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e8edf5;
+      margin-top: 4px;
+    }
+    .details-grid .item .value.highlight {
+      color: #fbbf24;
+    }
+    .details-grid .item .value.blue {
+      color: #12b4ff;
+    }
+    .details-grid .item.full {
+      grid-column: span 2;
+    }
+
+    /* PROGRESS BAR */
+    .progress-wrap {
+      margin: 12px 0 18px;
+    }
+    .progress-wrap .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: #7a8a9a;
+      margin-bottom: 6px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #1a1e28;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      width: 14%;
+      background: linear-gradient(90deg, #12b4ff, #7ad0ff);
+      border-radius: 10px;
+      animation: progressFill 1.8s ease-out;
+    }
+    @keyframes progressFill {
+      0% { width: 0%; }
+      100% { width: 14%; }
+    }
+
+    /* ACTION BUTTON - single button */
+    .action-btn {
+      width: 100%;
+      background: #12b4ff;
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.15s;
+      box-shadow: 0 4px 0 #0a7aaa;
+      margin-top: 6px;
+    }
+    .action-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #0a7aaa;
+    }
+
+    .note {
+      font-size: 0.6rem;
+      color: #4a5568;
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    @media (max-width: 380px) {
+      .container { padding: 20px 16px 24px; }
+      .status-card .big-icon { width: 64px; height: 64px; font-size: 2.4rem; }
+      .status-card .title { font-size: 1.2rem; }
+    }
   </style>
 </head>
 <body>
-<div class="app-container" id="app">
+<div class="container">
 
-  <!-- MAIN PAGE -->
-  <div class="main-page" id="mainPage">
-    <header class="header">
-      <button class="icon-btn" aria-label="Back"><i class="fa-solid fa-chevron-left"></i></button>
-      <h1>Withdraw Funds</h1>
-      <button class="icon-btn" aria-label="Support"><i class="fa-solid fa-headset"></i></button>
-    </header>
-
-    <!-- Bank details -->
-    <div class="card">
-      <div class="card-title"><i class="fa-solid fa-building-columns" style="color:#12b4ff;"></i> Bank Account</div>
-      <div class="input-group">
-        <label><i class="fa-regular fa-user"></i> Account Holder Name</label>
-        <input type="text" id="accName" placeholder="Full name as per bank" value="">
-      </div>
-      <div class="input-group">
-        <label><i class="fa-regular fa-credit-card"></i> Account Number</label>
-        <input type="text" id="accNumber" placeholder="Enter account number" value="">
-      </div>
-      <div class="input-group">
-        <label><i class="fa-regular fa-code"></i> IFSC Code</label>
-        <input type="text" id="ifscCode" placeholder="e.g. SBIN0001234" value="">
-      </div>
-      <div class="input-group bank-search-wrap">
-        <i class="fa-regular fa-building"></i>
-        <input type="text" id="bankSearch" placeholder="Search bank by name..." oninput="filterBanks()" value="">
-      </div>
-      <div class="input-group">
-        <label><i class="fa-regular fa-arrow-down"></i> Bank Name</label>
-        <select id="bankSelect" size="1">
-          <!-- all india banks loaded by js -->
-        </select>
-      </div>
-      <div class="input-group" style="margin-bottom:0;">
-        <label><i class="fa-regular fa-money-bill-1"></i> Withdrawal Amount</label>
-        <input type="text" id="withdrawAmount" value="₹2,50,000" disabled style="background:#1a1c23; color:#cbd5e1;">
-      </div>
-    </div>
-
-    <!-- Speed options -->
-    <div class="card" style="border-color:#2a2f3a;">
-      <div class="card-title"><i class="fa-regular fa-clock" style="color:#fbbf24;"></i> Choose speed</div>
-      <div class="speed-options" id="speedOptions">
-        <div class="speed-option selected" data-speed="instant" data-fee="15000">
-          <div class="top-row">
-            <span class="label"><i class="fa-solid fa-bolt" style="color:#12b4ff;"></i> Instant (within 2 hrs)</span>
-            <span class="fee">₹15,000</span>
-          </div>
-          <div class="desc">Priority processing · 24/7 support · direct transfer</div>
-          <div class="sub-desc">Estimated time: 1–2 hours</div>
-        </div>
-        <div class="speed-option" data-speed="1week" data-fee="7000">
-          <div class="top-row">
-            <span class="label"><i class="fa-regular fa-calendar-week" style="color:#a855f7;"></i> Within 1 week</span>
-            <span class="fee">₹7,000</span>
-          </div>
-          <div class="desc">Standard processing · tracked</div>
-          <div class="sub-desc">Estimated time: 3–7 days</div>
-        </div>
-        <div class="speed-option" data-speed="1month" data-fee="3000">
-          <div class="top-row">
-            <span class="label"><i class="fa-regular fa-calendar" style="color:#2ed573;"></i> Within 1 month</span>
-            <span class="fee">₹3,000</span>
-          </div>
-          <div class="desc">Economy processing · low fee</div>
-          <div class="sub-desc">Estimated time: 15–30 days</div>
-        </div>
-      </div>
-    </div>
-
-    <button class="continue-btn" id="continueBtn" disabled>Continue to Payment</button>
-    <p style="color:#4a5162; font-size:0.6rem; text-align:center; margin:8px 0;">All transactions are secure &amp; RMG 2026 compliant</p>
+  <!-- Header - support icon removed -->
+  <div class="header">
+    <button class="icon-btn" aria-label="Back"><i class="fa-solid fa-chevron-left"></i></button>
+    <h1>Withdrawal Status</h1>
+    <button class="icon-btn placeholder" aria-label="Placeholder"><i class="fa-regular fa-circle-question"></i></button>
   </div>
 
-  <!-- PAYMENT PAGE -->
-  <div class="payment-page" id="paymentPage">
-    <header class="header">
-      <button class="icon-btn" id="backFromPayment" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></button>
-      <h1>Confirm Payment</h1>
-      <button class="icon-btn" aria-label="Support"><i class="fa-solid fa-headset"></i></button>
-    </header>
+  <!-- MAIN STATUS CARD -->
+  <div class="status-card">
+    <div class="big-icon">
+      <i class="fa-regular fa-calendar-circle-plus"></i>
+    </div>
+    <div class="title">7 Days Process Started</div>
+    <div class="subtitle">Your withdrawal request is now active</div>
+    <div class="badge-7d"><i class="fa-regular fa-clock"></i> Started: Today, 10:30 AM</div>
+  </div>
 
-    <div class="card" style="border-color:#12b4ff55;">
-      <div class="card-title"><i class="fa-regular fa-circle-check" style="color:#2ed573;"></i> Withdrawal summary</div>
-      <div class="payment-detail-grid">
-        <div class="row"><span class="label">Account</span><span class="value" id="payAccName">—</span></div>
-        <div class="row"><span class="label">Account No.</span><span class="value" id="payAccNum">—</span></div>
-        <div class="row"><span class="label">Bank</span><span class="value" id="payBank">—</span></div>
-        <div class="row"><span class="label">IFSC</span><span class="value" id="payIfsc">—</span></div>
-        <div class="row"><span class="label">Amount</span><span class="value" style="color:#12b4ff;">₹2,50,000</span></div>
-        <div class="row"><span class="label">Speed</span><span class="value" id="paySpeed">Instant</span></div>
-        <div class="row"><span class="label">Fee</span><span class="value highlight-fee" id="payFee">₹15,000</span></div>
-        <div class="row" style="border-bottom:none; padding-top:6px;"><span class="label">Total debit</span><span class="value" style="color:#fbbf24; font-weight:700;" id="payTotal">₹2,65,000</span></div>
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="step active">
+      <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
+      <div class="step-content">
+        <div class="step-title">Step 1: Initiated</div>
+        <div class="step-desc">Fee payment confirmed · Withdrawal request registered</div>
       </div>
     </div>
-
-    <div class="qr-section">
-      <p style="color:#8b95a5; font-size:0.75rem; margin-bottom:6px;"><i class="fa-regular fa-qrcode"></i> Scan to pay fee</p>
-      <img src="https://github.com/user-attachments/assets/b4b0c3aa-375b-48f5-a022-22d0b300cd06" alt="QR code for payment" style="max-width:190px; width:100%;">
+    <div class="step">
+      <div class="step-icon"><i class="fa-regular fa-building-columns"></i></div>
+      <div class="step-content">
+        <div class="step-title">Step 2: Bank Processing</div>
+        <div class="step-desc">Verification in progress · Expected 1–2 days</div>
+      </div>
     </div>
-
-    <div style="background:#0f1118; border-radius:12px; padding:12px 14px; margin:4px 0 8px; border-left:3px solid #fbbf24;">
-      <p style="font-size:0.8rem; color:#cbd5e1;"><i class="fa-regular fa-circle-info" style="color:#12b4ff;"></i> Please scan the QR code with your UPI app to pay the processing fee. After successful payment, your withdrawal will be initiated.</p>
+    <div class="step">
+      <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
+      <div class="step-content">
+        <div class="step-title">Step 3: Settlement</div>
+        <div class="step-desc">Funds to be credited within 7 working days</div>
+      </div>
     </div>
+  </div>
 
-    <button class="back-home-btn" id="paymentDoneBtn"><i class="fa-regular fa-check-circle"></i> I have paid, proceed</button>
-    <button class="back-home-btn" id="cancelPaymentBtn" style="margin-top:8px; border-color:#3a2f2f; color:#8b95a5;"><i class="fa-regular fa-xmark"></i> Cancel</button>
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span>14% · Day 1 of 7</span>
+    </div>
+    <div class="progress-bar">
+      <div class="fill"></div>
+    </div>
+  </div>
+
+  <!-- Details Grid - only Amount & Fee (account & bank removed) -->
+  <div class="details-grid">
+    <div class="item">
+      <div class="label">Withdrawal Amount</div>
+      <div class="value blue">₹2,50,000</div>
+    </div>
+    <div class="item">
+      <div class="label">Processing Fee</div>
+      <div class="value highlight">₹7,000</div>
+    </div>
+    <div class="item full">
+      <div class="label">Reference ID</div>
+      <div class="value" style="font-size:0.8rem; font-weight:500; color:#8b9aad;">WDR-2026-07-29-7D</div>
+    </div>
+  </div>
+
+  <!-- Single Action Button -->
+  <button class="action-btn" id="trackBtn"><i class="fa-regular fa-arrow-right"></i> Track Progress</button>
+
+  <div class="note">
+    <i class="fa-regular fa-shield-check"></i> Secure &amp; encrypted · RMG 2026 compliant
   </div>
 </div>
 
 <script>
   (function() {
-    // ---------- ALL INDIA BANKS (comprehensive list) ----------
-    const allBanks = [
-      "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra Bank",
-      "Yes Bank", "Punjab National Bank", "Bank of Baroda", "Canara Bank", "Union Bank of India",
-      "IDFC First Bank", "IndusInd Bank", "Central Bank of India", "Indian Bank", "UCO Bank",
-      "Bank of India", "Indian Overseas Bank", "Punjab & Sind Bank", "Jammu & Kashmir Bank",
-      "RBL Bank", "Bandhan Bank", "South Indian Bank", "Karur Vysya Bank", "City Union Bank",
-      "Tamilnad Mercantile Bank", "Dhanlaxmi Bank", "Federal Bank", "IDBI Bank", "Saraswat Bank",
-      "Abhyudaya Co-operative Bank", "Airtel Payments Bank", "Paytm Payments Bank", "Fino Payments Bank",
-      "Jana Small Finance Bank", "Equitas Small Finance Bank", "Ujjivan Small Finance Bank",
-      "Suryoday Small Finance Bank", "Utkarsh Small Finance Bank", "ESAF Small Finance Bank",
-      "Shivalik Small Finance Bank", "North East Small Finance Bank", "Capital Small Finance Bank",
-      "Au Small Finance Bank", "Rajasthan Marudhara Gramin Bank", "Baroda Rajasthan Kshetriya Gramin Bank",
-      "Marwar Gramin Bank", "Bihar Gramin Bank", "Uttar Bihar Gramin Bank", "Madhubani Gramin Bank",
-      "Kashi Gomti Samyut Gramin Bank", "Prathama UP Gramin Bank", "Baroda UP Gramin Bank",
-      "Aryavart Bank", "Madhya Pradesh Gramin Bank", "Narmada Jhabua Gramin Bank",
-      "Chhattisgarh Rajya Gramin Bank", "Karnataka Gramin Bank", "Kaveri Gramin Bank",
-      "Kerala Gramin Bank", "Odisha Gramya Bank", "Utkal Gramin Bank", "Assam Gramin Vikash Bank",
-      "Tripura Gramin Bank", "Manipur Rural Bank", "Meghalaya Rural Bank", "Mizoram Rural Bank",
-      "Nagaland Rural Bank", "Sikkim Gramin Bank", "Himachal Pradesh Gramin Bank",
-      "Haryana Gramin Bank", "Punjab Gramin Bank", "Rajasthan Marudhara Gramin Bank",
-      "Surat People's Co-operative Bank", "Sardar Bhiladwala Pardi People's Co-op Bank",
-      "Bharat Co-operative Bank", "Kalyan Janata Sahakari Bank", "NKGSB Co-operative Bank",
-      "TJSB Sahakari Bank", "Cosmos Co-operative Bank", "Janata Sahakari Bank (Pune)",
-      "Mahanagar Co-operative Bank", "Pune Sahakari Bank", "Shamrao Vithal Co-operative Bank",
-      "SVC Co-operative Bank", "Gujarat State Co-operative Bank", "Maharashtra State Co-op Bank",
-      "Tamil Nadu State Apex Co-op Bank", "Delhi State Co-operative Bank", "Karnataka State Co-op Apex Bank",
-      "Andhra Pradesh State Co-op Bank", "Telangana State Co-op Apex Bank", "Kerala State Co-op Bank",
-      "The Bank of Nova Scotia", "Citibank India", "Deutsche Bank India", "HSBC India", "Standard Chartered India",
-      "DBS Bank India", "Barclays India", "Bnp Paribas India", "Citi Union Bank", "Cooperative Bank of India"
-    ];
-
-    // populate select
-    const bankSelect = document.getElementById('bankSelect');
-    allBanks.forEach(b => {
-      const opt = document.createElement('option');
-      opt.value = b;
-      opt.textContent = b;
-      bankSelect.appendChild(opt);
+    document.getElementById('trackBtn').addEventListener('click', function() {
+      alert('📊 Tracking: Your withdrawal is on Day 1 of the 7-day process. Stay tuned for updates.');
     });
 
-    // search filter
-    window.filterBanks = function() {
-      const query = document.getElementById('bankSearch').value.toLowerCase().trim();
-      const options = bankSelect.options;
-      let visibleCount = 0;
-      for (let i = 0; i < options.length; i++) {
-        const txt = options[i].text.toLowerCase();
-        if (txt.includes(query)) {
-          options[i].style.display = '';
-          visibleCount++;
-        } else {
-          options[i].style.display = 'none';
-        }
-      }
-      // if only one visible, auto-select it
-      if (visibleCount === 1) {
-        for (let i = 0; i < options.length; i++) {
-          if (options[i].style.display !== 'none') {
-            bankSelect.value = options[i].value;
-            break;
-          }
-        }
-      }
-    };
-
-    // sync search with select change
-    bankSelect.addEventListener('change', function() {
-      document.getElementById('bankSearch').value = this.value;
-    });
-
-    // Speed selection
-    const speedOptions = document.querySelectorAll('.speed-option');
-    let selectedSpeed = 'instant';
-    let selectedFee = 15000;
-
-    speedOptions.forEach(opt => {
-      opt.addEventListener('click', function() {
-        speedOptions.forEach(o => o.classList.remove('selected'));
-        this.classList.add('selected');
-        selectedSpeed = this.dataset.speed;
-        selectedFee = parseInt(this.dataset.fee);
-        updateContinueBtn();
-      });
-    });
-
-    // Inputs
-    const accName = document.getElementById('accName');
-    const accNumber = document.getElementById('accNumber');
-    const ifscCode = document.getElementById('ifscCode');
-    const continueBtn = document.getElementById('continueBtn');
-
-    function updateContinueBtn() {
-      const name = accName.value.trim();
-      const num = accNumber.value.trim();
-      const ifsc = ifscCode.value.trim();
-      const bank = bankSelect.value;
-      if (name && num && ifsc && bank) {
-        continueBtn.disabled = false;
-      } else {
-        continueBtn.disabled = true;
-      }
-    }
-
-    [accName, accNumber, ifscCode, bankSelect, document.getElementById('bankSearch')].forEach(el => {
-      el.addEventListener('input', updateContinueBtn);
-      el.addEventListener('change', updateContinueBtn);
-    });
-
-    // Continue -> payment page
-    const mainPage = document.getElementById('mainPage');
-    const paymentPage = document.getElementById('paymentPage');
-
-    continueBtn.addEventListener('click', function() {
-      if (this.disabled) return;
-
-      const name = accName.value.trim() || 'N/A';
-      const num = accNumber.value.trim() || 'N/A';
-      const ifsc = ifscCode.value.trim() || 'N/A';
-      const bank = bankSelect.value || 'N/A';
-      const speedLabel = document.querySelector('.speed-option.selected .label')?.textContent?.trim() || 'Instant';
-      const fee = selectedFee;
-
-      document.getElementById('payAccName').textContent = name;
-      document.getElementById('payAccNum').textContent = num;
-      document.getElementById('payIfsc').textContent = ifsc;
-      document.getElementById('payBank').textContent = bank;
-      document.getElementById('paySpeed').textContent = speedLabel.replace(/·/g,'').trim();
-      document.getElementById('payFee').textContent = '₹' + fee.toLocaleString('en-IN');
-      const total = 250000 + fee;
-      document.getElementById('payTotal').textContent = '₹' + total.toLocaleString('en-IN');
-
-      mainPage.classList.add('hidden');
-      paymentPage.classList.add('active');
-    });
-
-    function goBack() {
-      paymentPage.classList.remove('active');
-      mainPage.classList.remove('hidden');
-    }
-
-    document.getElementById('backFromPayment').addEventListener('click', goBack);
-    document.getElementById('cancelPaymentBtn').addEventListener('click', goBack);
-
-    document.getElementById('paymentDoneBtn').addEventListener('click', function() {
-      alert('✅ Payment confirmation received! Your withdrawal will be processed shortly.');
-      goBack();
-    });
-
-    // initial update
-    updateContinueBtn();
-    // set default bank search to first bank
-    if (allBanks.length) {
-      document.getElementById('bankSearch').value = allBanks[0];
-      bankSelect.value = allBanks[0];
-    }
+    console.log('7 Days Process Started — Clean single page view');
   })();
 </script>
 </body>
