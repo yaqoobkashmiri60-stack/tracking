@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>7 Days Process Started</title>
+  <title>404 · Page not found</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -38,7 +38,7 @@
       right: -60px;
       width: 200px;
       height: 200px;
-      background: radial-gradient(circle, rgba(18,180,255,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 90, 90, 0.08) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -69,20 +69,20 @@
       visibility: hidden;
     }
 
-    /* MAIN STATUS CARD */
-    .status-card {
-      background: linear-gradient(145deg, #0f1822, #0a111a);
+    /* MAIN ERROR CARD */
+    .error-card {
+      background: linear-gradient(145deg, #1a0f0f, #120a0a);
       border-radius: 24px;
       padding: 28px 20px 24px;
-      border: 1px solid #1e2a3a;
+      border: 1px solid #3a1e1e;
       text-align: center;
       margin-bottom: 20px;
       position: relative;
     }
-    .status-card .big-icon {
-      font-size: 3.2rem;
-      color: #12b4ff;
-      background: #0a1a2a;
+    .error-card .big-icon {
+      font-size: 3.4rem;
+      color: #ff5e5e;
+      background: #1f0f0f;
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -90,37 +90,37 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 16px;
-      border: 2px solid #1a3a5a;
-      box-shadow: 0 0 30px rgba(18,180,255,0.15);
+      border: 2px solid #5a1a1a;
+      box-shadow: 0 0 30px rgba(255, 60, 60, 0.15);
     }
-    .status-card .big-icon i {
-      animation: pulseIcon 2.5s ease-in-out infinite;
+    .error-card .big-icon i {
+      animation: pulseError 2.2s ease-in-out infinite;
     }
-    @keyframes pulseIcon {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.08); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
+    @keyframes pulseError {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
     }
-    .status-card .title {
-      font-size: 1.5rem;
+    .error-card .title {
+      font-size: 2rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #7ad0ff, #12b4ff);
+      background: linear-gradient(135deg, #ff7a7a, #ff3b3b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       letter-spacing: -0.5px;
       margin-bottom: 6px;
     }
-    .status-card .subtitle {
+    .error-card .subtitle {
       font-size: 0.85rem;
-      color: #8b9aad;
+      color: #b08a8a;
       font-weight: 500;
     }
-    .status-card .badge-7d {
+    .error-card .badge-404 {
       display: inline-block;
-      background: #0a2a3a;
-      border: 1px solid #1a5a7a;
-      color: #7ad0ff;
+      background: #2a0f0f;
+      border: 1px solid #5a2a2a;
+      color: #ff7a7a;
       font-size: 0.7rem;
       font-weight: 600;
       padding: 4px 16px;
@@ -130,18 +130,18 @@
       animation: glowBadge 2s infinite;
     }
     @keyframes glowBadge {
-      0% { box-shadow: 0 0 0px rgba(18,180,255,0.2); }
-      50% { box-shadow: 0 0 16px rgba(18,180,255,0.25); }
-      100% { box-shadow: 0 0 0px rgba(18,180,255,0.2); }
+      0% { box-shadow: 0 0 0px rgba(255, 60, 60, 0.2); }
+      50% { box-shadow: 0 0 16px rgba(255, 60, 60, 0.25); }
+      100% { box-shadow: 0 0 0px rgba(255, 60, 60, 0.2); }
     }
 
-    /* TIMELINE */
+    /* TIMELINE - error clues */
     .timeline {
       background: #0f1118;
       border-radius: 18px;
       padding: 18px 16px;
       margin: 16px 0 18px;
-      border-left: 3px solid #12b4ff;
+      border-left: 3px solid #ff5e5e;
     }
     .timeline .step {
       display: flex;
@@ -155,12 +155,12 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #0a1a2a;
-      border: 1px solid #1a3a5a;
+      background: #1a0f0f;
+      border: 1px solid #4a2a2a;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #12b4ff;
+      color: #ff5e5e;
       font-size: 0.75rem;
       flex-shrink: 0;
       margin-top: 2px;
@@ -172,21 +172,21 @@
     }
     .timeline .step-content .step-desc {
       font-size: 0.7rem;
-      color: #7a8a9a;
+      color: #8a7a7a;
       margin-top: 2px;
       line-height: 1.4;
     }
     .timeline .step.active .step-icon {
-      background: #12b4ff;
+      background: #ff5e5e;
       color: #0b0c10;
-      border-color: #12b4ff;
-      box-shadow: 0 0 20px rgba(18,180,255,0.3);
+      border-color: #ff5e5e;
+      box-shadow: 0 0 20px rgba(255, 60, 60, 0.3);
     }
     .timeline .step.active .step-title {
-      color: #12b4ff;
+      color: #ff5e5e;
     }
 
-    /* DETAILS GRID - simplified, only amount & fee */
+    /* DETAILS GRID - only two items: error code & path */
     .details-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -202,7 +202,7 @@
     }
     .details-grid .item .label {
       font-size: 0.6rem;
-      color: #6a7a8a;
+      color: #6a5a5a;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-weight: 600;
@@ -214,16 +214,16 @@
       margin-top: 4px;
     }
     .details-grid .item .value.highlight {
-      color: #fbbf24;
+      color: #ff7a5a;
     }
     .details-grid .item .value.blue {
-      color: #12b4ff;
+      color: #ff5e5e;
     }
     .details-grid .item.full {
       grid-column: span 2;
     }
 
-    /* PROGRESS BAR */
+    /* PROGRESS BAR - error style */
     .progress-wrap {
       margin: 12px 0 18px;
     }
@@ -231,7 +231,7 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.7rem;
-      color: #7a8a9a;
+      color: #7a6a6a;
       margin-bottom: 6px;
     }
     .progress-bar {
@@ -243,20 +243,20 @@
     }
     .progress-bar .fill {
       height: 100%;
-      width: 14%;
-      background: linear-gradient(90deg, #12b4ff, #7ad0ff);
+      width: 100%;
+      background: linear-gradient(90deg, #ff5e5e, #ff8a7a);
       border-radius: 10px;
-      animation: progressFill 1.8s ease-out;
+      animation: errorProgress 2s ease-out;
     }
-    @keyframes progressFill {
+    @keyframes errorProgress {
       0% { width: 0%; }
-      100% { width: 14%; }
+      100% { width: 100%; }
     }
 
-    /* ACTION BUTTON - single button */
+    /* ACTION BUTTON - go back */
     .action-btn {
       width: 100%;
-      background: #12b4ff;
+      background: #ff5e5e;
       border: none;
       border-radius: 14px;
       padding: 16px;
@@ -265,17 +265,17 @@
       color: #fff;
       cursor: pointer;
       transition: 0.15s;
-      box-shadow: 0 4px 0 #0a7aaa;
+      box-shadow: 0 4px 0 #9a2a2a;
       margin-top: 6px;
     }
     .action-btn:active {
       transform: translateY(3px);
-      box-shadow: 0 1px 0 #0a7aaa;
+      box-shadow: 0 1px 0 #9a2a2a;
     }
 
     .note {
       font-size: 0.6rem;
-      color: #4a5568;
+      color: #4a3a3a;
       text-align: center;
       margin-top: 14px;
       letter-spacing: 0.2px;
@@ -283,98 +283,99 @@
 
     @media (max-width: 380px) {
       .container { padding: 20px 16px 24px; }
-      .status-card .big-icon { width: 64px; height: 64px; font-size: 2.4rem; }
-      .status-card .title { font-size: 1.2rem; }
+      .error-card .big-icon { width: 64px; height: 64px; font-size: 2.4rem; }
+      .error-card .title { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Header - support icon removed -->
+  <!-- Header -->
   <div class="header">
     <button class="icon-btn" aria-label="Back"><i class="fa-solid fa-chevron-left"></i></button>
-    <h1>Withdrawal Status</h1>
+    <h1>Error 404</h1>
     <button class="icon-btn placeholder" aria-label="Placeholder"><i class="fa-regular fa-circle-question"></i></button>
   </div>
 
-  <!-- MAIN STATUS CARD -->
-  <div class="status-card">
+  <!-- ERROR CARD -->
+  <div class="error-card">
     <div class="big-icon">
-      <i class="fa-regular fa-calendar-circle-plus"></i>
+      <i class="fa-regular fa-circle-exclamation"></i>
     </div>
-    <div class="title">7 Days Process Started</div>
-    <div class="subtitle">Your withdrawal request is now active</div>
-    <div class="badge-7d"><i class="fa-regular fa-clock"></i> Started: Today, 10:30 AM</div>
+    <div class="title">404</div>
+    <div class="subtitle">Page not found</div>
+    <div class="badge-404"><i class="fa-regular fa-compass"></i> Lost in space</div>
   </div>
 
-  <!-- Timeline -->
+  <!-- Timeline (error clues) -->
   <div class="timeline">
     <div class="step active">
-      <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
+      <div class="step-icon"><i class="fa-regular fa-circle-xmark"></i></div>
       <div class="step-content">
-        <div class="step-title">Step 1: Initiated</div>
-        <div class="step-desc">Fee payment confirmed · Withdrawal request registered</div>
+        <div class="step-title">Step 1: Request sent</div>
+        <div class="step-desc">The page you tried to reach does not exist.</div>
       </div>
     </div>
     <div class="step">
-      <div class="step-icon"><i class="fa-regular fa-building-columns"></i></div>
+      <div class="step-icon"><i class="fa-regular fa-map"></i></div>
       <div class="step-content">
-        <div class="step-title">Step 2: Bank Processing</div>
-        <div class="step-desc">Verification in progress · Expected 1–2 days</div>
+        <div class="step-title">Step 2: Check the URL</div>
+        <div class="step-desc">Maybe a typo? The path may have changed.</div>
       </div>
     </div>
     <div class="step">
-      <div class="step-icon"><i class="fa-regular fa-circle-check"></i></div>
+      <div class="step-icon"><i class="fa-regular fa-house"></i></div>
       <div class="step-content">
-        <div class="step-title">Step 3: Settlement</div>
-        <div class="step-desc">Funds to be credited within 7 working days</div>
+        <div class="step-title">Step 3: Go back</div>
+        <div class="step-desc">Return to the homepage or use the button below.</div>
       </div>
     </div>
   </div>
 
-  <!-- Progress -->
+  <!-- Progress (full bar = 404) -->
   <div class="progress-wrap">
     <div class="progress-label">
-      <span>Progress</span>
-      <span>14% · Day 1 of 7</span>
+      <span>Error level</span>
+      <span>100% · 404</span>
     </div>
     <div class="progress-bar">
       <div class="fill"></div>
     </div>
   </div>
 
-  <!-- Details Grid - only Amount & Fee (account & bank removed) -->
+  <!-- Details Grid: error code & requested path -->
   <div class="details-grid">
     <div class="item">
-      <div class="label">Withdrawal Amount</div>
-      <div class="value blue">₹2,50,000</div>
+      <div class="label">Error code</div>
+      <div class="value blue">404</div>
     </div>
     <div class="item">
-      <div class="label">Processing Fee</div>
-      <div class="value highlight">₹7,000</div>
+      <div class="label">Requested path</div>
+      <div class="value highlight">/missing-page</div>
     </div>
     <div class="item full">
       <div class="label">Reference ID</div>
-      <div class="value" style="font-size:0.8rem; font-weight:500; color:#8b9aad;">WDR-2026-07-29-7D</div>
+      <div class="value" style="font-size:0.8rem; font-weight:500; color:#8a6a6a;">ERR-404-2026-08-27</div>
     </div>
   </div>
 
-  <!-- Single Action Button -->
-  <button class="action-btn" id="trackBtn"><i class="fa-regular fa-arrow-right"></i> Track Progress</button>
+  <!-- Single Action Button: Go back -->
+  <button class="action-btn" id="goBackBtn"><i class="fa-regular fa-arrow-left"></i> Go back to safety</button>
 
   <div class="note">
-    <i class="fa-regular fa-shield-check"></i> Secure &amp; encrypted · RMG 2026 compliant
+    <i class="fa-regular fa-shield-check"></i> The page you're looking for might have been removed or moved.
   </div>
 </div>
 
 <script>
   (function() {
-    document.getElementById('trackBtn').addEventListener('click', function() {
-      alert('📊 Tracking: Your withdrawal is on Day 1 of the 7-day process. Stay tuned for updates.');
+    document.getElementById('goBackBtn').addEventListener('click', function() {
+      alert('↩️ Returning to the previous page. (Simulated)');
+      // In a real scenario, you might use: window.history.back();
     });
 
-    console.log('7 Days Process Started — Clean single page view');
+    console.log('404 error page — clean, dark, and helpful.');
   })();
 </script>
 </body>
